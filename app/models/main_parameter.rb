@@ -1,0 +1,2 @@
+class MainParameter < Parameter
+end
