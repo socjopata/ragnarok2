@@ -3,13 +3,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 
-// import todos from './todos/reducer';
-// import posts from './posts/reducer';
-// import counter from './counter';
+import heros from './heros/reducer';
 
 export const history = createBrowserHistory();
 
 export default createStore(
-  // combineReducers({ todos, posts, counter }),
+  combineReducers({ heros }),
   composeWithDevTools(applyMiddleware(thunk)),
 );
