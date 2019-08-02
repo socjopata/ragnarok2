@@ -1,11 +1,13 @@
-import React, { Component, Fragment } from 'react';
+import React, {Component, Fragment} from 'react';
+import {connect} from 'react-redux';
+
+import {fetchHeroes} from '../store/heros';
 
 class Homepage extends Component {
-  state = {
-  };
+  state = {};
 
   componentDidMount() {
-    console.log("Mounted!")
+    this.props.fetchHeroes();
   }
 
   render() {
@@ -19,4 +21,12 @@ class Homepage extends Component {
   }
 }
 
-export default Homepage
+const mapDispatchToProps = dispatch => ({
+  fetchHeroes: () => fetchHeroes(dispatch)
+});
+
+// #TODO change null to mapStateToProps later
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Homepage);
