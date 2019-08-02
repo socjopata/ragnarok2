@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is dev README.
 
-Things you may want to cover:
+Note to myself aka get used to:
 
-* Ruby version
+* npm install --save library_name && yarn install
 
-* System dependencies
+* nvm --version 0.34
 
-* Configuration
+* npm -v 6.10.0
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* node -v v12.7.0
