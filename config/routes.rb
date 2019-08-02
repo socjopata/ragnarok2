@@ -6,4 +6,5 @@ Rails.application.routes.draw do
       resources :heros, only: [:index]
     end
   end
+  get '*path' => redirect('/') #redirect everything to "home". This is basically for hard refresh of the current page
 end
