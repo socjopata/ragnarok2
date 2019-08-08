@@ -1,4 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, {Component, Fragment} from 'react';
+import {Table} from 'reactstrap';
+import "./hero.scss"
 
 class Creator extends Component {
   state = {};
@@ -9,9 +11,20 @@ class Creator extends Component {
 
   render() {
     return (
-      <Fragment>
-        Here be dragons... and an actual character sheet.
-      </Fragment>
+      <div className="character_sheet__main">
+        <Table>
+          <tbody>
+          <tr className="black_and_white__tr">
+            <td>Parametry Główne (PG)</td>
+            <td>Nazwa Umiejętności</td>
+            <td>Baza + wszczepy + premie</td>
+            <td>Umiejętność</td>
+            <td>Premia do Testu</td>
+            <td>Imię Weterana</td>
+          </tr>
+          </tbody>
+        </Table>
+      </div>
     );
   }
 }
