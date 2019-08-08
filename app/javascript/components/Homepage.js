@@ -35,7 +35,6 @@ class Homepage extends Component {
                   color="success"
                   role="button"
                   href="/create_a_hero"
-                  target="_blank"
                 >
                   Create Character
                 </Button>

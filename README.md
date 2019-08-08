@@ -11,3 +11,5 @@ Note to myself aka get used to:
 * npm -v 6.10.0
 
 * node -v v12.7.0
+
+* foreman start -f Procfile.dev
