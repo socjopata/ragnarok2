@@ -5,14 +5,23 @@
   width: 1200px;
 }
 
-.black_and_white__tr {
+.black_and_white__cell {
   background-color: black;
   color: white;
   text-align: center;
 }
 
-.white_and_black__tr {
+.white_and_black__cell {
+  text-align: center;
 }
 
-.grey_and_black__tr {
+.grey_and_black__cell {
+  background-color: #cccccc;
+  text-align: center;
+}
+
+.solid_border__tr {
+  td {
+    border: 1px solid black;
+  }
 }
