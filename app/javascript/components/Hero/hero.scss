@@ -12,6 +12,8 @@
 }
 
 .white_and_black__cell {
+  background-color: white;
+  color: black;
   text-align: center;
 }
 
@@ -20,8 +22,13 @@
   text-align: center;
 }
 
-.solid_border__tr {
+.solid_border__cell {
   td {
     border: 1px solid black;
   }
+}
+
+.no_horizontal_border__cell {
+  border-bottom: 0 !important;
+  border-top: 0 !important;
 }
