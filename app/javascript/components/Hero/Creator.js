@@ -277,7 +277,7 @@ class Creator extends Component {
           <tr className="solid-border__cell">
             <td colSpan="2">&nbsp;</td>
             <td colSpan="3">&nbsp;</td>
-            <td id="test-difficulty-cheatsheet__wrapping_cell" rowSpan="8">
+            <td className="table-wrapping__cell" rowSpan="8">
             <table id="test-difficulty-cheatsheet__table">
               <tr>
                 <td className="-left">Łatwy</td>
@@ -322,9 +322,8 @@ class Creator extends Component {
             <td colSpan="2">&nbsp;</td>
             <td colSpan="3">&nbsp;</td>
           </tr>
-          <tr className="solid-border__cell">
-            <td colSpan="2">&nbsp;</td>
-            <td colSpan="3">&nbsp;</td>
+          <tr className="solid-border__cell black-and-white__cell">
+            <td colSpan="5">WYPOSAŻENIE</td>
           </tr>
           <tr className="solid-border__cell">
             <td colSpan="2">&nbsp;</td>
@@ -349,6 +348,313 @@ class Creator extends Component {
               &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;TRAFIENIE
               NA ZASIĘGU
             </td>
+          </tr>
+
+          <tr className="solid-border__cell">
+            <td className="table-wrapping__cell" colSpan="6">
+              <table id="ranged-weapons__table">
+                <tr>
+                  <th className="grey-and-black__cell">Nazwa Broni</th>
+                  <th className="grey-and-black__cell">Premia do Testu</th>
+                  <th className="grey-and-black__cell">Celność</th>
+                  <th className="grey-and-black__cell">Szybko-strzelność</th>
+                  <th className="light-grey-and-black__cell">Bliskim (1-10m)</th>
+                  <th className="light-grey-and-black__cell">Średnim (11-50m)</th>
+                  <th className="light-grey-and-black__cell">Dalekim (51-150m)</th>
+                  <th className="light-grey-and-black__cell">Ekstrem. (151-2km)</th>
+                  <th className="black-and-white__cell">Obrażenia</th>
+                </tr>
+                <tr className="white-and-black__cell">
+                  <td>1.</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr className="grey-and-black__cell">
+                  <td>2.</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr className="white-and-black__cell">
+                  <td>3.</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr className="black-and-white__cell">
+            <td colSpan="6">OBRONA DYSTANSOWA</td>
+          </tr>
+
+          <tr className="solid-border__cell">
+            <td className="table-wrapping__cell" colSpan="6">
+              <table id="ranged-defense__table">
+                <tr className="grey-and-black__cell">
+                  <td>Podstawa</td>
+                  <td>Opanowanie</td>
+                  <td>Zręczność</td>
+                  <td>Atuty</td>
+                  <td>Premie</td>
+                  <td>Zbroja/Tarcza</td>
+                  <td>SUMA</td>
+                </tr>
+                <tr className="white-and-black__cell">
+                  <td>15</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr className="grey-and-black__cell">
+                  <td>Podstawa</td>
+                  <td>Opanowanie</td>
+                  <td>Zręczność</td>
+                  <td>Atuty</td>
+                  <td>Premie</td>
+                  <td>Zbroja/Tarcza</td>
+                  <td>SUMA</td>
+                </tr>
+                <tr className="white-and-black__cell">
+                  <td>15</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr className="black-and-white__cell">
+            <td colSpan="6">PANCERZE</td>
+          </tr>
+
+          <tr className="solid-border__cell">
+            <td className="table-wrapping__cell" colSpan="6">
+              <table id="armors__table">
+                <tr className="grey-and-black__cell">
+                  <th>Nazwa</th>
+                  <th>W zwarciu</th>
+                  <th>Balistyczny</th>
+                  <th>Zasady Specjalne</th>
+                </tr>
+                <tr className="white-and-black__cell">
+                  <td>1.</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr className="white-and-black__cell">
+                  <td>2.</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr className="white-and-black__cell">
+                  <td>3.</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr className="black-and-white__cell">
+            <td colSpan="6">TARCZE  i  GADŻETY</td>
+          </tr>
+
+          <tr className="solid-border__cell">
+            <td className="table-wrapping__cell" colSpan="6">
+              <table id="shields-and-gadgets__table">
+                <tr className="grey-and-black__cell">
+                  <th>Nazwa</th>
+                  <th>Parametry</th>
+                  <th>Zasady Specjalne</th>
+                </tr>
+                <tr className="white-and-black__cell">
+                  <td>1.</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr className="white-and-black__cell">
+                  <td>2.</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr className="white-and-black__cell">
+                  <td>3.</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr className="black-and-white__cell">
+            <td colSpan="6">WALKA W ZWARCIU</td>
+          </tr>
+
+          <tr className="solid-border__cell">
+            <td className="table-wrapping__cell" colSpan="6">
+              <table id="close-combat__table">
+                <tr>
+                  <th className="grey-and-black__cell">Nazwa Broni</th>
+                  <th className="grey-and-black__cell">Typ</th>
+                  <th className="grey-and-black__cell">Premia do Testu
+                    Broń Biała/Walka Wręcz
+                  </th>
+                  <th className="grey-and-black__cell">Trafienie Broni</th>
+                  <th className="grey-and-black__cell">TRAFIENIE</th>
+                  <th className="grey-and-black__cell">OBRAŻENIA</th>
+                </tr>
+                <tr className="white-and-black__cell">
+                  <td>1.</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr className="grey-and-black__cell">
+                  <td>2.</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr className="white-and-black__cell">
+                  <td>3.</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr className="black-and-white__cell">
+            <td colSpan="6">OBRONA W ZWARCIU</td>
+          </tr>
+
+          <tr className="solid-border__cell">
+            <td className="table-wrapping__cell" colSpan="6">
+              <table id="close-combat-defense__table">
+                <tr className="grey-and-black__cell">
+                  <td>Podstawa</td>
+                  <td>Opanowanie</td>
+                  <td>Umiejętność Broń Biała</td>
+                  <td>Premie</td>
+                  <td>Obrona Broni</td>
+                  <td>Zbroja/Tarcza</td>
+                  <td>SUMA</td>
+                </tr>
+                <tr className="white-and-black__cell">
+                  <td>15</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr className="grey-and-black__cell">
+                  <td>Podstawa</td>
+                  <td>Opanowanie</td>
+                  <td>Umiejętność Broń Biała</td>
+                  <td>Premie</td>
+                  <td>Broń Improw.</td>
+                  <td>Zbroja/Tarcza</td>
+                  <td>SUMA</td>
+                </tr>
+                <tr className="white-and-black__cell">
+                  <td>15</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr className="grey-and-black__cell">
+                  <td>Podstawa</td>
+                  <td>Opanowanie</td>
+                  <td>Umiejętność Walka Wręcz</td>
+                  <td>Premie</td>
+                  <td>Zasady Spec.</td>
+                  <td>Zbroja/Tarcza</td>
+                  <td>SUMA</td>
+                </tr>
+                <tr className="white-and-black__cell">
+                  <td>15</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr className="solid-border__cell black-and-white__cell">
+            <td colSpan="2">Majątek</td>
+            <td colSpan="4">Granaty</td>
+          </tr>
+          <tr className="solid-border__cell">
+            <td colSpan="2">&nbsp;</td>
+            <td colSpan="1" className="grey-and-black__cell">Nazwa</td>
+            <td colSpan="1" className="grey-and-black__cell">Obrażenia</td>
+            <td colSpan="1" className="grey-and-black__cell">Promień Wyb.</td>
+            <td colSpan="1" className="grey-and-black__cell">Zasady Spec.</td>
+          </tr>
+          <tr className="solid-border__cell">
+            <td colSpan="2">&nbsp;</td>
+            <td colSpan="1">&nbsp;</td>
+            <td colSpan="1">&nbsp;</td>
+            <td colSpan="1">&nbsp;</td>
+            <td colSpan="1">&nbsp;</td>
+          </tr>
+          <tr className="solid-border__cell">
+            <td colSpan="2">&nbsp;</td>
+            <td colSpan="1">&nbsp;</td>
+            <td colSpan="1">&nbsp;</td>
+            <td colSpan="1">&nbsp;</td>
+            <td colSpan="1">&nbsp;</td>
+          </tr>
+          <tr className="solid-border__cell">
+            <td colSpan="2">&nbsp;</td>
+            <td colSpan="1">&nbsp;</td>
+            <td colSpan="1">&nbsp;</td>
+            <td colSpan="1">&nbsp;</td>
+            <td colSpan="1">&nbsp;</td>
           </tr>
           </tbody>
         </Table>
