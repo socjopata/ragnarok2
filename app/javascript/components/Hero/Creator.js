@@ -352,7 +352,7 @@ class Creator extends Component {
 
           <tr className="solid-border__cell">
             <td className="table-wrapping__cell" colSpan="6">
-              <table id="ranged-weapons__table">
+              <table className="nested__table">
                 <tr>
                   <th className="grey-and-black__cell">Nazwa Broni</th>
                   <th className="grey-and-black__cell">Premia do Testu</th>
@@ -365,7 +365,7 @@ class Creator extends Component {
                   <th className="black-and-white__cell">Obrażenia</th>
                 </tr>
                 <tr className="white-and-black__cell">
-                  <td>1.</td>
+                  <td className="text-left-allign">1.</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
@@ -376,7 +376,7 @@ class Creator extends Component {
                   <td>&nbsp;</td>
                 </tr>
                 <tr className="grey-and-black__cell">
-                  <td>2.</td>
+                  <td className="text-left-allign">2.</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
@@ -387,7 +387,7 @@ class Creator extends Component {
                   <td>&nbsp;</td>
                 </tr>
                 <tr className="white-and-black__cell">
-                  <td>3.</td>
+                  <td className="text-left-allign">3.</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
@@ -407,15 +407,15 @@ class Creator extends Component {
 
           <tr className="solid-border__cell">
             <td className="table-wrapping__cell" colSpan="6">
-              <table id="ranged-defense__table">
+              <table className="nested__table">
                 <tr className="grey-and-black__cell">
-                  <td>Podstawa</td>
-                  <td>Opanowanie</td>
-                  <td>Zręczność</td>
-                  <td>Atuty</td>
-                  <td>Premie</td>
-                  <td>Zbroja/Tarcza</td>
-                  <td>SUMA</td>
+                  <th>Podstawa</th>
+                  <th>Opanowanie</th>
+                  <th>Zręczność</th>
+                  <th>Atuty</th>
+                  <th>Premie</th>
+                  <th>Zbroja/Tarcza</th>
+                  <th>SUMA</th>
                 </tr>
                 <tr className="white-and-black__cell">
                   <td>15</td>
@@ -454,7 +454,7 @@ class Creator extends Component {
 
           <tr className="solid-border__cell">
             <td className="table-wrapping__cell" colSpan="6">
-              <table id="armors__table">
+              <table className="nested__table">
                 <tr className="grey-and-black__cell">
                   <th>Nazwa</th>
                   <th>W zwarciu</th>
@@ -462,19 +462,19 @@ class Creator extends Component {
                   <th>Zasady Specjalne</th>
                 </tr>
                 <tr className="white-and-black__cell">
-                  <td>1.</td>
+                  <td className="text-left-allign">1.</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr className="white-and-black__cell">
-                  <td>2.</td>
+                  <td className="text-left-allign">2.</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr className="white-and-black__cell">
-                  <td>3.</td>
+                  <td className="text-left-allign">3.</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
@@ -489,24 +489,24 @@ class Creator extends Component {
 
           <tr className="solid-border__cell">
             <td className="table-wrapping__cell" colSpan="6">
-              <table id="shields-and-gadgets__table">
+              <table className="nested__table">
                 <tr className="grey-and-black__cell">
                   <th>Nazwa</th>
                   <th>Parametry</th>
                   <th>Zasady Specjalne</th>
                 </tr>
                 <tr className="white-and-black__cell">
-                  <td>1.</td>
+                  <td className="text-left-allign">1.</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr className="white-and-black__cell">
-                  <td>2.</td>
+                  <td className="text-left-allign">2.</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr className="white-and-black__cell">
-                  <td>3.</td>
+                  <td className="text-left-allign">3.</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                 </tr>
@@ -520,7 +520,7 @@ class Creator extends Component {
 
           <tr className="solid-border__cell">
             <td className="table-wrapping__cell" colSpan="6">
-              <table id="close-combat__table">
+              <table className="nested__table">
                 <tr>
                   <th className="grey-and-black__cell">Nazwa Broni</th>
                   <th className="grey-and-black__cell">Typ</th>
@@ -532,7 +532,7 @@ class Creator extends Component {
                   <th className="grey-and-black__cell">OBRAŻENIA</th>
                 </tr>
                 <tr className="white-and-black__cell">
-                  <td>1.</td>
+                  <td className="text-left-allign">1.</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
@@ -540,7 +540,7 @@ class Creator extends Component {
                   <td>&nbsp;</td>
                 </tr>
                 <tr className="grey-and-black__cell">
-                  <td>2.</td>
+                  <td className="text-left-allign">2.</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
@@ -548,7 +548,7 @@ class Creator extends Component {
                   <td>&nbsp;</td>
                 </tr>
                 <tr className="white-and-black__cell">
-                  <td>3.</td>
+                  <td className="text-left-allign">3.</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
@@ -565,7 +565,7 @@ class Creator extends Component {
 
           <tr className="solid-border__cell">
             <td className="table-wrapping__cell" colSpan="6">
-              <table id="close-combat-defense__table">
+              <table className="nested__table">
                 <tr className="grey-and-black__cell">
                   <td>Podstawa</td>
                   <td>Opanowanie</td>

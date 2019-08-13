@@ -57,26 +57,7 @@
   }
 }
 
-#ranged-weapons__table {
-  th {
-    border: 1px solid black;
-  }
-
-  td {
-    font-weight: bold;
-    text-align: left;
-  }
-}
-
-#ranged-defense__table {
-  width: 100%;
-
-  tr {
-    text-align: center;
-  }
-}
-
-#armors__table {
+.nested__table {
   width: 100%;
 
   th {
@@ -86,50 +67,16 @@
 
   td {
     font-weight: bold;
-    text-align: left;
-  }
-}
-
-#shields-and-gadgets__table {
-  width: 100%;
-
-  th {
-    border: 1px solid black;
     text-align: center;
   }
-
-  td {
-    font-weight: bold;
-    text-align: left;
-  }
 }
 
-#close-combat__table {
-  width: 100%;
-
-  th {
-    border: 1px solid black;
-  }
-
-  td {
-    font-weight: bold;
-    text-align: left;
-  }
+td.text-left-allign {
+  font-weight: bold;
+  text-align: left;
 }
+
 
 td.table-wrapping__cell {
   padding: 0;
-}
-
-
-#close-combat-defense__table {
-  width: 100%;
-
-  th {
-    border: 1px solid black;
-  }
-
-  tr {
-    text-align: center;
-  }
 }
