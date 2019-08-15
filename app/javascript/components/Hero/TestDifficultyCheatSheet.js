@@ -5,6 +5,7 @@ class TestDifficultyCheatSheet extends Component {
     return (
       <Fragment>
         <table id="test-difficulty-cheatsheet__table">
+          <tbody>
           <tr>
             <td className="-left">Łatwy</td>
             <td className="-right">10</td>
@@ -37,6 +38,7 @@ class TestDifficultyCheatSheet extends Component {
             <td className="-left">MG/Kampania</td>
             <td className="-right">&nbsp;</td>
           </tr>
+          </tbody>
         </table>
       </Fragment>
     )

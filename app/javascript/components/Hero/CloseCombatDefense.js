@@ -10,6 +10,7 @@ class CloseCombatDefense extends Component {
         <tr className="solid-border__cell">
           <td className="table-wrapping__cell" colSpan="6">
             <table className="nested__table">
+              <tbody>
               <tr className="grey-and-black__cell">
                 <td>Podstawa</td>
                 <td>Opanowanie</td>
@@ -64,6 +65,7 @@ class CloseCombatDefense extends Component {
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
               </tr>
+              </tbody>
             </table>
           </td>
         </tr>

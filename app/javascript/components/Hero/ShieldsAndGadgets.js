@@ -5,11 +5,12 @@ class ShieldsAndGadgets extends Component {
     return (
       <Fragment>
         <tr className="black-and-white__cell">
-          <td colSpan="6">TARCZE  i  GADŻETY</td>
+          <td colSpan="6">TARCZE i GADŻETY</td>
         </tr>
         <tr className="solid-border__cell">
           <td className="table-wrapping__cell" colSpan="6">
             <table className="nested__table">
+              <tbody>
               <tr className="grey-and-black__cell">
                 <th>Nazwa</th>
                 <th>Parametry</th>
@@ -30,6 +31,7 @@ class ShieldsAndGadgets extends Component {
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
               </tr>
+              </tbody>
             </table>
           </td>
         </tr>

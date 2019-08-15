@@ -10,6 +10,7 @@ class RangedDefense extends Component {
         <tr className="solid-border__cell">
           <td className="table-wrapping__cell" colSpan="6">
             <table className="nested__table">
+              <tbody>
               <tr className="grey-and-black__cell">
                 <th>Podstawa</th>
                 <th>Opanowanie</th>
@@ -46,6 +47,7 @@ class RangedDefense extends Component {
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
               </tr>
+              </tbody>
             </table>
           </td>
         </tr>
