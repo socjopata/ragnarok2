@@ -1,9 +1,9 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 
 class CloseCombatAttack extends Component {
   render() {
     return (
-      <Fragment>
+      <>
         <tr className="black-and-white__cell">
           <td colSpan="6">WALKA W ZWARCIU</td>
         </tr>
@@ -49,7 +49,7 @@ class CloseCombatAttack extends Component {
             </table>
           </td>
         </tr>
-      </Fragment>
+      </>
     )
   }
 }
