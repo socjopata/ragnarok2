@@ -4,7 +4,7 @@ This is dev README.
 
 Note to myself aka get used to:
 
-* npm install --save library_name && yarn install
+* npm install --save library_name && yarn install (OR preferable yarn add library_name)
 
 * nvm --version 0.34
 

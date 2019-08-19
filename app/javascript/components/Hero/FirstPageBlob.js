@@ -314,9 +314,9 @@ class FirstPageBlob extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = {
   inputChange
-});
+};
 
 // #TODO change null to mapStateToProps later
 export default connect(

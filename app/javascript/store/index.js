@@ -1,5 +1,4 @@
-import { applyMiddleware, createStore, combineReducers } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { applyMiddleware, createStore, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 
@@ -9,5 +8,8 @@ export const history = createBrowserHistory();
 
 export default createStore(
   combineReducers({ heros }),
-  composeWithDevTools(applyMiddleware(thunk)),
+  compose(
+    applyMiddleware(thunk),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  )
 );
