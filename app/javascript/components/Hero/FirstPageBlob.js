@@ -315,7 +315,7 @@ class FirstPageBlob extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  inputChange: ( value, inputName ) => dispatch(inputChange(value, inputName))
+  inputChange
 });
 
 // #TODO change null to mapStateToProps later
