@@ -1,7 +1,15 @@
-import React, {Component, Fragment} from 'react';
+import React, { Component, Fragment } from 'react';
+import { Input } from 'reactstrap';
+import { connect } from "react-redux";
 import TestDifficultyCheatSheet from "./TestDifficultyCheatSheet";
 
+import { inputChange } from '../../store/heros';
+
 class FirstPageBlob extends Component {
+  handleChange = ({target: {value, name: inputName}}) => {
+    this.props.inputChange(value, inputName);
+  };
+
   render() {
     const twoPlusesAndTabs = <span>&emsp;&emsp;&emsp;+&emsp;&emsp;&emsp;&emsp;+&emsp;&emsp;&emsp;</span>;
 
@@ -27,7 +35,9 @@ class FirstPageBlob extends Component {
           <td className="grey-and-black__cell">{twoPlusesAndTabs}</td>
           <td className="grey-and-black__cell">&nbsp;</td>
           <td className="grey-and-black__cell">&nbsp;</td>
-          <td rowSpan="2">&nbsp;</td>
+          <td rowSpan="2">
+            <Input type="text" name="name" id="name" placeholder="Jak się nazywasz?" onChange={ this.handleChange } />
+          </td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
           <td>Walka Wręcz</td>
@@ -304,4 +314,12 @@ class FirstPageBlob extends Component {
   }
 }
 
-export default FirstPageBlob;
+const mapDispatchToProps = dispatch => ({
+  inputChange: ( value, inputName ) => dispatch(inputChange(value, inputName))
+});
+
+// #TODO change null to mapStateToProps later
+export default connect(
+  null,
+  mapDispatchToProps,
+)(FirstPageBlob);

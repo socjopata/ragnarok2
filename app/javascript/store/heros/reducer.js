@@ -4,6 +4,7 @@ import {
   FETCH_HEROES_STARTED,
   FETCH_HEROES_FAILURE,
   FETCH_HEROES_SUCCESS,
+  INPUT_CHANGE
 } from './actions';
 
 const initialState = {
@@ -13,10 +14,20 @@ const initialState = {
     error: null,
     loading: null,
   },
+  character: {
+    name: null
+  }
 };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case INPUT_CHANGE:
+      return {
+        ...state,
+        character: {
+          [action.fieldName]: action.value
+        }
+      };
     case FETCH_HEROES_STARTED:
       return {
         ...state,
