@@ -3,7 +3,7 @@ import { Input } from 'reactstrap';
 import { connect } from "react-redux";
 import TestDifficultyCheatSheet from "./TestDifficultyCheatSheet";
 
-import { inputChange } from '../../store/heros';
+import { inputChange, characterName } from '../../store/heros';
 
 class FirstPageBlob extends Component {
   handleChange = ({target: {value, name: inputName}}) => {
@@ -316,7 +316,7 @@ class FirstPageBlob extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  name: state.heros.character.name
+  name: characterName(state)
 });
 
 const mapDispatchToProps = {
