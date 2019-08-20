@@ -3,12 +3,11 @@ import { Input } from 'reactstrap';
 import { connect } from "react-redux";
 import TestDifficultyCheatSheet from "./TestDifficultyCheatSheet";
 
-import { inputChange } from '../../store/heros';
+import {INPUT_CHANGE} from '../../store/heros';
 
 class FirstPageBlob extends Component {
   handleChange = ({target: {value, name: inputName}}) => {
-    this.props.iAmMapDispatchToProps(value, inputName); //see, you named it that stupid because your future self needs
-    // to see the connection between this place and the mapping from the mapDispatchToProps
+    this.props.dispatch({ type: INPUT_CHANGE, value: value, fieldName: inputName});
   };
 
   render() {
@@ -321,6 +320,5 @@ const mapDispatchToProps = {
 
 // #TODO change null to mapStateToProps later
 export default connect(
-  null,
-  mapDispatchToProps,
+
 )(FirstPageBlob);
