@@ -7,7 +7,8 @@ import { inputChange } from '../../store/heros';
 
 class FirstPageBlob extends Component {
   handleChange = ({target: {value, name: inputName}}) => {
-    this.props.inputChange(value, inputName);
+    this.props.iAmMapDispatchToProps(value, inputName); //see, you named it that stupid because your future self needs
+    // to see the connection between this place and the mapping from the mapDispatchToProps
   };
 
   render() {
@@ -315,7 +316,7 @@ class FirstPageBlob extends Component {
 }
 
 const mapDispatchToProps = {
-  inputChange
+  iAmMapDispatchToProps: inputChange
 };
 
 // #TODO change null to mapStateToProps later
