@@ -15,8 +15,6 @@ import "./hero.scss"
 import {fetchHeroes} from "../../store/heros";
 
 class Creator extends Component {
-  state = {};
-
   componentDidMount() {
     const {herosList, fetchHeroes} = this.props;
     if (isEmpty(herosList)) {

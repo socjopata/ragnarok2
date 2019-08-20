@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 import {
   Container,
   Row,
@@ -8,18 +7,9 @@ import {
 } from 'reactstrap';
 
 import {NavLink as RouterNavLink} from 'react-router-dom';
-import {fetchHeroes} from '../store/heros';
 
 class Homepage extends Component {
-  state = {};
-
-  componentDidMount() {
-    this.props.fetchHeroes();
-  }
-
   render() {
-    const {destructuredProp} = this.props;
-
     return (
       <Jumbotron>
         <Container>
@@ -48,12 +38,4 @@ class Homepage extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  fetchHeroes: () => fetchHeroes(dispatch)
-});
-
-// #TODO change null to mapStateToProps later
-export default connect(
-  null,
-  mapDispatchToProps,
-)(Homepage);
+export default Homepage;

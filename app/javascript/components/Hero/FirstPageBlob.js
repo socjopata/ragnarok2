@@ -20,7 +20,7 @@ class FirstPageBlob extends Component {
 
   render() {
     const twoPlusesAndTabs = <span>&emsp;&emsp;&emsp;+&emsp;&emsp;&emsp;&emsp;+&emsp;&emsp;&emsp;</span>;
-    console.log(this.props.herosList);
+
     return (
       <Fragment>
         <tr className="black-and-white__cell">
