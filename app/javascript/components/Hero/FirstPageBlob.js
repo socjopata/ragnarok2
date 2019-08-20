@@ -1,18 +1,26 @@
-import React, { Component, Fragment } from 'react';
-import { Input } from 'reactstrap';
-import { connect } from "react-redux";
+import React, {Component, Fragment} from 'react';
+import {get, isEmpty, map} from 'lodash';
+import {Input} from 'reactstrap';
+import {connect} from "react-redux";
 import TestDifficultyCheatSheet from "./TestDifficultyCheatSheet";
 
-import { inputChange, characterName } from '../../store/heros';
+import {inputChange, characterName} from '../../store/heros';
 
 class FirstPageBlob extends Component {
   handleChange = ({target: {value, name: inputName}}) => {
     this.props.inputChange(value, inputName);
   };
 
+  renderItems() {
+    const {herosList} = this.props;
+    return (
+      !isEmpty(herosList) && map(herosList, ({id, name}) => <option key={id} value={id}>{name}</option>)
+    )
+  }
+
   render() {
     const twoPlusesAndTabs = <span>&emsp;&emsp;&emsp;+&emsp;&emsp;&emsp;&emsp;+&emsp;&emsp;&emsp;</span>;
-
+    console.log(this.props.herosList);
     return (
       <Fragment>
         <tr className="black-and-white__cell">
@@ -65,7 +73,11 @@ class FirstPageBlob extends Component {
           <td className="white-and-black__cell">{twoPlusesAndTabs}</td>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
-          <td rowSpan="2"></td>
+          <td rowSpan="2">
+            <Input type="select" name="characterClass" id="characterClass" placeholder="Wybierz klasę postaci">
+              {this.renderItems()}
+            </Input>
+          </td>
         </tr>
         <tr className="solid-border__cell">
           <td className="grey-and-black__cell">Obsługa Pojazdów</td>
@@ -316,7 +328,8 @@ class FirstPageBlob extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  name: characterName(state)
+  name: characterName(state),
+  herosList: get(state, "heros.byId")
 });
 
 const mapDispatchToProps = {

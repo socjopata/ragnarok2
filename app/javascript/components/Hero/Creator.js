@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
+import { get, isEmpty } from 'lodash';
 import {Table} from 'reactstrap';
-
+import {connect} from 'react-redux';
 import FirstPageBlob from './FirstPageBlob';
 import RangedAttack from './RangedAttack';
 import RangedDefense from './RangedDefense';
@@ -11,12 +12,16 @@ import CloseCombatDefense from './CloseCombatDefense';
 import WealthAndGrenades from './WealthAndGrenades';
 
 import "./hero.scss"
+import {fetchHeroes} from "../../store/heros";
 
 class Creator extends Component {
   state = {};
 
   componentDidMount() {
-    console.log("Mounted!")
+    const {herosList, fetchHeroes} = this.props;
+    if (isEmpty(herosList)) {
+      fetchHeroes();
+    }
   }
 
   render() {
@@ -39,4 +44,15 @@ class Creator extends Component {
   }
 }
 
-export default Creator;
+const mapStateToProps = (state) => ({
+  herosList: get(state, "heros.byId")
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchHeroes: () => fetchHeroes(dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Creator);
