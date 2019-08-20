@@ -3,11 +3,11 @@ import { Input } from 'reactstrap';
 import { connect } from "react-redux";
 import TestDifficultyCheatSheet from "./TestDifficultyCheatSheet";
 
-import {INPUT_CHANGE} from '../../store/heros';
+import { inputChange } from '../../store/heros';
 
 class FirstPageBlob extends Component {
   handleChange = ({target: {value, name: inputName}}) => {
-    this.props.dispatch({ type: INPUT_CHANGE, value: value, fieldName: inputName});
+    this.props.inputChange(value, inputName);
   };
 
   render() {
@@ -36,7 +36,8 @@ class FirstPageBlob extends Component {
           <td className="grey-and-black__cell">&nbsp;</td>
           <td className="grey-and-black__cell">&nbsp;</td>
           <td rowSpan="2">
-            <Input type="text" name="name" id="name" placeholder="Jak się nazywasz?" onChange={ this.handleChange } />
+            <Input type="text" name="name" id="name" placeholder="Jak się nazywasz?" onChange={this.handleChange}
+                   value={this.props.name}/>
           </td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
@@ -64,7 +65,7 @@ class FirstPageBlob extends Component {
           <td className="white-and-black__cell">{twoPlusesAndTabs}</td>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
-          <td rowSpan="2">&nbsp;</td>
+          <td rowSpan="2"></td>
         </tr>
         <tr className="solid-border__cell">
           <td className="grey-and-black__cell">Obsługa Pojazdów</td>
@@ -314,11 +315,15 @@ class FirstPageBlob extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  name: state.heros.character.name
+});
+
 const mapDispatchToProps = {
-  iAmMapDispatchToProps: inputChange
+  inputChange
 };
 
-// #TODO change null to mapStateToProps later
 export default connect(
-
+  mapStateToProps,
+  mapDispatchToProps,
 )(FirstPageBlob);
