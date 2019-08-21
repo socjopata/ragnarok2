@@ -4,17 +4,22 @@ import {Input} from 'reactstrap';
 import {connect} from "react-redux";
 import TestDifficultyCheatSheet from "./TestDifficultyCheatSheet";
 
-import {inputChange, characterName} from '../../store/heros';
+import {inputChange, characterName, heroClassSelected} from '../../store/heros';
 
 class FirstPageBlob extends Component {
   handleChange = ({target: {value, name: inputName}}) => {
     this.props.inputChange(value, inputName);
   };
 
-  renderItems() {
+  handleHeroClassChange = ({target: {value}}) => {
+    this.props.heroClassSelected(value);
+  };
+
+  renderHerosForSelect() {
     const {herosList} = this.props;
     return (
-      !isEmpty(herosList) && map(herosList, ({id, name}) => <option key={id} value={id}>{name}</option>)
+      !isEmpty(herosList) && [<option disabled selected value> -- Wybierz klasę postaci
+        -- </option>].concat(map(herosList, ({id, name}) => <option key={id} value={id}>{name}</option>))
     )
   }
 
@@ -74,8 +79,9 @@ class FirstPageBlob extends Component {
           <td>&nbsp;</td>
           <td>&nbsp;</td>
           <td rowSpan="2">
-            <Input type="select" name="characterClass" id="characterClass" placeholder="Wybierz klasę postaci">
-              {this.renderItems()}
+            <Input type="select" name="characterClass" id="characterClass" placeholder="Wybierz klasę postaci"
+                   onChange={this.handleHeroClassChange}>
+              {this.renderHerosForSelect()}
             </Input>
           </td>
         </tr>
@@ -333,7 +339,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  inputChange
+  inputChange,
+  heroClassSelected
 };
 
 export default connect(

@@ -4,7 +4,8 @@ import {
   FETCH_HEROES_STARTED,
   FETCH_HEROES_FAILURE,
   FETCH_HEROES_SUCCESS,
-  INPUT_CHANGE
+  INPUT_CHANGE,
+  HERO_CLASS_CHANGED
 } from './actions';
 
 const initialState = {
@@ -15,12 +16,20 @@ const initialState = {
     loading: null,
   },
   character: {
+    id: null,
     name: ""
   }
 };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case HERO_CLASS_CHANGED:
+      return {
+        ...state,
+        character: {
+          id: action.value
+        }
+      };
     case INPUT_CHANGE:
       return {
         ...state,
