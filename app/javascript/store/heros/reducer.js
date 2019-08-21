@@ -27,6 +27,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         character: {
+          ...state.character,
           id: action.value
         }
       };
@@ -34,6 +35,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         character: {
+          ...state.character,
           [action.fieldName]: action.value
         }
       };

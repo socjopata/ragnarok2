@@ -52,7 +52,7 @@ class FirstPageBlob extends Component {
           <td className="grey-and-black__cell">&nbsp;</td>
           <td rowSpan="2">
             <Input type="text" name="name" id="name" placeholder="Jak się nazywasz?" onChange={this.handleChange}
-                   value={this.props.name}/>
+                   defaultValue={this.props.name}/>
           </td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
