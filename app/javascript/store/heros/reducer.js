@@ -16,7 +16,7 @@ const initialState = {
     loading: null,
   },
   character: {
-    id: null,
+    id: 0,
     name: ""
   }
 };

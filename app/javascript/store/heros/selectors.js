@@ -6,3 +6,4 @@ export const getHeroes = state => ({
 });
 
 export const characterName = state => get(state, "heros.character.name");
+export const characterId = state => get(state, "heros.character.id");
