@@ -10,6 +10,7 @@ gem 'sass-rails', '~> 5'
 gem 'webpacker', '~> 4.0'
 gem 'mini_racer', platforms: :ruby
 gem 'react-rails'
+gem 'active_model_serializers'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
