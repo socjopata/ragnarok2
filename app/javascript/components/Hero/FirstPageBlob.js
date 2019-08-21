@@ -18,7 +18,7 @@ class FirstPageBlob extends Component {
   renderHerosForSelect() {
     const {herosList} = this.props;
     return (
-      !isEmpty(herosList) && [<option disabled selected value> -- Wybierz klasę postaci
+      !isEmpty(herosList) && [<option disabled value key={0}> -- Wybierz klasę postaci
         -- </option>].concat(map(herosList, ({id, name}) => <option key={id} value={id}>{name}</option>))
     )
   }
