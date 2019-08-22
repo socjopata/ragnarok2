@@ -4,9 +4,13 @@ import {Input} from 'reactstrap';
 import {connect} from "react-redux";
 import TestDifficultyCheatSheet from "./TestDifficultyCheatSheet";
 //actions
-import {inputChange, heroClassSelected} from '../../store/heros';
+import {inputChange, heroClassSelected} from '../../store/heroes';
 //selectors
-import {characterName, characterId} from '../../store/heros';
+import {
+  characterName, characterId, mainParameterBodyBuildingBase,
+  mainParameterBodyBuildingFromImplants,
+  mainParameterBodyBuildingTotal
+} from '../../store/heroes';
 
 class FirstPageBlob extends Component {
   handleChange = ({target: {value, name: inputName}}) => {
@@ -17,11 +21,11 @@ class FirstPageBlob extends Component {
     this.props.heroClassSelected(value);
   };
 
-  renderHerosForSelect() {
-    const {herosList} = this.props;
+  renderHeroesForSelect() {
+    const {heroesList} = this.props;
     return (
-      !isEmpty(herosList) && [<option disabled value key={0} value={0}> -- Wybierz klasę postaci
-        -- </option>].concat(map(herosList, ({id, name}) => <option key={id} value={id}>{name}</option>))
+      !isEmpty(heroesList) && [<option disabled value key={0} value={0}> -- Wybierz klasę postaci
+        -- </option>].concat(map(heroesList, ({id, name}) => <option key={id} value={id}>{name}</option>))
     )
   }
 
@@ -42,7 +46,7 @@ class FirstPageBlob extends Component {
           <td rowSpan="3" className="white-and-black__cell">
             BUDOWA CIAŁA
             <br/>
-            ____ + ____ =
+            {this.props.mainParameterBodyBuildingBase} + {this.props.mainParameterBodyBuildingFromImplants} = {this.props.mainParameterBodyBuildingTotal}
             <br/>
             Podstawa Wszczepy
           </td>
@@ -84,7 +88,7 @@ class FirstPageBlob extends Component {
             <Input type="select" name="characterClass" id="characterClass" placeholder="Wybierz klasę postaci"
                    value={this.props.characterId}
                    onChange={this.handleHeroClassChange}>
-              {this.renderHerosForSelect()}
+              {this.renderHeroesForSelect()}
             </Input>
           </td>
         </tr>
@@ -339,7 +343,10 @@ class FirstPageBlob extends Component {
 const mapStateToProps = (state) => ({
   name: characterName(state),
   characterId: characterId(state),
-  herosList: get(state, "heros.byId")
+  mainParameterBodyBuildingBase: mainParameterBodyBuildingBase(state),
+  mainParameterBodyBuildingFromImplants: mainParameterBodyBuildingFromImplants(state),
+  mainParameterBodyBuildingTotal: mainParameterBodyBuildingTotal(state),
+  heroesList: get(state, "heroes.byId")
 });
 
 const mapDispatchToProps = {

@@ -6,4 +6,4 @@ export const api = axios.create({
 
 const extractData = ({ data }) => data;
 
-export const fetchHeroes = () => api.get('/heros').then(extractData);
+export const fetchHeroes = () => api.get('/heroes').then(extractData);

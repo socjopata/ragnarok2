@@ -12,12 +12,12 @@ import CloseCombatDefense from './CloseCombatDefense';
 import WealthAndGrenades from './WealthAndGrenades';
 
 import "./hero.scss"
-import {fetchHeroes} from "../../store/heros";
+import {fetchHeroes} from "../../store/heroes";
 
 class Creator extends Component {
   componentDidMount() {
-    const {herosList, fetchHeroes} = this.props;
-    if (isEmpty(herosList)) {
+    const {heroesList, fetchHeroes} = this.props;
+    if (isEmpty(heroesList)) {
       fetchHeroes();
     }
   }
@@ -43,7 +43,7 @@ class Creator extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  herosList: get(state, "heros.byId")
+  heroesList: get(state, "heroes.byId")
 });
 
 const mapDispatchToProps = dispatch => ({

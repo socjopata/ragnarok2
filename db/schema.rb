@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2019_07_26_115843) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "heros", force: :cascade do |t|
+  create_table "heroes", force: :cascade do |t|
     t.string "name"
   end
 
@@ -27,5 +27,5 @@ ActiveRecord::Schema.define(version: 2019_07_26_115843) do
     t.index ["hero_id"], name: "index_parameters_on_hero_id"
   end
 
-  add_foreign_key "parameters", "heros"
+  add_foreign_key "parameters", "heroes"
 end
