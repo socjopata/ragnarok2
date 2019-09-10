@@ -43,3 +43,63 @@ export const mainParameterSelfControlTotal = state => mainParameterSelfControlBa
 export const mainParameterEntropyBase = state => _mainParameterBase(state, 'entropy');
 export const mainParameterEntropyFromImplants = state => 0;
 export const mainParameterEntropyTotal = state => mainParameterEntropyBase(state) + mainParameterEntropyFromImplants(state);
+
+export const experiencePoints = (state) => {
+  if (state.heroes && state.heroes.byId) {
+    const chosenHero = state.heroes.byId[parseInt(state.heroes.character.id)];
+    if (chosenHero) {
+      const defaultBase = 10;
+      const defaultInteligenceMultiplier = 3;
+      return (defaultBase + mainParameterInteligenceTotal(state) * defaultInteligenceMultiplier)
+    }
+  }
+};
+
+export const focus = (state) => {
+  if (state.heroes && state.heroes.byId) {
+    const chosenHero = state.heroes.byId[parseInt(state.heroes.character.id)];
+    if (chosenHero) {
+      return (mainParameterSelfControlTotal(state) + mainParameterEntropyTotal(state))
+    }
+  }
+};
+
+export const neurostability = (state) => {
+  if (state.heroes && state.heroes.byId) {
+    const chosenHero = state.heroes.byId[parseInt(state.heroes.character.id)];
+    if (chosenHero) {
+      const baseMultiplier = 5;
+      return (mainParameterInteligenceTotal(state) * baseMultiplier)
+    }
+  }
+};
+
+export const sportiness = (state) => {
+  if (state.heroes && state.heroes.byId) {
+    const chosenHero = state.heroes.byId[parseInt(state.heroes.character.id)];
+    if (chosenHero) {
+      return (mainParameterBodyBuildingTotal(state) + mainParameterDexterityTotal(state))
+    }
+  }
+};
+
+export const movementSpeed = (state) => {
+  if (state.heroes && state.heroes.byId) {
+    const chosenHero = state.heroes.byId[parseInt(state.heroes.character.id)];
+    if (chosenHero) {
+      const defaultValue = 5;
+      return (sportiness(state) + defaultValue)
+    }
+  }
+};
+
+export const hitPoints = (state) => {
+  if (state.heroes && state.heroes.byId) {
+    const chosenHero = state.heroes.byId[parseInt(state.heroes.character.id)];
+    if (chosenHero) {
+      const defaultValue = 10;
+      const defaultMultiplier = 5;
+      return (mainParameterBodyBuildingTotal(state) * defaultMultiplier + defaultValue)
+    }
+  }
+};

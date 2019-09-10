@@ -25,6 +25,12 @@ import {
   mainParameterEntropyBase,
   mainParameterEntropyFromImplants,
   mainParameterEntropyTotal,
+  experiencePoints,
+  focus,
+  neurostability,
+  sportiness,
+  movementSpeed,
+  hitPoints,
 } from '../../store/heroes';
 
 class FirstPageBlob extends Component {
@@ -132,7 +138,7 @@ class FirstPageBlob extends Component {
           <td className="grey-and-black__cell">{twoPlusesAndTabs}</td>
           <td className="grey-and-black__cell">&nbsp;</td>
           <td className="grey-and-black__cell">&nbsp;</td>
-          <td rowSpan="2">&nbsp;</td>
+          <td className="centered__cell" rowSpan="2">{this.props.experiencePoints}</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
           <td>Gwiezdny Pilotaż</td>
@@ -159,7 +165,7 @@ class FirstPageBlob extends Component {
           <td className="white-and-black__cell">{twoPlusesAndTabs}</td>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
-          <td rowSpan="2">&nbsp;</td>
+          <td className="centered__cell" rowSpan="2">{this.props.focus}</td>
         </tr>
         <tr className="solid-border__cell">
           <td className="grey-and-black__cell">Technika</td>
@@ -186,7 +192,7 @@ class FirstPageBlob extends Component {
           <td className="grey-and-black__cell">{twoPlusesAndTabs}</td>
           <td className="grey-and-black__cell">&nbsp;</td>
           <td className="grey-and-black__cell">&nbsp;</td>
-          <td rowSpan="2">&nbsp;</td>
+          <td className="centered__cell" rowSpan="2">{this.props.neurostability}</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
           <td>Infiltracja</td>
@@ -213,7 +219,7 @@ class FirstPageBlob extends Component {
           <td className="white-and-black__cell">{twoPlusesAndTabs}</td>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
-          <td rowSpan="2">&nbsp;</td>
+          <td className="centered__cell" rowSpan="2">{this.props.sportiness}</td>
         </tr>
         <tr className="solid-border__cell">
           <td className="grey-and-black__cell">Hekseri</td>
@@ -230,7 +236,7 @@ class FirstPageBlob extends Component {
         </tr>
         <tr className="black-and-white__cell">
           <td colSpan="5">ZALETY</td>
-          <td className="no-horizontal-border__cell white-and-black__cell">&nbsp;</td>
+          <td className="no-horizontal-border__cell white-and-black__cell centered__cell">{this.props.movementSpeed}</td>
         </tr>
         <tr className="solid-border__cell">
           <td rowSpan="2" colSpan="2">&nbsp;</td>
@@ -242,7 +248,7 @@ class FirstPageBlob extends Component {
         </tr>
         <tr className="solid-border__cell black-and-white__cell">
           <td colSpan="5">ATUTY</td>
-          <td className="no-horizontal-border__cell white-and-black__cell">&nbsp;</td>
+          <td className="centered__cell no-horizontal-border__cell white-and-black__cell">{this.props.hitPoints}</td>
         </tr>
         <tr className="solid-border__cell">
           <td colSpan="2">&nbsp;</td>
@@ -376,6 +382,12 @@ const mapStateToProps = (state) => ({
   mainParameterEntropyBase: mainParameterEntropyBase(state),
   mainParameterEntropyFromImplants: mainParameterEntropyFromImplants(state),
   mainParameterEntropyTotal: mainParameterEntropyTotal(state),
+  experiencePoints: experiencePoints(state),
+  focus: focus(state),
+  neurostability: neurostability(state),
+  sportiness: sportiness(state),
+  movementSpeed: movementSpeed(state),
+  hitPoints: hitPoints(state),
   heroesList: get(state, "heroes.byId")
 });
 
