@@ -12,7 +12,19 @@ import {
   mainParameterBodyBuildingTotal,
   mainParameterDexterityBase,
   mainParameterDexterityFromImplants,
-  mainParameterDexterityTotal
+  mainParameterDexterityTotal,
+  mainParameterPerceptionBase,
+  mainParameterPerceptionFromImplants,
+  mainParameterPerceptionTotal,
+  mainParameterInteligenceBase,
+  mainParameterInteligenceFromImplants,
+  mainParameterInteligenceTotal,
+  mainParameterSelfControlBase,
+  mainParameterSelfControlFromImplants,
+  mainParameterSelfControlTotal,
+  mainParameterEntropyBase,
+  mainParameterEntropyFromImplants,
+  mainParameterEntropyTotal,
 } from '../../store/heroes';
 
 class FirstPageBlob extends Component {
@@ -112,7 +124,7 @@ class FirstPageBlob extends Component {
           <td rowSpan="3" className="white-and-black__cell">
             PERCEPCJA
             <br/>
-            ____ + ____ =
+            {this.props.mainParameterPerceptionBase} + {this.props.mainParameterPerceptionFromImplants} = {this.props.mainParameterPerceptionTotal}
             <br/>
             Podstawa Wszczepy
           </td>
@@ -139,7 +151,7 @@ class FirstPageBlob extends Component {
           <td rowSpan="3" className="white-and-black__cell">
             INTELIGENCJA
             <br/>
-            ____ + ____ =
+            {this.props.mainParameterInteligenceBase} + {this.props.mainParameterInteligenceFromImplants} = {this.props.mainParameterInteligenceTotal}
             <br/>
             Podstawa Wszczepy
           </td>
@@ -166,7 +178,7 @@ class FirstPageBlob extends Component {
           <td rowSpan="3" className="white-and-black__cell">
             OPANOWANIE
             <br/>
-            ____ + ____ =
+            {this.props.mainParameterSelfControlBase} + {this.props.mainParameterSelfControlFromImplants} = {this.props.mainParameterSelfControlTotal}
             <br/>
             Podstawa Wszczepy
           </td>
@@ -193,7 +205,7 @@ class FirstPageBlob extends Component {
           <td rowSpan="3" className="white-and-black__cell">
             ENTROPIA
             <br/>
-            ____ + ____ =
+            {this.props.mainParameterEntropyBase} + {this.props.mainParameterEntropyFromImplants} = {this.props.mainParameterEntropyTotal}
             <br/>
             Podstawa Wszczepy
           </td>
@@ -352,6 +364,18 @@ const mapStateToProps = (state) => ({
   mainParameterDexterityBase: mainParameterDexterityBase(state),
   mainParameterDexterityFromImplants: mainParameterDexterityFromImplants(state),
   mainParameterDexterityTotal: mainParameterDexterityTotal(state),
+  mainParameterPerceptionBase: mainParameterPerceptionBase(state),
+  mainParameterPerceptionFromImplants: mainParameterPerceptionFromImplants(state),
+  mainParameterPerceptionTotal: mainParameterPerceptionTotal(state),
+  mainParameterInteligenceBase: mainParameterInteligenceBase(state),
+  mainParameterInteligenceFromImplants: mainParameterInteligenceFromImplants(state),
+  mainParameterInteligenceTotal: mainParameterInteligenceTotal(state),
+  mainParameterSelfControlBase: mainParameterSelfControlBase(state),
+  mainParameterSelfControlFromImplants: mainParameterSelfControlFromImplants(state),
+  mainParameterSelfControlTotal: mainParameterSelfControlTotal(state),
+  mainParameterEntropyBase: mainParameterEntropyBase(state),
+  mainParameterEntropyFromImplants: mainParameterEntropyFromImplants(state),
+  mainParameterEntropyTotal: mainParameterEntropyTotal(state),
   heroesList: get(state, "heroes.byId")
 });
 

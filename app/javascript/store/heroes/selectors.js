@@ -27,3 +27,19 @@ export const mainParameterBodyBuildingTotal = state => mainParameterBodyBuilding
 export const mainParameterDexterityBase = state => _mainParameterBase(state, 'dexerity');
 export const mainParameterDexterityFromImplants = state => 0;
 export const mainParameterDexterityTotal = state => mainParameterDexterityBase(state) + mainParameterDexterityFromImplants(state);
+
+export const mainParameterPerceptionBase = state => _mainParameterBase(state, 'perception');
+export const mainParameterPerceptionFromImplants = state => 0;
+export const mainParameterPerceptionTotal = state => mainParameterPerceptionBase(state) + mainParameterPerceptionFromImplants(state);
+
+export const mainParameterInteligenceBase = state => _mainParameterBase(state, 'inteligence');
+export const mainParameterInteligenceFromImplants = state => 0;
+export const mainParameterInteligenceTotal = state => mainParameterInteligenceBase(state) + mainParameterInteligenceFromImplants(state);
+
+export const mainParameterSelfControlBase = state => _mainParameterBase(state, 'self_control');
+export const mainParameterSelfControlFromImplants = state => 0;
+export const mainParameterSelfControlTotal = state => mainParameterSelfControlBase(state) + mainParameterSelfControlFromImplants(state);
+
+export const mainParameterEntropyBase = state => _mainParameterBase(state, 'entropy');
+export const mainParameterEntropyFromImplants = state => 0;
+export const mainParameterEntropyTotal = state => mainParameterEntropyBase(state) + mainParameterEntropyFromImplants(state);
