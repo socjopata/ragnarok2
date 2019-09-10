@@ -22,10 +22,6 @@ const _mainParameterBase = (state, name) => {
 };
 
 const _heroSelected = (state) => {
-  // if (state.heroes && state.heroes.byId) {
-  //   state.heroes.byId[parseInt(state.heroes.character.id)];
-  //   return chosenHero;
-  // }
   const currentHeroId = _.toNumber(_.get(state, 'heroes.character.id'));
   return _.get(state, ['heroes', 'byId', currentHeroId])
 };
