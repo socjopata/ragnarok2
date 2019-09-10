@@ -103,3 +103,20 @@ export const hitPoints = createSelector(_heroSelected, mainParameterBodyBuilding
     }
   }
 );
+
+export const power = createSelector(_heroSelected, mainParameterInteligenceTotal,
+  (chosenHero, inteligenceTotal) => {
+    if (chosenHero) {
+      const defaultMultiplier = 5;
+      return (inteligenceTotal * defaultMultiplier)
+    }
+  }
+);
+
+export const apparition = createSelector(_heroSelected, mainParameterBodyBuildingTotal, mainParameterEntropyTotal,
+  (chosenHero, bodyBuildingTotal, entropyTotal) => {
+    if (chosenHero) {
+      return (bodyBuildingTotal + entropyTotal)
+    }
+  }
+);

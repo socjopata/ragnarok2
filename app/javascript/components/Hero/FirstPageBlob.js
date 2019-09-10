@@ -31,6 +31,8 @@ import {
   sportiness,
   movementSpeed,
   hitPoints,
+  power,
+  apparition,
 } from '../../store/heroes';
 
 class FirstPageBlob extends Component {
@@ -263,7 +265,7 @@ class FirstPageBlob extends Component {
         <tr className="solid-border__cell">
           <td colSpan="2">&nbsp;</td>
           <td colSpan="3">&nbsp;</td>
-          <td className="no-horizontal-border__cell white-and-black__cell">&nbsp;</td>
+          <td className="centered__cell no-horizontal-border__cell white-and-black__cell">{this.props.power}</td>
         </tr>
         <tr className="solid-border__cell">
           <td colSpan="2">&nbsp;</td>
@@ -278,7 +280,7 @@ class FirstPageBlob extends Component {
         <tr className="solid-border__cell">
           <td colSpan="2">&nbsp;</td>
           <td colSpan="3">&nbsp;</td>
-          <td className="no-horizontal-border__cell white-and-black__cell">&nbsp;</td>
+          <td className="centered__cell no-horizontal-border__cell white-and-black__cell">{this.props.apparition}</td>
         </tr>
         <tr className="solid-border__cell black-and-white__cell">
           <td colSpan="5">WSZCZEPY</td>
@@ -388,6 +390,8 @@ const mapStateToProps = (state) => ({
   sportiness: sportiness(state),
   movementSpeed: movementSpeed(state),
   hitPoints: hitPoints(state),
+  power: power(state),
+  apparition: apparition(state),
   heroesList: get(state, "heroes.byId")
 });
 
