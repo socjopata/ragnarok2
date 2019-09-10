@@ -9,7 +9,10 @@ import {inputChange, heroClassSelected} from '../../store/heroes';
 import {
   characterName, characterId, mainParameterBodyBuildingBase,
   mainParameterBodyBuildingFromImplants,
-  mainParameterBodyBuildingTotal
+  mainParameterBodyBuildingTotal,
+  mainParameterDexterityBase,
+  mainParameterDexterityFromImplants,
+  mainParameterDexterityTotal
 } from '../../store/heroes';
 
 class FirstPageBlob extends Component {
@@ -76,7 +79,7 @@ class FirstPageBlob extends Component {
           <td rowSpan="3" className="white-and-black__cell">
             ZRĘCZNOŚĆ
             <br/>
-            ____ + ____ =
+            {this.props.mainParameterDexterityBase} + {this.props.mainParameterDexterityFromImplants} = {this.props.mainParameterDexterityTotal}
             <br/>
             Podstawa Wszczepy
           </td>
@@ -346,6 +349,9 @@ const mapStateToProps = (state) => ({
   mainParameterBodyBuildingBase: mainParameterBodyBuildingBase(state),
   mainParameterBodyBuildingFromImplants: mainParameterBodyBuildingFromImplants(state),
   mainParameterBodyBuildingTotal: mainParameterBodyBuildingTotal(state),
+  mainParameterDexterityBase: mainParameterDexterityBase(state),
+  mainParameterDexterityFromImplants: mainParameterDexterityFromImplants(state),
+  mainParameterDexterityTotal: mainParameterDexterityTotal(state),
   heroesList: get(state, "heroes.byId")
 });
 
