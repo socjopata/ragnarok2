@@ -1,4 +1,5 @@
 import {get} from 'lodash';
+import {createSelector} from 'reselect';
 
 export const getHeroes = state => ({
   ...state.heroes.list,
@@ -18,6 +19,15 @@ const _mainParameterBase = (state, name) => {
       return 0
     }
   }
+};
+
+const _heroSelected = (state) => {
+  // if (state.heroes && state.heroes.byId) {
+  //   state.heroes.byId[parseInt(state.heroes.character.id)];
+  //   return chosenHero;
+  // }
+  const currentHeroId = _.toNumber(_.get(state, 'heroes.character.id'));
+  return _.get(state, ['heroes', 'byId', currentHeroId])
 };
 
 export const mainParameterBodyBuildingBase = (state) => _mainParameterBase(state, 'physique');
@@ -44,62 +54,56 @@ export const mainParameterEntropyBase = state => _mainParameterBase(state, 'entr
 export const mainParameterEntropyFromImplants = state => 0;
 export const mainParameterEntropyTotal = state => mainParameterEntropyBase(state) + mainParameterEntropyFromImplants(state);
 
-export const experiencePoints = (state) => {
-  if (state.heroes && state.heroes.byId) {
-    const chosenHero = state.heroes.byId[parseInt(state.heroes.character.id)];
+export const experiencePoints = createSelector(_heroSelected, mainParameterInteligenceTotal,
+  (chosenHero, inteligenceTotal) => {
     if (chosenHero) {
       const defaultBase = 10;
       const defaultInteligenceMultiplier = 3;
-      return (defaultBase + mainParameterInteligenceTotal(state) * defaultInteligenceMultiplier)
+      return (defaultBase + inteligenceTotal * defaultInteligenceMultiplier)
     }
   }
-};
+);
 
-export const focus = (state) => {
-  if (state.heroes && state.heroes.byId) {
-    const chosenHero = state.heroes.byId[parseInt(state.heroes.character.id)];
+export const focus = createSelector(_heroSelected, mainParameterSelfControlTotal, mainParameterEntropyTotal,
+  (chosenHero, selfControlTotal, entropyTotal) => {
     if (chosenHero) {
-      return (mainParameterSelfControlTotal(state) + mainParameterEntropyTotal(state))
+      return (selfControlTotal + entropyTotal)
     }
   }
-};
+);
 
-export const neurostability = (state) => {
-  if (state.heroes && state.heroes.byId) {
-    const chosenHero = state.heroes.byId[parseInt(state.heroes.character.id)];
+export const neurostability = createSelector(_heroSelected, mainParameterInteligenceTotal,
+  (chosenHero, inteligenceTotal) => {
     if (chosenHero) {
       const baseMultiplier = 5;
-      return (mainParameterInteligenceTotal(state) * baseMultiplier)
+      return (inteligenceTotal * baseMultiplier)
     }
   }
-};
+);
 
-export const sportiness = (state) => {
-  if (state.heroes && state.heroes.byId) {
-    const chosenHero = state.heroes.byId[parseInt(state.heroes.character.id)];
+export const sportiness = createSelector(_heroSelected, mainParameterBodyBuildingTotal, mainParameterDexterityTotal,
+  (chosenHero, bodyBulidingTotal, dexterityTotal) => {
     if (chosenHero) {
-      return (mainParameterBodyBuildingTotal(state) + mainParameterDexterityTotal(state))
+      return (bodyBulidingTotal + dexterityTotal)
     }
   }
-};
+);
 
-export const movementSpeed = (state) => {
-  if (state.heroes && state.heroes.byId) {
-    const chosenHero = state.heroes.byId[parseInt(state.heroes.character.id)];
+export const movementSpeed = createSelector(_heroSelected, sportiness,
+  (chosenHero, sportiness) => {
     if (chosenHero) {
       const defaultValue = 5;
-      return (sportiness(state) + defaultValue)
+      return (sportiness + defaultValue)
     }
   }
-};
+);
 
-export const hitPoints = (state) => {
-  if (state.heroes && state.heroes.byId) {
-    const chosenHero = state.heroes.byId[parseInt(state.heroes.character.id)];
+export const hitPoints = createSelector(_heroSelected, mainParameterBodyBuildingTotal,
+  (chosenHero, bodyBuildingTotal) => {
     if (chosenHero) {
       const defaultValue = 10;
       const defaultMultiplier = 5;
-      return (mainParameterBodyBuildingTotal(state) * defaultMultiplier + defaultValue)
+      return (bodyBuildingTotal * defaultMultiplier + defaultValue)
     }
   }
-};
+);
