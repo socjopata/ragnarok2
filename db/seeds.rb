@@ -196,3 +196,7 @@ end
 }.each do |param_name, value|
   hero.secondary_parameters.create(name: param_name, value: value)
 end
+
+
+
+
