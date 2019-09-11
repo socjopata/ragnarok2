@@ -13,7 +13,19 @@ const _mainParameterBase = (state, name) => {
   if (state.heroes && state.heroes.byId) {
     const chosenHero = state.heroes.byId[parseInt(state.heroes.character.id)];
     if (chosenHero) {
-      const base = chosenHero.parameters.filter(parameter => parameter.name === name)[0].value;
+      const base = chosenHero.parameters.filter(parameter => parameter.name === name && parameter.type === "MainParameter")[0].value;
+      return (base)
+    } else {
+      return 0
+    }
+  }
+};
+
+const _secondaryParameterBase = (state, name) => {
+  if (state.heroes && state.heroes.byId) {
+    const chosenHero = state.heroes.byId[parseInt(state.heroes.character.id)];
+    if (chosenHero) {
+      const base = chosenHero.parameters.filter(parameter => parameter.name === name && parameter.type === "SecondaryParameter")[0].value;
       return (base)
     } else {
       return 0
@@ -120,3 +132,13 @@ export const apparition = createSelector(_heroSelected, mainParameterBodyBuildin
     }
   }
 );
+
+export const secondaryParameterFencingBase = (state) => _secondaryParameterBase(state, 'fencing');
+export const secondaryParameterFencingFromImplants = state => 0;
+export const secondaryParameterFencingBonus = state => 0;
+export const secondaryParameterFencingTotal = state => secondaryParameterFencingBase(state) + secondaryParameterFencingFromImplants(state) + secondaryParameterFencingBonus(state);
+
+export const secondaryParameterMartialArtsBase = (state) => _secondaryParameterBase(state, 'martial_arts');
+export const secondaryParameterMartialArtsFromImplants = state => 0;
+export const secondaryParameterMartialArtsBonus = state => 0;
+export const secondaryParameterMartialArtsTotal = state => secondaryParameterMartialArtsBase(state) + secondaryParameterMartialArtsFromImplants(state) + secondaryParameterMartialArtsBonus(state);

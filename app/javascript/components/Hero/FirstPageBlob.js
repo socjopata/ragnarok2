@@ -33,6 +33,14 @@ import {
   hitPoints,
   power,
   apparition,
+  secondaryParameterFencingBase,
+  secondaryParameterFencingFromImplants,
+  secondaryParameterFencingBonus,
+  secondaryParameterFencingTotal,
+  secondaryParameterMartialArtsBase,
+  secondaryParameterMartialArtsFromImplants,
+  secondaryParameterMartialArtsBonus,
+  secondaryParameterMartialArtsTotal,
 } from '../../store/heroes';
 
 class FirstPageBlob extends Component {
@@ -74,7 +82,11 @@ class FirstPageBlob extends Component {
             Podstawa Wszczepy
           </td>
           <td className="grey-and-black__cell">Broń Biała</td>
-          <td className="grey-and-black__cell">{twoPlusesAndTabs}</td>
+          <td className="grey-and-black__cell"><span>
+            {this.props.secondaryParameterFencingBase}&emsp;&emsp;+&ensp;
+            &emsp;{this.props.secondaryParameterFencingFromImplants}&emsp;&emsp;+
+            &emsp;&emsp;{this.props.secondaryParameterFencingBonus}
+          </span></td>
           <td className="grey-and-black__cell">&nbsp;</td>
           <td className="grey-and-black__cell">&nbsp;</td>
           <td rowSpan="2">
@@ -84,7 +96,11 @@ class FirstPageBlob extends Component {
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
           <td>Walka Wręcz</td>
-          <td>{twoPlusesAndTabs}</td>
+          <td><span>
+            {this.props.secondaryParameterMartialArtsBase}&emsp;&emsp;+&ensp;
+            &emsp;{this.props.secondaryParameterMartialArtsFromImplants}&emsp;&emsp;+
+            &emsp;&emsp;{this.props.secondaryParameterMartialArtsBonus}
+          </span></td>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
         </tr>
@@ -392,6 +408,14 @@ const mapStateToProps = (state) => ({
   hitPoints: hitPoints(state),
   power: power(state),
   apparition: apparition(state),
+  secondaryParameterFencingBase: secondaryParameterFencingBase(state),
+  secondaryParameterFencingFromImplants: secondaryParameterFencingFromImplants(state),
+  secondaryParameterFencingBonus: secondaryParameterFencingBonus(state),
+  secondaryParameterFencingTotal: secondaryParameterFencingTotal(state),
+  secondaryParameterMartialArtsBase: secondaryParameterMartialArtsBase(state),
+  secondaryParameterMartialArtsFromImplants: secondaryParameterMartialArtsFromImplants(state),
+  secondaryParameterMartialArtsBonus: secondaryParameterMartialArtsBonus(state),
+  secondaryParameterMartialArtsTotal: secondaryParameterMartialArtsTotal(state),
   heroesList: get(state, "heroes.byId")
 });
 
