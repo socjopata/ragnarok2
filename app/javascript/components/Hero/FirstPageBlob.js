@@ -1,13 +1,13 @@
 import React, {Component, Fragment} from 'react';
 import {get, isEmpty, map} from 'lodash';
-import {Input} from 'reactstrap';
+import {Input, Button} from 'reactstrap';
 import {connect} from "react-redux";
 import TestDifficultyCheatSheet from "./TestDifficultyCheatSheet";
 //actions
 import {inputChange, heroClassSelected} from '../../store/heroes';
 //selectors
 import {
-  characterName, characterId, mainParameterBodyBuildingBase,
+  heroSelected, characterName, characterId, mainParameterBodyBuildingBase,
   mainParameterBodyBuildingFromImplants,
   mainParameterBodyBuildingTotal,
   mainParameterDexterityBase,
@@ -124,6 +124,24 @@ class FirstPageBlob extends Component {
     )
   }
 
+  renderFlexibleSecondarySkillChoice(skillName) {
+    const heroSelected = this.props.heroSelected;
+    if (heroSelected) {
+      const flexibleParameters = heroSelected.parameters.filter(parameter => parameter.name.includes("_or_") || parameter.name.includes("any_") && parameter.type === "SecondaryParameter");
+      return (map(flexibleParameters, ({id, name, value}) => {
+        if (name.includes(skillName)) {
+          return (<Button key={id + name} color="primary" className="tiny__button">{value}</Button>)
+        } else if (name.includes("any_")) {
+          const base = heroSelected.parameters.filter(parameter => parameter.name === skillName && parameter.type === "SecondaryParameter")[0].value; //FIXME this is a duplication, when we consider a method defined in selectors.js
+          const secondaryParameterAtZero = base === 0;
+          if (secondaryParameterAtZero) {
+            return (<Button key={id + name} color="primary" className="tiny__button">{value}</Button>)
+          }
+        }
+      }))
+    }
+  };
+
   render() {
     return (
       <Fragment>
@@ -143,7 +161,7 @@ class FirstPageBlob extends Component {
             <br/>
             Podstawa Wszczepy
           </td>
-          <td className="grey-and-black__cell">Broń Biała</td>
+          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('fencing')}Broń Biała</td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterFencingBase}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterFencingFromImplants}&emsp;&emsp;+
@@ -157,7 +175,7 @@ class FirstPageBlob extends Component {
           </td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
-          <td>Walka Wręcz</td>
+          <td>{this.renderFlexibleSecondarySkillChoice('martial_arts')}Walka Wręcz</td>
           <td><span>
             {this.props.secondaryParameterMartialArtsBase}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterMartialArtsFromImplants}&emsp;&emsp;+
@@ -167,7 +185,7 @@ class FirstPageBlob extends Component {
           <td>&nbsp;</td>
         </tr>
         <tr className="solid-border__cell">
-          <td className="grey-and-black__cell">Wytrzymałość</td>
+          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('endurance')}Wytrzymałość</td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterEnduranceBase}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterEnduranceFromImplants}&emsp;&emsp;+
@@ -185,7 +203,7 @@ class FirstPageBlob extends Component {
             <br/>
             Podstawa Wszczepy
           </td>
-          <td className="white-and-black__cell">Broń Krótka</td>
+          <td className="white-and-black__cell">{this.renderFlexibleSecondarySkillChoice('pistols')}Broń Krótka</td>
           <td className="white-and-black__cell"><span>
             {this.props.secondaryParameterPistolsBase}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterPistolsFromImplants}&emsp;&emsp;+
@@ -202,7 +220,7 @@ class FirstPageBlob extends Component {
           </td>
         </tr>
         <tr className="solid-border__cell">
-          <td className="grey-and-black__cell">Obsługa Pojazdów</td>
+          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('vehicle_handling')}Obsługa Pojazdów</td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterVehicleHandlingBase}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterVehicleHandlingFromImplants}&emsp;&emsp;+
@@ -212,7 +230,7 @@ class FirstPageBlob extends Component {
           <td className="grey-and-black__cell">&nbsp;</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
-          <td>Refleks</td>
+          <td>{this.renderFlexibleSecondarySkillChoice('reflex')}Refleks</td>
           <td><span>
             {this.props.secondaryParameterReflexBase}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterReflexFromImplants}&emsp;&emsp;+
@@ -230,7 +248,7 @@ class FirstPageBlob extends Component {
             <br/>
             Podstawa Wszczepy
           </td>
-          <td className="grey-and-black__cell">Broń Długa</td>
+          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('rifles')}Broń Długa</td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterRiflesBase}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterRiflesFromImplants}&emsp;&emsp;+
@@ -241,7 +259,7 @@ class FirstPageBlob extends Component {
           <td className="centered__cell" rowSpan="2">{this.props.experiencePoints}</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
-          <td>Gwiezdny Pilotaż</td>
+          <td>{this.renderFlexibleSecondarySkillChoice('spaceships_handling')}Gwiezdny Pilotaż</td>
           <td><span>
             {this.props.secondaryParameterSpaceshipsHandlingBase}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterSpaceshipsHandlingFromImplants}&emsp;&emsp;+
@@ -251,7 +269,7 @@ class FirstPageBlob extends Component {
           <td>&nbsp;</td>
         </tr>
         <tr className="solid-border__cell">
-          <td className="grey-and-black__cell">Wyczulone Zmysły</td>
+          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('senses')}Wyczulone Zmysły</td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterSensesBase}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterSensesFromImplants}&emsp;&emsp;+
@@ -269,7 +287,7 @@ class FirstPageBlob extends Component {
             <br/>
             Podstawa Wszczepy
           </td>
-          <td className="white-and-black__cell">Koneksje</td>
+          <td className="white-and-black__cell">{this.renderFlexibleSecondarySkillChoice('connections')}Koneksje</td>
           <td className="white-and-black__cell"><span>
             {this.props.secondaryParameterConnectionsBase}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterConnectionsFromImplants}&emsp;&emsp;+
@@ -280,7 +298,7 @@ class FirstPageBlob extends Component {
           <td className="centered__cell" rowSpan="2">{this.props.focus}</td>
         </tr>
         <tr className="solid-border__cell">
-          <td className="grey-and-black__cell">Technika</td>
+          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('technology')}Technika</td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterTechnologyBase}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterTechnologyFromImplants}&emsp;&emsp;+
@@ -290,7 +308,7 @@ class FirstPageBlob extends Component {
           <td className="grey-and-black__cell">&nbsp;</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
-          <td>Wiedza</td>
+          <td>{this.renderFlexibleSecondarySkillChoice('knowledge')}Wiedza</td>
           <td><span>
             {this.props.secondaryParameterKnowledgeBase}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterKnowledgeFromImplants}&emsp;&emsp;+
@@ -308,7 +326,7 @@ class FirstPageBlob extends Component {
             <br/>
             Podstawa Wszczepy
           </td>
-          <td className="grey-and-black__cell">Hackowanie</td>
+          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('hacking')}Hackowanie</td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterHackingBase}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterHackingFromImplants}&emsp;&emsp;+
@@ -319,7 +337,7 @@ class FirstPageBlob extends Component {
           <td className="centered__cell" rowSpan="2">{this.props.neurostability}</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
-          <td>Infiltracja</td>
+          <td>{this.renderFlexibleSecondarySkillChoice('infiltration')}Infiltracja</td>
           <td><span>
             {this.props.secondaryParameterInfiltrationBase}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterInfiltrationFromImplants}&emsp;&emsp;+
@@ -329,7 +347,7 @@ class FirstPageBlob extends Component {
           <td>&nbsp;</td>
         </tr>
         <tr className="solid-border__cell">
-          <td className="grey-and-black__cell">Trik i Fortel</td>
+          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('trick_and_subterfuge')}Trik i Fortel</td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterTrickAndSubterfugeBase}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterTrickAndSubterfugeFromImplants}&emsp;&emsp;+
@@ -347,7 +365,7 @@ class FirstPageBlob extends Component {
             <br/>
             Podstawa Wszczepy
           </td>
-          <td className="white-and-black__cell">Charyzma</td>
+          <td className="white-and-black__cell">{this.renderFlexibleSecondarySkillChoice('charisma')}Charyzma</td>
           <td className="white-and-black__cell"><span>
             {this.props.secondaryParameterCharismaBase}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterCharismaFromImplants}&emsp;&emsp;+
@@ -358,7 +376,7 @@ class FirstPageBlob extends Component {
           <td className="centered__cell" rowSpan="2">{this.props.sportiness}</td>
         </tr>
         <tr className="solid-border__cell">
-          <td className="grey-and-black__cell">Hekseri</td>
+          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('hexeri')}Hekseri</td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterHexeriBase}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterHexeriFromImplants}&emsp;&emsp;+
@@ -368,7 +386,7 @@ class FirstPageBlob extends Component {
           <td className="grey-and-black__cell">&nbsp;</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
-          <td>Siła Woli</td>
+          <td>{this.renderFlexibleSecondarySkillChoice('willpower')}Siła Woli</td>
           <td><span>
             {this.props.secondaryParameterWillpowerBase}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterWillpowerFromImplants}&emsp;&emsp;+
@@ -606,7 +624,8 @@ const mapStateToProps = (state) => ({
   secondaryParameterWillpowerFromImplants: secondaryParameterWillpowerFromImplants(state),
   secondaryParameterWillpowerBonus: secondaryParameterWillpowerBonus(state),
   secondaryParameterWillpowerTotal: secondaryParameterWillpowerTotal(state),
-  heroesList: get(state, "heroes.byId")
+  heroesList: get(state, "heroes.byId"),
+  heroSelected: heroSelected(state)
 });
 
 const mapDispatchToProps = {

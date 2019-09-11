@@ -33,7 +33,7 @@ const _secondaryParameterBase = (state, name) => {
   }
 };
 
-const _heroSelected = (state) => {
+export const heroSelected = (state) => {
   const currentHeroId = _.toNumber(_.get(state, 'heroes.character.id'));
   return _.get(state, ['heroes', 'byId', currentHeroId])
 };
@@ -62,7 +62,7 @@ export const mainParameterEntropyBase = state => _mainParameterBase(state, 'entr
 export const mainParameterEntropyFromImplants = state => 0;
 export const mainParameterEntropyTotal = state => mainParameterEntropyBase(state) + mainParameterEntropyFromImplants(state);
 
-export const experiencePoints = createSelector(_heroSelected, mainParameterInteligenceTotal,
+export const experiencePoints = createSelector(heroSelected, mainParameterInteligenceTotal,
   (chosenHero, inteligenceTotal) => {
     if (chosenHero) {
       const defaultBase = 10;
@@ -72,7 +72,7 @@ export const experiencePoints = createSelector(_heroSelected, mainParameterIntel
   }
 );
 
-export const focus = createSelector(_heroSelected, mainParameterSelfControlTotal, mainParameterEntropyTotal,
+export const focus = createSelector(heroSelected, mainParameterSelfControlTotal, mainParameterEntropyTotal,
   (chosenHero, selfControlTotal, entropyTotal) => {
     if (chosenHero) {
       return (selfControlTotal + entropyTotal)
@@ -80,7 +80,7 @@ export const focus = createSelector(_heroSelected, mainParameterSelfControlTotal
   }
 );
 
-export const neurostability = createSelector(_heroSelected, mainParameterInteligenceTotal,
+export const neurostability = createSelector(heroSelected, mainParameterInteligenceTotal,
   (chosenHero, inteligenceTotal) => {
     if (chosenHero) {
       const baseMultiplier = 5;
@@ -89,7 +89,7 @@ export const neurostability = createSelector(_heroSelected, mainParameterIntelig
   }
 );
 
-export const sportiness = createSelector(_heroSelected, mainParameterBodyBuildingTotal, mainParameterDexterityTotal,
+export const sportiness = createSelector(heroSelected, mainParameterBodyBuildingTotal, mainParameterDexterityTotal,
   (chosenHero, bodyBulidingTotal, dexterityTotal) => {
     if (chosenHero) {
       return (bodyBulidingTotal + dexterityTotal)
@@ -97,7 +97,7 @@ export const sportiness = createSelector(_heroSelected, mainParameterBodyBuildin
   }
 );
 
-export const movementSpeed = createSelector(_heroSelected, sportiness,
+export const movementSpeed = createSelector(heroSelected, sportiness,
   (chosenHero, sportiness) => {
     if (chosenHero) {
       const defaultValue = 5;
@@ -106,7 +106,7 @@ export const movementSpeed = createSelector(_heroSelected, sportiness,
   }
 );
 
-export const hitPoints = createSelector(_heroSelected, mainParameterBodyBuildingTotal,
+export const hitPoints = createSelector(heroSelected, mainParameterBodyBuildingTotal,
   (chosenHero, bodyBuildingTotal) => {
     if (chosenHero) {
       const defaultValue = 10;
@@ -116,7 +116,7 @@ export const hitPoints = createSelector(_heroSelected, mainParameterBodyBuilding
   }
 );
 
-export const power = createSelector(_heroSelected, mainParameterInteligenceTotal,
+export const power = createSelector(heroSelected, mainParameterInteligenceTotal,
   (chosenHero, inteligenceTotal) => {
     if (chosenHero) {
       const defaultMultiplier = 5;
@@ -125,7 +125,7 @@ export const power = createSelector(_heroSelected, mainParameterInteligenceTotal
   }
 );
 
-export const apparition = createSelector(_heroSelected, mainParameterBodyBuildingTotal, mainParameterEntropyTotal,
+export const apparition = createSelector(heroSelected, mainParameterBodyBuildingTotal, mainParameterEntropyTotal,
   (chosenHero, bodyBuildingTotal, entropyTotal) => {
     if (chosenHero) {
       return (bodyBuildingTotal + entropyTotal)
