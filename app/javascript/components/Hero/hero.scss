@@ -1,3 +1,13 @@
+.table {
+  th {
+    padding: 0;
+  }
+
+  td {
+    padding: 0;
+  }
+}
+
 .character-sheet__main {
   border: 1px solid;
   margin: auto;
@@ -85,4 +95,8 @@ td.text-left-allign {
 
 td.table-wrapping__cell {
   padding: 0;
+}
+
+table#test-difficulty-cheatsheet__table {
+  width: 100%;
 }
