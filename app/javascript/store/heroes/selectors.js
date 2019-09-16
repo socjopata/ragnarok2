@@ -8,6 +8,8 @@ export const getHeroes = state => ({
 
 export const characterName = state => get(state, "heroes.character.name");
 export const characterId = state => get(state, "heroes.character.id");
+export const usedFlexibleSecondaryParameters = state => get(state, "heroes.character.usedFlexibleSecondaryParameters");
+export const chosenFlexibleSecondaryParameters = state => get(state, "heroes.character.selectedFlexibleSecondaryParameters");
 
 const _mainParameterBase = (state, name) => {
   if (state.heroes && state.heroes.byId) {
@@ -25,8 +27,9 @@ const _secondaryParameterBase = (state, name) => {
   if (state.heroes && state.heroes.byId) {
     const chosenHero = state.heroes.byId[parseInt(state.heroes.character.id)];
     if (chosenHero) {
-      const base = chosenHero.parameters.filter(parameter => parameter.name === name && parameter.type === "SecondaryParameter")[0].value;
-      return (base)
+      const defaultBase = chosenHero.parameters.filter(parameter => parameter.name === name && parameter.type === "SecondaryParameter")[0].value;
+      const flexibleSkillChoice = get(chosenFlexibleSecondaryParameters(state), name, 0);
+      return (defaultBase + flexibleSkillChoice)
     } else {
       return 0
     }
