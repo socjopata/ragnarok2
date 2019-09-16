@@ -30,8 +30,10 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         character: {
-          ...state.character,
-          id: action.value
+          id: action.value,
+          name: state.character.name,
+          usedFlexibleSecondaryParameters: [],
+          selectedFlexibleSecondaryParameters: {}
         }
       };
     case INPUT_CHANGE:
