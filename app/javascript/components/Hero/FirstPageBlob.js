@@ -219,7 +219,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterPistolsFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterPistolsBonus}
           </span></td>
-          <td className="centered__cell">{this.props.secondaryParameterPistolsTotal}</td>
+          <td className="white-and-black__cell">{this.props.secondaryParameterPistolsTotal}</td>
           <td>&nbsp;</td>
           <td rowSpan="2">
             <Input type="select" name="characterClass" id="characterClass" placeholder="Wybierz klasę postaci"
@@ -303,7 +303,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterConnectionsFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterConnectionsBonus}
           </span></td>
-          <td className="centered__cell">{this.props.secondaryParameterConnectionsTotal}</td>
+          <td className="white-and-black__cell">{this.props.secondaryParameterConnectionsTotal}</td>
           <td>&nbsp;</td>
           <td className="centered__cell" rowSpan="2">{this.props.focus}</td>
         </tr>
@@ -381,7 +381,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterCharismaFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterCharismaBonus}
           </span></td>
-          <td className="centered__cell">{this.props.secondaryParameterCharismaTotal}</td>
+          <td className="white-and-black__cell">{this.props.secondaryParameterCharismaTotal}</td>
           <td>&nbsp;</td>
           <td className="centered__cell" rowSpan="2">{this.props.sportiness}</td>
         </tr>
