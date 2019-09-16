@@ -4,7 +4,7 @@ import {Input, Button} from 'reactstrap';
 import {connect} from "react-redux";
 import TestDifficultyCheatSheet from "./TestDifficultyCheatSheet";
 //actions
-import {inputChange, heroClassSelected} from '../../store/heroes';
+import {inputChange, heroClassSelected, flexibleSecondarySkillSelected} from '../../store/heroes';
 //selectors
 import {
   heroSelected, characterName, characterId, mainParameterBodyBuildingBase,
@@ -116,6 +116,10 @@ class FirstPageBlob extends Component {
     this.props.heroClassSelected(value);
   };
 
+  handleFlexibleSecondarySkillChoice = (flexibleParameterName, skillName, value) => {
+    this.props.flexibleSecondarySkillSelected(flexibleParameterName, skillName, value);
+  };
+
   renderHeroesForSelect() {
     const {heroesList} = this.props;
     return (
@@ -128,14 +132,14 @@ class FirstPageBlob extends Component {
     const heroSelected = this.props.heroSelected;
     if (heroSelected) {
       const flexibleParameters = heroSelected.parameters.filter(parameter => parameter.name.includes("_or_") || parameter.name.includes("any_") && parameter.type === "SecondaryParameter");
-      return (map(flexibleParameters, ({id, name, value}) => {
-        if (name.includes(skillName)) {
-          return (<Button key={id + name} color="primary" className="tiny__button">{value}</Button>)
-        } else if (name.includes("any_")) {
+      return (map(flexibleParameters, ({id, name: flexibleParameterName, value}) => {
+        if (flexibleParameterName.includes(skillName)) {
+          return (<Button key={id + name} color="primary" className="tiny__button" onClick={() => this.handleFlexibleSecondarySkillChoice(flexibleParameterName, skillName, value)}>{value}</Button>)
+        } else if (flexibleParameterName.includes("any_")) {
           const base = heroSelected.parameters.filter(parameter => parameter.name === skillName && parameter.type === "SecondaryParameter")[0].value; //FIXME this is a duplication, when we consider a method defined in selectors.js
           const secondaryParameterAtZero = base === 0;
           if (secondaryParameterAtZero) {
-            return (<Button key={id + name} color="primary" className="tiny__button">{value}</Button>)
+            return (<Button key={id + name} color="primary" className="tiny__button" onClick={() => this.handleFlexibleSecondarySkillChoice(flexibleParameterName, skillName, value)}>{value}</Button>)
           }
         }
       }))
@@ -630,7 +634,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   inputChange,
-  heroClassSelected
+  heroClassSelected,
+  flexibleSecondarySkillSelected
 };
 
 export default connect(

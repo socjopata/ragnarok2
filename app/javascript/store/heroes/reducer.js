@@ -5,7 +5,8 @@ import {
   FETCH_HEROES_FAILURE,
   FETCH_HEROES_SUCCESS,
   INPUT_CHANGE,
-  HERO_CLASS_CHANGED
+  HERO_CLASS_CHANGED,
+  FLEXIBLE_PARAMETER_SELECTED
 } from './actions';
 
 const initialState = {
@@ -17,7 +18,9 @@ const initialState = {
   },
   character: {
     id: 0,
-    name: ""
+    name: "",
+    usedFlexibleSecondaryParameters: [],
+    selectedFlexibleSecondaryParameters: {}
   }
 };
 
@@ -37,6 +40,21 @@ export const reducer = (state = initialState, action) => {
         character: {
           ...state.character,
           [action.fieldName]: action.value
+        }
+      };
+    case FLEXIBLE_PARAMETER_SELECTED:
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          usedFlexibleSecondaryParameters: [
+            ...state.character.usedFlexibleSecondaryParameters,
+            action.flexibleParameterName
+          ],
+          selectedFlexibleSecondaryParameters: {
+            ...state.character.selectedFlexibleSecondaryParameters,
+            [action.skillName]: action.value,
+          },
         }
       };
     case FETCH_HEROES_STARTED:
