@@ -177,7 +177,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterFencingFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterFencingBonus}
           </span></td>
-          <td className="grey-and-black__cell">&nbsp;</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterFencingTotal}</td>
           <td className="grey-and-black__cell">&nbsp;</td>
           <td rowSpan="2">
             <Input type="text" name="name" id="name" placeholder="Jak się nazywasz?" onChange={this.handleChange}
@@ -191,7 +191,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterMartialArtsFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterMartialArtsBonus}
           </span></td>
-          <td>&nbsp;</td>
+          <td>{this.props.secondaryParameterMartialArtsTotal}</td>
           <td>&nbsp;</td>
         </tr>
         <tr className="solid-border__cell">
@@ -201,7 +201,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterEnduranceFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterEnduranceBonus}
           </span></td>
-          <td className="grey-and-black__cell">&nbsp;</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterEnduranceTotal}</td>
           <td className="grey-and-black__cell">&nbsp;</td>
           <td className="black-and-white__cell">Klasa Postaci</td>
         </tr>
@@ -219,7 +219,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterPistolsFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterPistolsBonus}
           </span></td>
-          <td>&nbsp;</td>
+          <td className="centered__cell">{this.props.secondaryParameterPistolsTotal}</td>
           <td>&nbsp;</td>
           <td rowSpan="2">
             <Input type="select" name="characterClass" id="characterClass" placeholder="Wybierz klasę postaci"
@@ -236,7 +236,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterVehicleHandlingFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterVehicleHandlingBonus}
           </span></td>
-          <td className="grey-and-black__cell">&nbsp;</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterVehicleHandlingTotal}</td>
           <td className="grey-and-black__cell">&nbsp;</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
@@ -246,7 +246,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterReflexFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterReflexBonus}
           </span></td>
-          <td>&nbsp;</td>
+          <td>{this.props.secondaryParameterReflexTotal}</td>
           <td>&nbsp;</td>
           <td className="black-and-white__cell">Punkty Doświadczenia</td>
         </tr>
@@ -264,7 +264,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterRiflesFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterRiflesBonus}
           </span></td>
-          <td className="grey-and-black__cell">&nbsp;</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterRiflesTotal}</td>
           <td className="grey-and-black__cell">&nbsp;</td>
           <td className="centered__cell" rowSpan="2">{this.props.experiencePoints}</td>
         </tr>
@@ -275,7 +275,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterSpaceshipsHandlingFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterSpaceshipsHandlingBonus}
           </span></td>
-          <td>&nbsp;</td>
+          <td>{this.props.secondaryParameterSpaceshipsHandlingTotal}</td>
           <td>&nbsp;</td>
         </tr>
         <tr className="solid-border__cell">
@@ -285,7 +285,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterSensesFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterSensesBonus}
           </span></td>
-          <td className="grey-and-black__cell">&nbsp;</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterSensesTotal}</td>
           <td className="grey-and-black__cell">&nbsp;</td>
           <td className="black-and-white__cell">Koncentracja (OP+E)</td>
         </tr>
@@ -303,7 +303,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterConnectionsFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterConnectionsBonus}
           </span></td>
-          <td>&nbsp;</td>
+          <td className="centered__cell">{this.props.secondaryParameterConnectionsTotal}</td>
           <td>&nbsp;</td>
           <td className="centered__cell" rowSpan="2">{this.props.focus}</td>
         </tr>
@@ -314,7 +314,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterTechnologyFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterTechnologyBonus}
           </span></td>
-          <td className="grey-and-black__cell">&nbsp;</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterTechnologyTotal}</td>
           <td className="grey-and-black__cell">&nbsp;</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
@@ -324,7 +324,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterKnowledgeFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterKnowledgeBonus}
           </span></td>
-          <td>&nbsp;</td>
+          <td>{this.props.secondaryParameterKnowledgeTotal}</td>
           <td>&nbsp;</td>
           <td className="black-and-white__cell">Neurostabilność (INTx5)</td>
         </tr>
@@ -342,7 +342,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterHackingFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterHackingBonus}
           </span></td>
-          <td className="grey-and-black__cell">&nbsp;</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterHackingTotal}</td>
           <td className="grey-and-black__cell">&nbsp;</td>
           <td className="centered__cell" rowSpan="2">{this.props.neurostability}</td>
         </tr>
@@ -353,7 +353,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterInfiltrationFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterInfiltrationBonus}
           </span></td>
-          <td>&nbsp;</td>
+          <td>{this.props.secondaryParameterInfiltrationTotal}</td>
           <td>&nbsp;</td>
         </tr>
         <tr className="solid-border__cell">
@@ -363,7 +363,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterTrickAndSubterfugeFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterTrickAndSubterfugeBonus}
           </span></td>
-          <td className="grey-and-black__cell">&nbsp;</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterTrickAndSubterfugeTotal}</td>
           <td className="grey-and-black__cell">&nbsp;</td>
           <td className="black-and-white__cell">Wysportowanie (BC+ZR)</td>
         </tr>
@@ -381,7 +381,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterCharismaFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterCharismaBonus}
           </span></td>
-          <td>&nbsp;</td>
+          <td className="centered__cell">{this.props.secondaryParameterCharismaTotal}</td>
           <td>&nbsp;</td>
           <td className="centered__cell" rowSpan="2">{this.props.sportiness}</td>
         </tr>
@@ -392,7 +392,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterHexeriFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterHexeriBonus}
           </span></td>
-          <td className="grey-and-black__cell">&nbsp;</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterHexeriTotal}</td>
           <td className="grey-and-black__cell">&nbsp;</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
@@ -402,7 +402,7 @@ class FirstPageBlob extends Component {
             &emsp;{this.props.secondaryParameterWillpowerFromImplants}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterWillpowerBonus}
           </span></td>
-          <td>&nbsp;</td>
+          <td>{this.props.secondaryParameterWillpowerTotal}</td>
           <td>&nbsp;</td>
           <td className="black-and-white__cell">Ruch (5+Wysportowanie)</td>
         </tr>
