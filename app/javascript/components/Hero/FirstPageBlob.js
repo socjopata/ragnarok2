@@ -7,28 +7,11 @@ import TestDifficultyCheatSheet from "./TestDifficultyCheatSheet";
 import {inputChange, heroClassSelected, flexibleSecondarySkillSelected} from '../../store/heroes';
 //selectors
 import {
-  heroSelected, characterName, characterId, mainParameterBodyBuildingBase, usedFlexibleSecondaryParameters,
+  heroSelected, characterName, characterId, usedFlexibleSecondaryParameters,
   chosenFlexibleSecondaryParameters,
   mainParameterBase,
   mainParameterFromImplants,
   mainParameterTotal,
-  mainParameterBodyBuildingFromImplants,
-  mainParameterBodyBuildingTotal,
-  mainParameterDexterityBase,
-  mainParameterDexterityFromImplants,
-  mainParameterDexterityTotal,
-  mainParameterPerceptionBase,
-  mainParameterPerceptionFromImplants,
-  mainParameterPerceptionTotal,
-  mainParameterInteligenceBase,
-  mainParameterInteligenceFromImplants,
-  mainParameterInteligenceTotal,
-  mainParameterSelfControlBase,
-  mainParameterSelfControlFromImplants,
-  mainParameterSelfControlTotal,
-  mainParameterEntropyBase,
-  mainParameterEntropyFromImplants,
-  mainParameterEntropyTotal,
   experiencePoints,
   focus,
   neurostability,
@@ -230,7 +213,7 @@ class FirstPageBlob extends Component {
           <td rowSpan="3" className="white-and-black__cell">
             ZRĘCZNOŚĆ
             <br/>
-            {this.props.mainParameterDexterityBase} + {this.props.mainParameterDexterityFromImplants} = {this.props.mainParameterDexterityTotal}
+            {this.props.mainParameterBase("dexterity")} + {this.props.mainParameterFromImplants("dexterity")} = {this.props.mainParameterTotal("dexterity")}
             <br/>
             Podstawa Wszczepy
           </td>
@@ -275,7 +258,7 @@ class FirstPageBlob extends Component {
           <td rowSpan="3" className="white-and-black__cell">
             PERCEPCJA
             <br/>
-            {this.props.mainParameterPerceptionBase} + {this.props.mainParameterPerceptionFromImplants} = {this.props.mainParameterPerceptionTotal}
+            {this.props.mainParameterBase("perception")} + {this.props.mainParameterFromImplants("perception")} = {this.props.mainParameterTotal("perception")}
             <br/>
             Podstawa Wszczepy
           </td>
@@ -314,7 +297,7 @@ class FirstPageBlob extends Component {
           <td rowSpan="3" className="white-and-black__cell">
             INTELIGENCJA
             <br/>
-            {this.props.mainParameterInteligenceBase} + {this.props.mainParameterInteligenceFromImplants} = {this.props.mainParameterInteligenceTotal}
+            {this.props.mainParameterBase("inteligence")} + {this.props.mainParameterFromImplants("inteligence")} = {this.props.mainParameterTotal("inteligence")}
             <br/>
             Podstawa Wszczepy
           </td>
@@ -353,7 +336,7 @@ class FirstPageBlob extends Component {
           <td rowSpan="3" className="white-and-black__cell">
             OPANOWANIE
             <br/>
-            {this.props.mainParameterSelfControlBase} + {this.props.mainParameterSelfControlFromImplants} = {this.props.mainParameterSelfControlTotal}
+            {this.props.mainParameterBase("self_control")} + {this.props.mainParameterFromImplants("self_control")} = {this.props.mainParameterTotal("self_control")}
             <br/>
             Podstawa Wszczepy
           </td>
@@ -392,7 +375,7 @@ class FirstPageBlob extends Component {
           <td rowSpan="3" className="white-and-black__cell">
             ENTROPIA
             <br/>
-            {this.props.mainParameterEntropyBase} + {this.props.mainParameterEntropyFromImplants} = {this.props.mainParameterEntropyTotal}
+            {this.props.mainParameterBase("entropy")} + {this.props.mainParameterFromImplants("entropy")} = {this.props.mainParameterTotal("entropy")}
             <br/>
             Podstawa Wszczepy
           </td>
@@ -562,24 +545,6 @@ const mapStateToProps = (state) => ({
   mainParameterTotal: name => mainParameterTotal(state, name),
   usedFlexibleSecondaryParameters: usedFlexibleSecondaryParameters(state),
   chosenFlexibleSecondaryParameters: chosenFlexibleSecondaryParameters(state),
-  mainParameterBodyBuildingBase: mainParameterBodyBuildingBase(state),
-  mainParameterBodyBuildingFromImplants: mainParameterBodyBuildingFromImplants(state),
-  mainParameterBodyBuildingTotal: mainParameterBodyBuildingTotal(state),
-  mainParameterDexterityBase: mainParameterDexterityBase(state),
-  mainParameterDexterityFromImplants: mainParameterDexterityFromImplants(state),
-  mainParameterDexterityTotal: mainParameterDexterityTotal(state),
-  mainParameterPerceptionBase: mainParameterPerceptionBase(state),
-  mainParameterPerceptionFromImplants: mainParameterPerceptionFromImplants(state),
-  mainParameterPerceptionTotal: mainParameterPerceptionTotal(state),
-  mainParameterInteligenceBase: mainParameterInteligenceBase(state),
-  mainParameterInteligenceFromImplants: mainParameterInteligenceFromImplants(state),
-  mainParameterInteligenceTotal: mainParameterInteligenceTotal(state),
-  mainParameterSelfControlBase: mainParameterSelfControlBase(state),
-  mainParameterSelfControlFromImplants: mainParameterSelfControlFromImplants(state),
-  mainParameterSelfControlTotal: mainParameterSelfControlTotal(state),
-  mainParameterEntropyBase: mainParameterEntropyBase(state),
-  mainParameterEntropyFromImplants: mainParameterEntropyFromImplants(state),
-  mainParameterEntropyTotal: mainParameterEntropyTotal(state),
   experiencePoints: experiencePoints(state),
   focus: focus(state),
   neurostability: neurostability(state),

@@ -49,29 +49,12 @@ export const heroSelected = (state) => {
   return _.get(state, ['heroes', 'byId', currentHeroId])
 };
 
-export const mainParameterBodyBuildingBase = (state) => mainParameterBase(state, 'physique');
-export const mainParameterBodyBuildingFromImplants = state => mainParameterFromImplants(state, 'physique');
 export const mainParameterBodyBuildingTotal = state => mainParameterTotal(state, 'physique');
-
-export const mainParameterDexterityBase = state => mainParameterBase(state, 'dexerity');
-export const mainParameterDexterityFromImplants = state => 0;
-export const mainParameterDexterityTotal = state => mainParameterDexterityBase(state) + mainParameterDexterityFromImplants(state);
-
-export const mainParameterPerceptionBase = state => mainParameterBase(state, 'perception');
-export const mainParameterPerceptionFromImplants = state => 0;
-export const mainParameterPerceptionTotal = state => mainParameterPerceptionBase(state) + mainParameterPerceptionFromImplants(state);
-
-export const mainParameterInteligenceBase = state => mainParameterBase(state, 'inteligence');
-export const mainParameterInteligenceFromImplants = state => 0;
-export const mainParameterInteligenceTotal = state => mainParameterInteligenceBase(state) + mainParameterInteligenceFromImplants(state);
-
-export const mainParameterSelfControlBase = state => mainParameterBase(state, 'self_control');
-export const mainParameterSelfControlFromImplants = state => 0;
-export const mainParameterSelfControlTotal = state => mainParameterSelfControlBase(state) + mainParameterSelfControlFromImplants(state);
-
-export const mainParameterEntropyBase = state => mainParameterBase(state, 'entropy');
-export const mainParameterEntropyFromImplants = state => 0;
-export const mainParameterEntropyTotal = state => mainParameterEntropyBase(state) + mainParameterEntropyFromImplants(state);
+export const mainParameterDexterityTotal = state => mainParameterTotal(state, 'dexterity');
+export const mainParameterPerceptionTotal = state => mainParameterTotal(state, 'perception');
+export const mainParameterInteligenceTotal = state => mainParameterTotal(state, 'inteligence');
+export const mainParameterSelfControlTotal = state => mainParameterTotal(state, 'self_control');
+export const mainParameterEntropyTotal = state => mainParameterTotal(state, 'entropy');
 
 export const experiencePoints = createSelector(heroSelected, mainParameterInteligenceTotal,
   (chosenHero, inteligenceTotal) => {
