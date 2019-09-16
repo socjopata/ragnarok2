@@ -10,6 +10,7 @@ export const characterName = state => get(state, "heroes.character.name");
 export const characterId = state => get(state, "heroes.character.id");
 export const usedFlexibleSecondaryParameters = state => get(state, "heroes.character.usedFlexibleSecondaryParameters");
 export const chosenFlexibleSecondaryParameters = state => get(state, "heroes.character.selectedFlexibleSecondaryParameters");
+const experiencePointsSpent = state => get(state, "heroes.character.experiencePointsSpent");
 
 export const mainParameterBase = (state, name) => {
   if (state.heroes && state.heroes.byId) {
@@ -72,12 +73,12 @@ export const mainParameterInteligenceTotal = state => mainParameterTotal(state, 
 export const mainParameterSelfControlTotal = state => mainParameterTotal(state, 'self_control');
 export const mainParameterEntropyTotal = state => mainParameterTotal(state, 'entropy');
 
-export const experiencePoints = createSelector(heroSelected, mainParameterInteligenceTotal,
-  (chosenHero, inteligenceTotal) => {
+export const experiencePoints = createSelector(heroSelected, mainParameterInteligenceTotal, experiencePointsSpent,
+  (chosenHero, inteligenceTotal, experiencePointsSpent) => {
     if (chosenHero) {
       const defaultBase = 10;
       const defaultInteligenceMultiplier = 3;
-      return (defaultBase + inteligenceTotal * defaultInteligenceMultiplier)
+      return (defaultBase + inteligenceTotal * defaultInteligenceMultiplier - experiencePointsSpent)
     }
   }
 );

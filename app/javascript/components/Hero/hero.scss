@@ -103,10 +103,17 @@ table {
 
 .tiny__button {
   border: 0;
-  float: left;
   font-size: 1rem;
   padding-left: 3px;
   padding-right: 3px;
   padding-top: 0;
   padding-bottom: 0;
+}
+
+.float_left {
+  float: left;
+}
+
+.float_right {
+  float: right;
 }

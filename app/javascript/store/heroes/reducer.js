@@ -6,7 +6,9 @@ import {
   FETCH_HEROES_SUCCESS,
   INPUT_CHANGE,
   HERO_CLASS_CHANGED,
-  FLEXIBLE_PARAMETER_SELECTED
+  FLEXIBLE_PARAMETER_SELECTED,
+  MAIN_PARAMETER_INCREMENTED,
+  MAIN_PARAMETER_DECREMENTED
 } from './actions';
 
 const initialState = {
@@ -20,7 +22,8 @@ const initialState = {
     id: 0,
     name: "",
     usedFlexibleSecondaryParameters: [],
-    selectedFlexibleSecondaryParameters: {}
+    selectedFlexibleSecondaryParameters: {},
+    experiencePointsSpent: 0
   }
 };
 
@@ -33,7 +36,8 @@ export const reducer = (state = initialState, action) => {
           id: action.value,
           name: state.character.name,
           usedFlexibleSecondaryParameters: [],
-          selectedFlexibleSecondaryParameters: {}
+          selectedFlexibleSecondaryParameters: {},
+          experiencePointsSpent: 0
         }
       };
     case INPUT_CHANGE:
@@ -58,6 +62,10 @@ export const reducer = (state = initialState, action) => {
             [action.skillName]: action.value,
           },
         }
+      };
+    case MAIN_PARAMETER_INCREMENTED:
+      return {
+        ...state,
       };
     case FETCH_HEROES_STARTED:
       return {

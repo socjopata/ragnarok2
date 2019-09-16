@@ -4,7 +4,13 @@ import {Input, Button} from 'reactstrap';
 import {connect} from "react-redux";
 import TestDifficultyCheatSheet from "./TestDifficultyCheatSheet";
 //actions
-import {inputChange, heroClassSelected, flexibleSecondarySkillSelected} from '../../store/heroes';
+import {
+  inputChange,
+  heroClassSelected,
+  flexibleSecondarySkillSelected,
+  mainParameterIncremented,
+  mainParameterDecremented
+} from '../../store/heroes';
 //selectors
 import {
   heroSelected, characterName, characterId, usedFlexibleSecondaryParameters,
@@ -25,7 +31,6 @@ import {
   secondaryParameterBonus,
   secondaryParameterTotal,
   secondaryParameterTotalBonus,
-  secondaryParameterWillpowerTotalBonus,
 } from '../../store/heroes';
 
 class FirstPageBlob extends Component {
@@ -39,6 +44,14 @@ class FirstPageBlob extends Component {
 
   handleFlexibleSecondarySkillChoice = (flexibleParameterName, skillName, value) => {
     this.props.flexibleSecondarySkillSelected(flexibleParameterName, skillName, value);
+  };
+
+  handleIncrementMainParameter = (skillName) => {
+    this.props.mainParameterIncremented(skillName);
+  };
+
+  handleDecrementMainParameter = (skillName) => {
+    this.props.mainParameterDecremented(skillName);
   };
 
   renderHeroesForSelect() {
@@ -60,17 +73,44 @@ class FirstPageBlob extends Component {
         if (get(chosenFlexibleSecondaryParameters, skillName, 0) > 0) { return false }
 
         if (flexibleParameterName.includes(skillName)) {
-          return (<Button key={id + name} color="primary" className="tiny__button" onClick={() => this.handleFlexibleSecondarySkillChoice(flexibleParameterName, skillName, value)}>{value}</Button>)
+          return (<Button key={id + name} color="primary" className="tiny__button float_left" onClick={() => this.handleFlexibleSecondarySkillChoice(flexibleParameterName, skillName, value)}>{value}</Button>)
         } else if (flexibleParameterName.includes("any_")) {
           const base = heroSelected.parameters.filter(parameter => parameter.name === skillName && parameter.type === "SecondaryParameter")[0].value; //FIXME this is a duplication, when we consider a method defined in selectors.js
           const secondaryParameterAtZero = base === 0;
           if (secondaryParameterAtZero) {
-            return (<Button key={id + name} color="primary" className="tiny__button" onClick={() => this.handleFlexibleSecondarySkillChoice(flexibleParameterName, skillName, value)}>{value}</Button>)
+            return (<Button key={id + name} color="primary" className="tiny__button float_right" onClick={() => this.handleFlexibleSecondarySkillChoice(flexibleParameterName, skillName, value)}>{value}</Button>)
           }
         }
       }))
     }
   };
+
+  renderIncrementMainParameterButton(skillName) {
+    const heroSelected = this.props.heroSelected;
+    if (heroSelected) {
+      const baseParameter = this.props.mainParameterTotal(skillName);
+      const experiencePoints = this.props.experiencePoints;
+      if ((baseParameter + 1) * 2 <= experiencePoints) {
+        return (<Button key={"increment" + skillName} color="success" className="tiny__button float_left"
+                        onClick={() => this.handleIncrementMainParameter(skillName)}>+</Button>)
+      }
+
+      //if user has enough experiencePoints display the button
+      // after a click, save the information and deduct experiencePoints (maybe save in store experiencePointsSpent)
+    }
+  };
+
+  renderDecrementMainParameterButton(skillName) {
+    const heroSelected = this.props.heroSelected;
+    if (heroSelected) {
+      const baseParameter = this.props.mainParameterTotal(skillName);
+      return (<Button key={"decrement" + skillName} color="danger" className="tiny__button float_right" onClick={() => this.handleDecrementMainParameter(skillName)}>-</Button>)
+
+      //if user is not at the skill Base, display the button
+      //  after the click, decrease the baseParameter and amend the  experiencePointsSpent
+    }
+  };
+
 
   render() {
     return (
@@ -85,7 +125,7 @@ class FirstPageBlob extends Component {
         </tr>
         <tr className="solid-border__cell">
           <td rowSpan="3" className="white-and-black__cell">
-            BUDOWA CIAŁA
+            {this.renderIncrementMainParameterButton("physique")} BUDOWA CIAŁA {this.renderDecrementMainParameterButton("physique")}
             <br/>
             {this.props.mainParameterBase("physique")} + {this.props.mainParameterFromImplants("physique")} = {this.props.mainParameterTotal("physique")}
             <br/>
@@ -481,7 +521,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   inputChange,
   heroClassSelected,
-  flexibleSecondarySkillSelected
+  flexibleSecondarySkillSelected,
+  mainParameterIncremented,
+  mainParameterDecremented,
 };
 
 export default connect(

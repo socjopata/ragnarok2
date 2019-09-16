@@ -6,6 +6,8 @@ export const FETCH_HEROES_FAILURE = 'heroes/FETCH_FAILURE';
 export const INPUT_CHANGE = 'metaprogramming/INPUT_CHANGE';
 export const HERO_CLASS_CHANGED = 'creator/HERO_CLASS_CHANGED';
 export const FLEXIBLE_PARAMETER_SELECTED = 'creator/FLEXIBLE_PARAMETER_SELECTED';
+export const MAIN_PARAMETER_INCREMENTED = 'creator/MAIN_PARAMETER_INCREMENTED';
+export const MAIN_PARAMETER_DECREMENTED = 'creator/MAIN_PARAMETER_DECREMENTED';
 
 export const inputChange = (value, fieldName) => ({type: INPUT_CHANGE, value: value, fieldName: fieldName});
 export const heroClassSelected = (value) => ({type: HERO_CLASS_CHANGED, value: value});
@@ -14,6 +16,16 @@ export const flexibleSecondarySkillSelected = (flexibleParameterName, skillName,
   value: value,
   skillName: skillName,
   flexibleParameterName: flexibleParameterName
+});
+
+export const mainParameterIncremented = (skillName) => ({
+  type: MAIN_PARAMETER_INCREMENTED,
+  skillName: skillName,
+});
+
+export const mainParameterDecremented = (skillName) => ({
+  type: MAIN_PARAMETER_DECREMENTED,
+  skillName: skillName,
 });
 
 export const fetchHeroesStarted = () => ({
