@@ -8,6 +8,7 @@ import {inputChange, heroClassSelected, flexibleSecondarySkillSelected} from '..
 //selectors
 import {
   heroSelected, characterName, characterId, mainParameterBodyBuildingBase, usedFlexibleSecondaryParameters,
+  chosenFlexibleSecondaryParameters,
   mainParameterBodyBuildingFromImplants,
   mainParameterBodyBuildingTotal,
   mainParameterDexterityBase,
@@ -131,10 +132,12 @@ class FirstPageBlob extends Component {
   renderFlexibleSecondarySkillChoice(skillName) {
     const heroSelected = this.props.heroSelected;
     const usedFlexibleSecondaryParameters = this.props.usedFlexibleSecondaryParameters;
+    const chosenFlexibleSecondaryParameters = this.props.chosenFlexibleSecondaryParameters;
     if (heroSelected) {
       const flexibleParameters = heroSelected.parameters.filter(parameter => parameter.name.includes("_or_") || parameter.name.includes("any_") && parameter.type === "SecondaryParameter");
       return (map(flexibleParameters, ({id, name: flexibleParameterName, value}) => {
         if (usedFlexibleSecondaryParameters.includes(flexibleParameterName)) { return false }
+        if (get(chosenFlexibleSecondaryParameters, skillName, 0) > 0) { return false }
 
         if (flexibleParameterName.includes(skillName)) {
           return (<Button key={id + name} color="primary" className="tiny__button" onClick={() => this.handleFlexibleSecondarySkillChoice(flexibleParameterName, skillName, value)}>{value}</Button>)
@@ -534,6 +537,7 @@ const mapStateToProps = (state) => ({
   name: characterName(state),
   characterId: characterId(state),
   usedFlexibleSecondaryParameters: usedFlexibleSecondaryParameters(state),
+  chosenFlexibleSecondaryParameters: chosenFlexibleSecondaryParameters(state),
   mainParameterBodyBuildingBase: mainParameterBodyBuildingBase(state),
   mainParameterBodyBuildingFromImplants: mainParameterBodyBuildingFromImplants(state),
   mainParameterBodyBuildingTotal: mainParameterBodyBuildingTotal(state),

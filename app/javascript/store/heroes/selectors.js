@@ -151,7 +151,7 @@ export const secondaryParameterEnduranceFromImplants = state => 0;
 export const secondaryParameterEnduranceBonus = state => 0;
 export const secondaryParameterEnduranceTotal = state => secondaryParameterEnduranceBase(state) + secondaryParameterEnduranceFromImplants(state) + secondaryParameterEnduranceBonus(state);
 
-export const secondaryParameterPistolsBase = (state) => _secondaryParameterBase(state, 'endurance');
+export const secondaryParameterPistolsBase = (state) => _secondaryParameterBase(state, 'pistols');
 export const secondaryParameterPistolsFromImplants = state => 0;
 export const secondaryParameterPistolsBonus = state => 0;
 export const secondaryParameterPistolsTotal = state => secondaryParameterPistolsBase(state) + secondaryParameterPistolsFromImplants(state) + secondaryParameterPistolsBonus(state);
