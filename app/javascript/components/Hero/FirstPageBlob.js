@@ -9,6 +9,9 @@ import {inputChange, heroClassSelected, flexibleSecondarySkillSelected} from '..
 import {
   heroSelected, characterName, characterId, mainParameterBodyBuildingBase, usedFlexibleSecondaryParameters,
   chosenFlexibleSecondaryParameters,
+  mainParameterBase,
+  mainParameterFromImplants,
+  mainParameterTotal,
   mainParameterBodyBuildingFromImplants,
   mainParameterBodyBuildingTotal,
   mainParameterDexterityBase,
@@ -185,7 +188,7 @@ class FirstPageBlob extends Component {
           <td rowSpan="3" className="white-and-black__cell">
             BUDOWA CIAŁA
             <br/>
-            {this.props.mainParameterBodyBuildingBase} + {this.props.mainParameterBodyBuildingFromImplants} = {this.props.mainParameterBodyBuildingTotal}
+            {this.props.mainParameterBase("physique")} + {this.props.mainParameterFromImplants("physique")} = {this.props.mainParameterTotal("physique")}
             <br/>
             Podstawa Wszczepy
           </td>
@@ -554,6 +557,9 @@ class FirstPageBlob extends Component {
 const mapStateToProps = (state) => ({
   name: characterName(state),
   characterId: characterId(state),
+  mainParameterBase: name => mainParameterBase(state, name),
+  mainParameterFromImplants: name => mainParameterFromImplants(state, name),
+  mainParameterTotal: name => mainParameterTotal(state, name),
   usedFlexibleSecondaryParameters: usedFlexibleSecondaryParameters(state),
   chosenFlexibleSecondaryParameters: chosenFlexibleSecondaryParameters(state),
   mainParameterBodyBuildingBase: mainParameterBodyBuildingBase(state),

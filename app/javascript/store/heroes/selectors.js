@@ -11,7 +11,7 @@ export const characterId = state => get(state, "heroes.character.id");
 export const usedFlexibleSecondaryParameters = state => get(state, "heroes.character.usedFlexibleSecondaryParameters");
 export const chosenFlexibleSecondaryParameters = state => get(state, "heroes.character.selectedFlexibleSecondaryParameters");
 
-const _mainParameterBase = (state, name) => {
+export const mainParameterBase = (state, name) => {
   if (state.heroes && state.heroes.byId) {
     const chosenHero = state.heroes.byId[parseInt(state.heroes.character.id)];
     if (chosenHero) {
@@ -21,6 +21,14 @@ const _mainParameterBase = (state, name) => {
       return 0
     }
   }
+};
+
+export const mainParameterFromImplants = (state, name) => {
+  return(0);
+};
+
+export const mainParameterTotal = (state, name) => {
+  return(mainParameterBase(state, name) + mainParameterFromImplants(state, name))
 };
 
 const _secondaryParameterBase = (state, name) => {
@@ -41,27 +49,27 @@ export const heroSelected = (state) => {
   return _.get(state, ['heroes', 'byId', currentHeroId])
 };
 
-export const mainParameterBodyBuildingBase = (state) => _mainParameterBase(state, 'physique');
-export const mainParameterBodyBuildingFromImplants = state => 0;
-export const mainParameterBodyBuildingTotal = state => mainParameterBodyBuildingBase(state) + mainParameterBodyBuildingFromImplants(state);
+export const mainParameterBodyBuildingBase = (state) => mainParameterBase(state, 'physique');
+export const mainParameterBodyBuildingFromImplants = state => mainParameterFromImplants(state, 'physique');
+export const mainParameterBodyBuildingTotal = state => mainParameterTotal(state, 'physique');
 
-export const mainParameterDexterityBase = state => _mainParameterBase(state, 'dexerity');
+export const mainParameterDexterityBase = state => mainParameterBase(state, 'dexerity');
 export const mainParameterDexterityFromImplants = state => 0;
 export const mainParameterDexterityTotal = state => mainParameterDexterityBase(state) + mainParameterDexterityFromImplants(state);
 
-export const mainParameterPerceptionBase = state => _mainParameterBase(state, 'perception');
+export const mainParameterPerceptionBase = state => mainParameterBase(state, 'perception');
 export const mainParameterPerceptionFromImplants = state => 0;
 export const mainParameterPerceptionTotal = state => mainParameterPerceptionBase(state) + mainParameterPerceptionFromImplants(state);
 
-export const mainParameterInteligenceBase = state => _mainParameterBase(state, 'inteligence');
+export const mainParameterInteligenceBase = state => mainParameterBase(state, 'inteligence');
 export const mainParameterInteligenceFromImplants = state => 0;
 export const mainParameterInteligenceTotal = state => mainParameterInteligenceBase(state) + mainParameterInteligenceFromImplants(state);
 
-export const mainParameterSelfControlBase = state => _mainParameterBase(state, 'self_control');
+export const mainParameterSelfControlBase = state => mainParameterBase(state, 'self_control');
 export const mainParameterSelfControlFromImplants = state => 0;
 export const mainParameterSelfControlTotal = state => mainParameterSelfControlBase(state) + mainParameterSelfControlFromImplants(state);
 
-export const mainParameterEntropyBase = state => _mainParameterBase(state, 'entropy');
+export const mainParameterEntropyBase = state => mainParameterBase(state, 'entropy');
 export const mainParameterEntropyFromImplants = state => 0;
 export const mainParameterEntropyTotal = state => mainParameterEntropyBase(state) + mainParameterEntropyFromImplants(state);
 
