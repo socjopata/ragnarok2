@@ -20,95 +20,11 @@ import {
   hitPoints,
   power,
   apparition,
-  secondaryParameterFencingBase,
-  secondaryParameterFencingFromImplants,
-  secondaryParameterFencingBonus,
-  secondaryParameterFencingTotal,
-  secondaryParameterFencingTotalBonus,
-  secondaryParameterMartialArtsBase,
-  secondaryParameterMartialArtsFromImplants,
-  secondaryParameterMartialArtsBonus,
-  secondaryParameterMartialArtsTotal,
-  secondaryParameterMartialArtsTotalBonus,
-  secondaryParameterEnduranceBase,
-  secondaryParameterEnduranceFromImplants,
-  secondaryParameterEnduranceBonus,
-  secondaryParameterEnduranceTotal,
-  secondaryParameterEnduranceTotalBonus,
-  secondaryParameterPistolsBase,
-  secondaryParameterPistolsFromImplants,
-  secondaryParameterPistolsBonus,
-  secondaryParameterPistolsTotal,
-  secondaryParameterPistolsTotalBonus,
-  secondaryParameterVehicleHandlingBase,
-  secondaryParameterVehicleHandlingFromImplants,
-  secondaryParameterVehicleHandlingBonus,
-  secondaryParameterVehicleHandlingTotal,
-  secondaryParameterVehicleHandlingTotalBonus,
-  secondaryParameterReflexBase,
-  secondaryParameterReflexFromImplants,
-  secondaryParameterReflexBonus,
-  secondaryParameterReflexTotal,
-  secondaryParameterReflexTotalBonus,
-  secondaryParameterRiflesBase,
-  secondaryParameterRiflesFromImplants,
-  secondaryParameterRiflesBonus,
-  secondaryParameterRiflesTotal,
-  secondaryParameterRiflesTotalBonus,
-  secondaryParameterSpaceshipsHandlingBase,
-  secondaryParameterSpaceshipsHandlingFromImplants,
-  secondaryParameterSpaceshipsHandlingBonus,
-  secondaryParameterSpaceshipsHandlingTotal,
-  secondaryParameterSpaceshipsHandlingTotalBonus,
-  secondaryParameterSensesBase,
-  secondaryParameterSensesFromImplants,
-  secondaryParameterSensesBonus,
-  secondaryParameterSensesTotal,
-  secondaryParameterSensesTotalBonus,
-  secondaryParameterConnectionsBase,
-  secondaryParameterConnectionsFromImplants,
-  secondaryParameterConnectionsBonus,
-  secondaryParameterConnectionsTotal,
-  secondaryParameterConnectionsTotalBonus,
-  secondaryParameterTechnologyBase,
-  secondaryParameterTechnologyFromImplants,
-  secondaryParameterTechnologyBonus,
-  secondaryParameterTechnologyTotal,
-  secondaryParameterTechnologyTotalBonus,
-  secondaryParameterKnowledgeBase,
-  secondaryParameterKnowledgeFromImplants,
-  secondaryParameterKnowledgeBonus,
-  secondaryParameterKnowledgeTotal,
-  secondaryParameterKnowledgeTotalBonus,
-  secondaryParameterHackingBase,
-  secondaryParameterHackingFromImplants,
-  secondaryParameterHackingBonus,
-  secondaryParameterHackingTotal,
-  secondaryParameterHackingTotalBonus,
-  secondaryParameterInfiltrationBase,
-  secondaryParameterInfiltrationFromImplants,
-  secondaryParameterInfiltrationBonus,
-  secondaryParameterInfiltrationTotal,
-  secondaryParameterInfiltrationTotalBonus,
-  secondaryParameterTrickAndSubterfugeBase,
-  secondaryParameterTrickAndSubterfugeFromImplants,
-  secondaryParameterTrickAndSubterfugeBonus,
-  secondaryParameterTrickAndSubterfugeTotal,
-  secondaryParameterTrickAndSubterfugeTotalBonus,
-  secondaryParameterCharismaBase,
-  secondaryParameterCharismaFromImplants,
-  secondaryParameterCharismaBonus,
-  secondaryParameterCharismaTotal,
-  secondaryParameterCharismaTotalBonus,
-  secondaryParameterHexeriBase,
-  secondaryParameterHexeriFromImplants,
-  secondaryParameterHexeriBonus,
-  secondaryParameterHexeriTotal,
-  secondaryParameterHexeriTotalBonus,
-  secondaryParameterWillpowerBase,
-  secondaryParameterWillpowerFromImplants,
-  secondaryParameterWillpowerBonus,
-  secondaryParameterWillpowerTotal,
+  secondaryParameterBase,
+  secondaryParameterFromImplants,
+  secondaryParameterBonus,
+  secondaryParameterTotal,
+  secondaryParameterTotalBonus,
   secondaryParameterWillpowerTotalBonus,
 } from '../../store/heroes';
 
@@ -177,12 +93,12 @@ class FirstPageBlob extends Component {
           </td>
           <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('fencing')}Broń Biała</td>
           <td className="grey-and-black__cell"><span>
-            {this.props.secondaryParameterFencingBase}&emsp;&emsp;+&ensp;
-            &emsp;{this.props.secondaryParameterFencingFromImplants}&emsp;&emsp;+
-            &emsp;&emsp;{this.props.secondaryParameterFencingBonus}
+            {this.props.secondaryParameterBase("fencing")}&emsp;&emsp;+&ensp;
+            &emsp;{this.props.secondaryParameterFromImplants("fencing")}&emsp;&emsp;+
+            &emsp;&emsp;{this.props.secondaryParameterBonus("fencing")}
           </span></td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterFencingTotal}</td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterFencingTotalBonus}</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterTotal("fencing")}</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterTotalBonus("physique", "fencing")}</td>
           <td rowSpan="2">
             <Input type="text" name="name" id="name" placeholder="Jak się nazywasz?" onChange={this.handleChange}
                    defaultValue={this.props.name}/>
@@ -191,22 +107,22 @@ class FirstPageBlob extends Component {
         <tr className="solid-border__cell white-and-black__cell">
           <td>{this.renderFlexibleSecondarySkillChoice('martial_arts')}Walka Wręcz</td>
           <td><span>
-            {this.props.secondaryParameterMartialArtsBase}&emsp;&emsp;+&ensp;
-            &emsp;{this.props.secondaryParameterMartialArtsFromImplants}&emsp;&emsp;+
-            &emsp;&emsp;{this.props.secondaryParameterMartialArtsBonus}
+            {this.props.secondaryParameterBase('martial_arts')}&emsp;&emsp;+&ensp;
+            &emsp;{this.props.secondaryParameterFromImplants("martial_arts")}&emsp;&emsp;+
+            &emsp;&emsp;{this.props.secondaryParameterBonus("physique", "martial_arts")}
           </span></td>
-          <td>{this.props.secondaryParameterMartialArtsTotal}</td>
-          <td>{this.props.secondaryParameterMartialArtsTotalBonus}</td>
+          <td>{this.props.secondaryParameterTotal("martial_arts")}</td>
+          <td>{this.props.secondaryParameterTotalBonus("physique", "martial_arts")}</td>
         </tr>
         <tr className="solid-border__cell">
           <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('endurance')}Wytrzymałość</td>
           <td className="grey-and-black__cell"><span>
-            {this.props.secondaryParameterEnduranceBase}&emsp;&emsp;+&ensp;
-            &emsp;{this.props.secondaryParameterEnduranceFromImplants}&emsp;&emsp;+
-            &emsp;&emsp;{this.props.secondaryParameterEnduranceBonus}
+            {this.props.secondaryParameterBase("endurance")}&emsp;&emsp;+&ensp;
+            &emsp;{this.props.secondaryParameterFromImplants("endurance")}&emsp;&emsp;+
+            &emsp;&emsp;{this.props.secondaryParameterBonus("endurance")}
           </span></td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterEnduranceTotal}</td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterEnduranceTotalBonus}</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterTotal("endurance")}</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterTotalBonus("physique", "endurance")}</td>
           <td className="black-and-white__cell">Klasa Postaci</td>
         </tr>
         <tr className="solid-border__cell">
@@ -219,12 +135,12 @@ class FirstPageBlob extends Component {
           </td>
           <td className="white-and-black__cell">{this.renderFlexibleSecondarySkillChoice('pistols')}Broń Krótka</td>
           <td className="white-and-black__cell"><span>
-            {this.props.secondaryParameterPistolsBase}&emsp;&emsp;+&ensp;
-            &emsp;{this.props.secondaryParameterPistolsFromImplants}&emsp;&emsp;+
-            &emsp;&emsp;{this.props.secondaryParameterPistolsBonus}
+            {this.props.secondaryParameterBase("pistols")}&emsp;&emsp;+&ensp;
+            &emsp;{this.props.secondaryParameterFromImplants("pistols")}&emsp;&emsp;+
+            &emsp;&emsp;{this.props.secondaryParameterBonus("pistols")}
           </span></td>
-          <td className="white-and-black__cell">{this.props.secondaryParameterPistolsTotal}</td>
-          <td className="white-and-black__cell">{this.props.secondaryParameterPistolsTotalBonus}</td>
+          <td className="white-and-black__cell">{this.props.secondaryParameterTotal("pistols")}</td>
+          <td className="white-and-black__cell">{this.props.secondaryParameterTotalBonus("dexterity", "pistols")}</td>
           <td rowSpan="2">
             <Input type="select" name="characterClass" id="characterClass" placeholder="Wybierz klasę postaci"
                    value={this.props.characterId}
@@ -236,22 +152,22 @@ class FirstPageBlob extends Component {
         <tr className="solid-border__cell">
           <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('vehicle_handling')}Obsługa Pojazdów</td>
           <td className="grey-and-black__cell"><span>
-            {this.props.secondaryParameterVehicleHandlingBase}&emsp;&emsp;+&ensp;
-            &emsp;{this.props.secondaryParameterVehicleHandlingFromImplants}&emsp;&emsp;+
-            &emsp;&emsp;{this.props.secondaryParameterVehicleHandlingBonus}
+            {this.props.secondaryParameterBase('vehicle_handling')}&emsp;&emsp;+&ensp;
+            &emsp;{this.props.secondaryParameterFromImplants('vehicle_handling')}&emsp;&emsp;+
+            &emsp;&emsp;{this.props.secondaryParameterBonus('vehicle_handling')}
           </span></td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterVehicleHandlingTotal}</td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterVehicleHandlingTotalBonus}</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterTotal('vehicle_handling')}</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterTotalBonus('dexterity', 'vehicle_handling')}</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
           <td>{this.renderFlexibleSecondarySkillChoice('reflex')}Refleks</td>
           <td><span>
-            {this.props.secondaryParameterReflexBase}&emsp;&emsp;+&ensp;
-            &emsp;{this.props.secondaryParameterReflexFromImplants}&emsp;&emsp;+
-            &emsp;&emsp;{this.props.secondaryParameterReflexBonus}
+            {this.props.secondaryParameterBase('reflex')}&emsp;&emsp;+&ensp;
+            &emsp;{this.props.secondaryParameterFromImplants('reflex')}&emsp;&emsp;+
+            &emsp;&emsp;{this.props.secondaryParameterBonus('reflex')}
           </span></td>
-          <td>{this.props.secondaryParameterReflexTotal}</td>
-          <td>{this.props.secondaryParameterReflexTotalBonus}</td>
+          <td>{this.props.secondaryParameterTotal('reflex')}</td>
+          <td>{this.props.secondaryParameterTotalBonus('dexterity', 'reflex')}</td>
           <td className="black-and-white__cell">Punkty Doświadczenia</td>
         </tr>
         <tr className="solid-border__cell">
@@ -264,33 +180,33 @@ class FirstPageBlob extends Component {
           </td>
           <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('rifles')}Broń Długa</td>
           <td className="grey-and-black__cell"><span>
-            {this.props.secondaryParameterRiflesBase}&emsp;&emsp;+&ensp;
-            &emsp;{this.props.secondaryParameterRiflesFromImplants}&emsp;&emsp;+
-            &emsp;&emsp;{this.props.secondaryParameterRiflesBonus}
+            {this.props.secondaryParameterBase('rifles')}&emsp;&emsp;+&ensp;
+            &emsp;{this.props.secondaryParameterFromImplants('rifles')}&emsp;&emsp;+
+            &emsp;&emsp;{this.props.secondaryParameterBonus('rifles')}
           </span></td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterRiflesTotal}</td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterRiflesTotalBonus}</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterTotal('rifles')}</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterTotalBonus('perception', 'rifles')}</td>
           <td className="centered__cell" rowSpan="2">{this.props.experiencePoints}</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
           <td>{this.renderFlexibleSecondarySkillChoice('spaceships_handling')}Gwiezdny Pilotaż</td>
           <td><span>
-            {this.props.secondaryParameterSpaceshipsHandlingBase}&emsp;&emsp;+&ensp;
-            &emsp;{this.props.secondaryParameterSpaceshipsHandlingFromImplants}&emsp;&emsp;+
-            &emsp;&emsp;{this.props.secondaryParameterSpaceshipsHandlingBonus}
+            {this.props.secondaryParameterBase('spaceships_handling')}&emsp;&emsp;+&ensp;
+            &emsp;{this.props.secondaryParameterFromImplants('spaceships_handling')}&emsp;&emsp;+
+            &emsp;&emsp;{this.props.secondaryParameterBonus('spaceships_handling')}
           </span></td>
-          <td>{this.props.secondaryParameterSpaceshipsHandlingTotal}</td>
-          <td>{this.props.secondaryParameterSpaceshipsHandlingTotalBonus}</td>
+          <td>{this.props.secondaryParameterTotal('spaceships_handling')}</td>
+          <td>{this.props.secondaryParameterTotalBonus('perception', 'spaceships_handling')}</td>
         </tr>
         <tr className="solid-border__cell">
           <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('senses')}Wyczulone Zmysły</td>
           <td className="grey-and-black__cell"><span>
-            {this.props.secondaryParameterSensesBase}&emsp;&emsp;+&ensp;
-            &emsp;{this.props.secondaryParameterSensesFromImplants}&emsp;&emsp;+
-            &emsp;&emsp;{this.props.secondaryParameterSensesBonus}
+            {this.props.secondaryParameterBase('senses')}&emsp;&emsp;+&ensp;
+            &emsp;{this.props.secondaryParameterFromImplants('senses')}&emsp;&emsp;+
+            &emsp;&emsp;{this.props.secondaryParameterBonus('senses')}
           </span></td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterSensesTotal}</td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterSensesTotalBonus}</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterTotal('senses')}</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterTotalBonus('perception', 'senses')}</td>
           <td className="black-and-white__cell">Koncentracja (OP+E)</td>
         </tr>
         <tr className="solid-border__cell">
@@ -303,33 +219,33 @@ class FirstPageBlob extends Component {
           </td>
           <td className="white-and-black__cell">{this.renderFlexibleSecondarySkillChoice('connections')}Koneksje</td>
           <td className="white-and-black__cell"><span>
-            {this.props.secondaryParameterConnectionsBase}&emsp;&emsp;+&ensp;
-            &emsp;{this.props.secondaryParameterConnectionsFromImplants}&emsp;&emsp;+
-            &emsp;&emsp;{this.props.secondaryParameterConnectionsBonus}
+            {this.props.secondaryParameterBase('connections')}&emsp;&emsp;+&ensp;
+            &emsp;{this.props.secondaryParameterFromImplants('connections')}&emsp;&emsp;+
+            &emsp;&emsp;{this.props.secondaryParameterBonus('connections')}
           </span></td>
-          <td className="white-and-black__cell">{this.props.secondaryParameterConnectionsTotal}</td>
-          <td className="white-and-black__cell">{this.props.secondaryParameterConnectionsTotalBonus}</td>
+          <td className="white-and-black__cell">{this.props.secondaryParameterTotal('connections')}</td>
+          <td className="white-and-black__cell">{this.props.secondaryParameterTotalBonus('inteligence', 'connections')}</td>
           <td className="centered__cell" rowSpan="2">{this.props.focus}</td>
         </tr>
         <tr className="solid-border__cell">
           <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('technology')}Technika</td>
           <td className="grey-and-black__cell"><span>
-            {this.props.secondaryParameterTechnologyBase}&emsp;&emsp;+&ensp;
-            &emsp;{this.props.secondaryParameterTechnologyFromImplants}&emsp;&emsp;+
-            &emsp;&emsp;{this.props.secondaryParameterTechnologyBonus}
+            {this.props.secondaryParameterBase('technology')}&emsp;&emsp;+&ensp;
+            &emsp;{this.props.secondaryParameterFromImplants('technology')}&emsp;&emsp;+
+            &emsp;&emsp;{this.props.secondaryParameterBonus('technology')}
           </span></td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterTechnologyTotal}</td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterTechnologyTotalBonus}</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterTotal('technology')}</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterTotalBonus('inteligence', 'technology')}</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
           <td>{this.renderFlexibleSecondarySkillChoice('knowledge')}Wiedza</td>
           <td><span>
-            {this.props.secondaryParameterKnowledgeBase}&emsp;&emsp;+&ensp;
-            &emsp;{this.props.secondaryParameterKnowledgeFromImplants}&emsp;&emsp;+
-            &emsp;&emsp;{this.props.secondaryParameterKnowledgeBonus}
+            {this.props.secondaryParameterBase('knowledge')}&emsp;&emsp;+&ensp;
+            &emsp;{this.props.secondaryParameterFromImplants('knowledge')}&emsp;&emsp;+
+            &emsp;&emsp;{this.props.secondaryParameterBonus('knowledge')}
           </span></td>
-          <td>{this.props.secondaryParameterKnowledgeTotal}</td>
-          <td>{this.props.secondaryParameterKnowledgeTotalBonus}</td>
+          <td>{this.props.secondaryParameterTotal('knowledge')}</td>
+          <td>{this.props.secondaryParameterTotalBonus('inteligence', 'knowledge')}</td>
           <td className="black-and-white__cell">Neurostabilność (INTx5)</td>
         </tr>
         <tr className="solid-border__cell">
@@ -342,33 +258,33 @@ class FirstPageBlob extends Component {
           </td>
           <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('hacking')}Hackowanie</td>
           <td className="grey-and-black__cell"><span>
-            {this.props.secondaryParameterHackingBase}&emsp;&emsp;+&ensp;
-            &emsp;{this.props.secondaryParameterHackingFromImplants}&emsp;&emsp;+
-            &emsp;&emsp;{this.props.secondaryParameterHackingBonus}
+            {this.props.secondaryParameterBase('hacking')}&emsp;&emsp;+&ensp;
+            &emsp;{this.props.secondaryParameterFromImplants('hacking')}&emsp;&emsp;+
+            &emsp;&emsp;{this.props.secondaryParameterBonus('hacking')}
           </span></td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterHackingTotal}</td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterHackingTotalBonus}</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterTotal('hacking')}</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterTotalBonus('self_control', 'hacking')}</td>
           <td className="centered__cell" rowSpan="2">{this.props.neurostability}</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
           <td>{this.renderFlexibleSecondarySkillChoice('infiltration')}Infiltracja</td>
           <td><span>
-            {this.props.secondaryParameterInfiltrationBase}&emsp;&emsp;+&ensp;
-            &emsp;{this.props.secondaryParameterInfiltrationFromImplants}&emsp;&emsp;+
-            &emsp;&emsp;{this.props.secondaryParameterInfiltrationBonus}
+            {this.props.secondaryParameterBase('infiltration')}&emsp;&emsp;+&ensp;
+            &emsp;{this.props.secondaryParameterFromImplants('infiltration')}&emsp;&emsp;+
+            &emsp;&emsp;{this.props.secondaryParameterBonus('infiltration')}
           </span></td>
-          <td>{this.props.secondaryParameterInfiltrationTotal}</td>
-          <td>{this.props.secondaryParameterInfiltrationTotalBonus}</td>
+          <td>{this.props.secondaryParameterTotal('infiltration')}</td>
+          <td>{this.props.secondaryParameterTotalBonus('self_control', 'infiltration')}</td>
         </tr>
         <tr className="solid-border__cell">
           <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('trick_and_subterfuge')}Trik i Fortel</td>
           <td className="grey-and-black__cell"><span>
-            {this.props.secondaryParameterTrickAndSubterfugeBase}&emsp;&emsp;+&ensp;
-            &emsp;{this.props.secondaryParameterTrickAndSubterfugeFromImplants}&emsp;&emsp;+
-            &emsp;&emsp;{this.props.secondaryParameterTrickAndSubterfugeBonus}
+            {this.props.secondaryParameterBase('trick_and_subterfuge')}&emsp;&emsp;+&ensp;
+            &emsp;{this.props.secondaryParameterFromImplants('trick_and_subterfuge')}&emsp;&emsp;+
+            &emsp;&emsp;{this.props.secondaryParameterBonus('trick_and_subterfuge')}
           </span></td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterTrickAndSubterfugeTotal}</td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterTrickAndSubterfugeTotalBonus}</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterTotal('trick_and_subterfuge')}</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterTotalBonus('self_control', 'trick_and_subterfuge')}</td>
           <td className="black-and-white__cell">Wysportowanie (BC+ZR)</td>
         </tr>
         <tr className="solid-border__cell">
@@ -381,33 +297,33 @@ class FirstPageBlob extends Component {
           </td>
           <td className="white-and-black__cell">{this.renderFlexibleSecondarySkillChoice('charisma')}Charyzma</td>
           <td className="white-and-black__cell"><span>
-            {this.props.secondaryParameterCharismaBase}&emsp;&emsp;+&ensp;
-            &emsp;{this.props.secondaryParameterCharismaFromImplants}&emsp;&emsp;+
-            &emsp;&emsp;{this.props.secondaryParameterCharismaBonus}
+            {this.props.secondaryParameterBase('charisma')}&emsp;&emsp;+&ensp;
+            &emsp;{this.props.secondaryParameterFromImplants('charisma')}&emsp;&emsp;+
+            &emsp;&emsp;{this.props.secondaryParameterBonus('charisma')}
           </span></td>
-          <td className="white-and-black__cell">{this.props.secondaryParameterCharismaTotal}</td>
-          <td className="white-and-black__cell">{this.props.secondaryParameterCharismaTotalBonus}</td>
+          <td className="white-and-black__cell">{this.props.secondaryParameterTotal('charisma')}</td>
+          <td className="white-and-black__cell">{this.props.secondaryParameterTotalBonus('entropy', 'charisma')}</td>
           <td className="centered__cell" rowSpan="2">{this.props.sportiness}</td>
         </tr>
         <tr className="solid-border__cell">
           <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('hexeri')}Hekseri</td>
           <td className="grey-and-black__cell"><span>
-            {this.props.secondaryParameterHexeriBase}&emsp;&emsp;+&ensp;
-            &emsp;{this.props.secondaryParameterHexeriFromImplants}&emsp;&emsp;+
-            &emsp;&emsp;{this.props.secondaryParameterHexeriBonus}
+            {this.props.secondaryParameterBase('hexeri')}&emsp;&emsp;+&ensp;
+            &emsp;{this.props.secondaryParameterFromImplants('hexeri')}&emsp;&emsp;+
+            &emsp;&emsp;{this.props.secondaryParameterBonus('hexeri')}
           </span></td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterHexeriTotal}</td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterHexeriTotalBonus}</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterTotal('hexeri')}</td>
+          <td className="grey-and-black__cell">{this.props.secondaryParameterTotalBonus('entropy', 'hexeri')}</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
           <td>{this.renderFlexibleSecondarySkillChoice('willpower')}Siła Woli</td>
           <td><span>
-            {this.props.secondaryParameterWillpowerBase}&emsp;&emsp;+&ensp;
-            &emsp;{this.props.secondaryParameterWillpowerFromImplants}&emsp;&emsp;+
-            &emsp;&emsp;{this.props.secondaryParameterWillpowerBonus}
+            {this.props.secondaryParameterBase('willpower')}&emsp;&emsp;+&ensp;
+            &emsp;{this.props.secondaryParameterFromImplants('willpower')}&emsp;&emsp;+
+            &emsp;&emsp;{this.props.secondaryParameterBonus('willpower')}
           </span></td>
-          <td>{this.props.secondaryParameterWillpowerTotal}</td>
-          <td>{this.props.secondaryParameterWillpowerTotalBonus}</td>
+          <td>{this.props.secondaryParameterTotal('willpower')}</td>
+          <td>{this.props.secondaryParameterTotalBonus('entropy', 'willpower')}</td>
           <td className="black-and-white__cell">Ruch (5+Wysportowanie)</td>
         </tr>
         <tr className="black-and-white__cell">
@@ -553,96 +469,11 @@ const mapStateToProps = (state) => ({
   hitPoints: hitPoints(state),
   power: power(state),
   apparition: apparition(state),
-  secondaryParameterFencingBase: secondaryParameterFencingBase(state),
-  secondaryParameterFencingFromImplants: secondaryParameterFencingFromImplants(state),
-  secondaryParameterFencingBonus: secondaryParameterFencingBonus(state),
-  secondaryParameterFencingTotal: secondaryParameterFencingTotal(state),
-  secondaryParameterFencingTotalBonus: secondaryParameterFencingTotalBonus(state),
-  secondaryParameterMartialArtsBase: secondaryParameterMartialArtsBase(state),
-  secondaryParameterMartialArtsFromImplants: secondaryParameterMartialArtsFromImplants(state),
-  secondaryParameterMartialArtsBonus: secondaryParameterMartialArtsBonus(state),
-  secondaryParameterMartialArtsTotal: secondaryParameterMartialArtsTotal(state),
-  secondaryParameterMartialArtsTotalBonus: secondaryParameterMartialArtsTotalBonus(state),
-  secondaryParameterEnduranceBase: secondaryParameterEnduranceBase(state),
-  secondaryParameterEnduranceFromImplants: secondaryParameterEnduranceFromImplants(state),
-  secondaryParameterEnduranceBonus: secondaryParameterEnduranceBonus(state),
-  secondaryParameterEnduranceTotal: secondaryParameterEnduranceTotal(state),
-  secondaryParameterEnduranceTotalBonus: secondaryParameterEnduranceTotalBonus(state),
-  secondaryParameterPistolsBase: secondaryParameterPistolsBase(state),
-  secondaryParameterPistolsFromImplants: secondaryParameterPistolsFromImplants(state),
-  secondaryParameterPistolsBonus: secondaryParameterPistolsBonus(state),
-  secondaryParameterPistolsTotal: secondaryParameterPistolsTotal(state),
-  secondaryParameterPistolsTotalBonus: secondaryParameterPistolsTotalBonus(state),
-  secondaryParameterVehicleHandlingBase: secondaryParameterVehicleHandlingBase(state),
-  secondaryParameterVehicleHandlingFromImplants: secondaryParameterVehicleHandlingFromImplants(state),
-  secondaryParameterVehicleHandlingBonus: secondaryParameterVehicleHandlingBonus(state),
-  secondaryParameterVehicleHandlingTotal: secondaryParameterVehicleHandlingTotal(state),
-  secondaryParameterVehicleHandlingTotalBonus: secondaryParameterVehicleHandlingTotalBonus(state),
-  secondaryParameterReflexBase: secondaryParameterReflexBase(state),
-  secondaryParameterReflexFromImplants: secondaryParameterReflexFromImplants(state),
-  secondaryParameterReflexBonus: secondaryParameterReflexBonus(state),
-  secondaryParameterReflexTotal: secondaryParameterReflexTotal(state),
-  secondaryParameterReflexTotalBonus: secondaryParameterReflexTotalBonus(state),
-  secondaryParameterRiflesBase: secondaryParameterRiflesBase(state),
-  secondaryParameterRiflesFromImplants: secondaryParameterRiflesFromImplants(state),
-  secondaryParameterRiflesBonus: secondaryParameterRiflesBonus(state),
-  secondaryParameterRiflesTotal: secondaryParameterRiflesTotal(state),
-  secondaryParameterRiflesTotalBonus: secondaryParameterRiflesTotalBonus(state),
-  secondaryParameterSpaceshipsHandlingBase: secondaryParameterSpaceshipsHandlingBase(state),
-  secondaryParameterSpaceshipsHandlingFromImplants: secondaryParameterSpaceshipsHandlingFromImplants(state),
-  secondaryParameterSpaceshipsHandlingBonus: secondaryParameterSpaceshipsHandlingBonus(state),
-  secondaryParameterSpaceshipsHandlingTotal: secondaryParameterSpaceshipsHandlingTotal(state),
-  secondaryParameterSpaceshipsHandlingTotalBonus: secondaryParameterSpaceshipsHandlingTotalBonus(state),
-  secondaryParameterSensesBase: secondaryParameterSensesBase(state),
-  secondaryParameterSensesFromImplants: secondaryParameterSensesFromImplants(state),
-  secondaryParameterSensesBonus: secondaryParameterSensesBonus(state),
-  secondaryParameterSensesTotal: secondaryParameterSensesTotal(state),
-  secondaryParameterSensesTotalBonus: secondaryParameterSensesTotalBonus(state),
-  secondaryParameterConnectionsBase: secondaryParameterConnectionsBase(state),
-  secondaryParameterConnectionsFromImplants: secondaryParameterConnectionsFromImplants(state),
-  secondaryParameterConnectionsBonus: secondaryParameterConnectionsBonus(state),
-  secondaryParameterConnectionsTotal: secondaryParameterConnectionsTotal(state),
-  secondaryParameterConnectionsTotalBonus: secondaryParameterConnectionsTotalBonus(state),
-  secondaryParameterTechnologyBase: secondaryParameterTechnologyBase(state),
-  secondaryParameterTechnologyFromImplants: secondaryParameterTechnologyFromImplants(state),
-  secondaryParameterTechnologyBonus: secondaryParameterTechnologyBonus(state),
-  secondaryParameterTechnologyTotal: secondaryParameterTechnologyTotal(state),
-  secondaryParameterTechnologyTotalBonus: secondaryParameterTechnologyTotalBonus(state),
-  secondaryParameterKnowledgeBase: secondaryParameterKnowledgeBase(state),
-  secondaryParameterKnowledgeFromImplants: secondaryParameterKnowledgeFromImplants(state),
-  secondaryParameterKnowledgeBonus: secondaryParameterKnowledgeBonus(state),
-  secondaryParameterKnowledgeTotal: secondaryParameterKnowledgeTotal(state),
-  secondaryParameterKnowledgeTotalBonus: secondaryParameterKnowledgeTotalBonus(state),
-  secondaryParameterHackingBase: secondaryParameterHackingBase(state),
-  secondaryParameterHackingFromImplants: secondaryParameterHackingFromImplants(state),
-  secondaryParameterHackingBonus: secondaryParameterHackingBonus(state),
-  secondaryParameterHackingTotal: secondaryParameterHackingTotal(state),
-  secondaryParameterHackingTotalBonus: secondaryParameterHackingTotalBonus(state),
-  secondaryParameterInfiltrationBase: secondaryParameterInfiltrationBase(state),
-  secondaryParameterInfiltrationFromImplants: secondaryParameterInfiltrationFromImplants(state),
-  secondaryParameterInfiltrationBonus: secondaryParameterInfiltrationBonus(state),
-  secondaryParameterInfiltrationTotal: secondaryParameterInfiltrationTotal(state),
-  secondaryParameterInfiltrationTotalBonus: secondaryParameterInfiltrationTotalBonus(state),
-  secondaryParameterTrickAndSubterfugeBase: secondaryParameterTrickAndSubterfugeBase(state),
-  secondaryParameterTrickAndSubterfugeFromImplants: secondaryParameterTrickAndSubterfugeFromImplants(state),
-  secondaryParameterTrickAndSubterfugeBonus: secondaryParameterTrickAndSubterfugeBonus(state),
-  secondaryParameterTrickAndSubterfugeTotal: secondaryParameterTrickAndSubterfugeTotal(state),
-  secondaryParameterTrickAndSubterfugeTotalBonus: secondaryParameterTrickAndSubterfugeTotalBonus(state),
-  secondaryParameterCharismaBase: secondaryParameterCharismaBase(state),
-  secondaryParameterCharismaFromImplants: secondaryParameterCharismaFromImplants(state),
-  secondaryParameterCharismaBonus: secondaryParameterCharismaBonus(state),
-  secondaryParameterCharismaTotal: secondaryParameterCharismaTotal(state),
-  secondaryParameterCharismaTotalBonus: secondaryParameterCharismaTotalBonus(state),
-  secondaryParameterHexeriBase: secondaryParameterHexeriBase(state),
-  secondaryParameterHexeriFromImplants: secondaryParameterHexeriFromImplants(state),
-  secondaryParameterHexeriBonus: secondaryParameterHexeriBonus(state),
-  secondaryParameterHexeriTotal: secondaryParameterHexeriTotal(state),
-  secondaryParameterHexeriTotalBonus: secondaryParameterHexeriTotalBonus(state),
-  secondaryParameterWillpowerBase: secondaryParameterWillpowerBase(state),
-  secondaryParameterWillpowerFromImplants: secondaryParameterWillpowerFromImplants(state),
-  secondaryParameterWillpowerBonus: secondaryParameterWillpowerBonus(state),
-  secondaryParameterWillpowerTotal: secondaryParameterWillpowerTotal(state),
-  secondaryParameterWillpowerTotalBonus: secondaryParameterWillpowerTotalBonus(state),
+  secondaryParameterBase: name => secondaryParameterBase(state, name),
+  secondaryParameterFromImplants: name => secondaryParameterFromImplants(state, name),
+  secondaryParameterBonus: name => secondaryParameterBonus(state, name),
+  secondaryParameterTotal: name => secondaryParameterTotal(state, name),
+  secondaryParameterTotalBonus: (mainName, secondaryName) => secondaryParameterTotalBonus(state, mainName, secondaryName),
   heroesList: get(state, "heroes.byId"),
   heroSelected: heroSelected(state)
 });
