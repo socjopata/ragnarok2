@@ -18,14 +18,16 @@ export const flexibleSecondarySkillSelected = (flexibleParameterName, skillName,
   flexibleParameterName: flexibleParameterName
 });
 
-export const mainParameterIncremented = (skillName) => ({
+export const mainParameterIncremented = (skillName, cost) => ({
   type: MAIN_PARAMETER_INCREMENTED,
   skillName: skillName,
+  cost: cost
 });
 
-export const mainParameterDecremented = (skillName) => ({
+export const mainParameterDecremented = (skillName, costDeducted) => ({
   type: MAIN_PARAMETER_DECREMENTED,
   skillName: skillName,
+  costDeducted: costDeducted
 });
 
 export const fetchHeroesStarted = () => ({

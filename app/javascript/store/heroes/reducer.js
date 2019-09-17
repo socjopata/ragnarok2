@@ -1,4 +1,4 @@
-import { keyBy } from 'lodash';
+import {keyBy, get} from 'lodash';
 
 import {
   FETCH_HEROES_STARTED,
@@ -23,7 +23,8 @@ const initialState = {
     name: "",
     usedFlexibleSecondaryParameters: [],
     selectedFlexibleSecondaryParameters: {},
-    experiencePointsSpent: 0
+    experiencePointsSpent: 0,
+    mainParametersIncreased: {}
   }
 };
 
@@ -66,6 +67,26 @@ export const reducer = (state = initialState, action) => {
     case MAIN_PARAMETER_INCREMENTED:
       return {
         ...state,
+        character: {
+          ...state.character,
+          experiencePointsSpent: state.character.experiencePointsSpent + action.cost,
+          mainParametersIncreased: {
+            ...state.character.mainParametersIncreased,
+            [action.skillName]: get(state, ['character', 'mainParametersIncreased', action.skillName], 0) + 1
+          }
+        }
+      };
+    case MAIN_PARAMETER_DECREMENTED:
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          experiencePointsSpent: state.character.experiencePointsSpent - action.costDeducted,
+          mainParametersIncreased: {
+            ...state.character.mainParametersIncreased,
+            [action.skillName]: get(state, ['character', 'mainParametersIncreased', action.skillName], 0) - 1
+          }
+        }
       };
     case FETCH_HEROES_STARTED:
       return {
@@ -83,7 +104,7 @@ export const reducer = (state = initialState, action) => {
           ...keyBy(action.payload, 'id'),
         },
         list: {
-          ids: action.payload.map(({ id }) => id),
+          ids: action.payload.map(({id}) => id),
           loading: false,
           error: null,
         },

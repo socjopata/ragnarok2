@@ -31,6 +31,7 @@ import {
   secondaryParameterBonus,
   secondaryParameterTotal,
   secondaryParameterTotalBonus,
+  mainParameterUserChanges
 } from '../../store/heroes';
 
 class FirstPageBlob extends Component {
@@ -46,12 +47,12 @@ class FirstPageBlob extends Component {
     this.props.flexibleSecondarySkillSelected(flexibleParameterName, skillName, value);
   };
 
-  handleIncrementMainParameter = (skillName) => {
-    this.props.mainParameterIncremented(skillName);
+  handleIncrementMainParameter = (skillName, cost) => {
+    this.props.mainParameterIncremented(skillName, cost);
   };
 
-  handleDecrementMainParameter = (skillName) => {
-    this.props.mainParameterDecremented(skillName);
+  handleDecrementMainParameter = (skillName, costDeducted) => {
+    this.props.mainParameterDecremented(skillName, costDeducted);
   };
 
   renderHeroesForSelect() {
@@ -90,23 +91,24 @@ class FirstPageBlob extends Component {
     if (heroSelected) {
       const baseParameter = this.props.mainParameterTotal(skillName);
       const experiencePoints = this.props.experiencePoints;
-      if ((baseParameter + 1) * 2 <= experiencePoints) {
+      const cost = (baseParameter + 1) * 2;
+      if (cost <= experiencePoints) {
         return (<Button key={"increment" + skillName} color="success" className="tiny__button float_left"
-                        onClick={() => this.handleIncrementMainParameter(skillName)}>+</Button>)
+                        onClick={() => this.handleIncrementMainParameter(skillName, cost)}>+</Button>)
       }
-
-      //if user has enough experiencePoints display the button
-      // after a click, save the information and deduct experiencePoints (maybe save in store experiencePointsSpent)
     }
   };
 
   renderDecrementMainParameterButton(skillName) {
     const heroSelected = this.props.heroSelected;
     if (heroSelected) {
-      const baseParameter = this.props.mainParameterTotal(skillName);
-      return (<Button key={"decrement" + skillName} color="danger" className="tiny__button float_right" onClick={() => this.handleDecrementMainParameter(skillName)}>-</Button>)
-
-      //if user is not at the skill Base, display the button
+      const canDeduct = this.props.mainParameterUserChanges(skillName);
+      console.log(canDeduct);
+      if (canDeduct) {
+        const costDeducted = this.props.mainParameterTotal(skillName) * 2;
+        return (<Button key={"decrement" + skillName} color="danger" className="tiny__button float_right"
+                        onClick={() => this.handleDecrementMainParameter(skillName, costDeducted)}>-</Button>)
+      }
       //  after the click, decrease the baseParameter and amend the  experiencePointsSpent
     }
   };
@@ -499,6 +501,7 @@ const mapStateToProps = (state) => ({
   mainParameterBase: name => mainParameterBase(state, name),
   mainParameterFromImplants: name => mainParameterFromImplants(state, name),
   mainParameterTotal: name => mainParameterTotal(state, name),
+  mainParameterUserChanges: name => mainParameterUserChanges(state, name),
   usedFlexibleSecondaryParameters: usedFlexibleSecondaryParameters(state),
   chosenFlexibleSecondaryParameters: chosenFlexibleSecondaryParameters(state),
   experiencePoints: experiencePoints(state),

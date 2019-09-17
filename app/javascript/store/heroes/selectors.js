@@ -66,6 +66,14 @@ export const heroSelected = (state) => {
   return _.get(state, ['heroes', 'byId', currentHeroId])
 };
 
+export const mainParameterUserChanges = (state, name) => {
+  //TODO this is a duplication (mainParameterBase), but createSelector kinda didn't fit here
+  if (state.heroes && state.heroes.byId) {
+    const changes = state.heroes.character.mainParametersIncreased;
+    return(get(changes, name, 0));
+  }
+};
+
 export const mainParameterBodyBuildingTotal = state => mainParameterTotal(state, 'physique');
 export const mainParameterDexterityTotal = state => mainParameterTotal(state, 'dexterity');
 export const mainParameterPerceptionTotal = state => mainParameterTotal(state, 'perception');
