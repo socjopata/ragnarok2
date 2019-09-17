@@ -28,7 +28,14 @@ end
   hero.secondary_parameters.create(name: param_name, value: value)
 end
 
-hero = Hero.find_by(name: 'Ulfhednar')
+virtue = Virtue.create(hero_id: hero.id, name: "Furiat", internal_name: "furious", description: "Weterana zwiększana jest o +2pkt. Na początku starcia, w ramach darmowej akcji w swojej inicjatywie, Weteran wprowadza się w trans i wykonuje test Siły Woli. Za każdy poziom, który uda mu się zdać otrzymuje jedną rundę, w której wszystkie zadane mu Obrażenia zmniejszane są o połowę. Po upływie tego czasu, aby podtrzymać trans, co rundę wykonuje test Siły Woli. Jeżeli nie uda mu się go podtrzymać, zatrzymuje się oszołomiony na k5 rund, podczas których nie może czynnie atakować ani poruszać się, a jedynie bronić.")
+virtue.secondary_parameters.create(name: "willpower", value: 2)
+virtue = Virtue.create(hero_id: hero.id, name: "Runiczne Tatuaże", internal_name: "rune_tattoos", description: "Weteran, dzięki pokrywającym jego ciało mistycznym tatuażom, zwiększa swoją Entropię i Wytrzymałość o +1pkt, ponadto zyskuje Odporność na Hekseri +5pkt.")
+virtue.main_parameters.create(name: "entropy", value: 1)
+virtue.secondary_parameters.create(name: "endurance", value: 1)
+Virtue.create(hero_id: hero.id, name: "Pogarda Śmierci", internal_name: "i_disdain_death", description: "Weteran śmieje się Hel prosto w twarz, mając śmierć za nic! Najważniejsze, to zabrać ze sobą jak najwięcej wrogów! Na początku każdego starcia, zanim ktokolwiek inny zdąży zareagować, Weteran wydaje z siebie szyderczy okrzyk, skupiający na nim uwagę Szeregowych przeciwników, którzy walczą z nim tak długo, aż nie zostaną zaatakowani przez kogoś innego. Doświadczeni i Elitarni przeciwnicy mogą obronić się przed działaniem okrzyku dzięki udanemu testowi Siły Woli. Jeżeli Weteran został zaskoczony nie może korzystać z tej zalety w danym starciu, chyba, że wyda 2 pkt Koncentracji.")
+
+  hero = Hero.find_by(name: 'Ulfhednar')
 { physique: 4, dexterity: 7, perception: 5, inteligence: 4, self_control: 4, entropy: 3 }.each do |param_name, value|
   hero.main_parameters.create(name: param_name, value: value)
 end

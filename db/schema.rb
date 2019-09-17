@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_26_115843) do
+ActiveRecord::Schema.define(version: 2019_09_17_074221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,9 +23,18 @@ ActiveRecord::Schema.define(version: 2019_07_26_115843) do
     t.integer "value"
     t.string "name"
     t.string "type"
-    t.bigint "hero_id"
-    t.index ["hero_id"], name: "index_parameters_on_hero_id"
+    t.bigint "entity_id"
+    t.string "entity_type"
+    t.index ["entity_id", "entity_type"], name: "index_parameters_on_entity_id_and_entity_type"
   end
 
-  add_foreign_key "parameters", "heroes"
+  create_table "virtues", force: :cascade do |t|
+    t.string "name"
+    t.string "internal_name"
+    t.text "description"
+    t.bigint "hero_id"
+    t.index ["hero_id"], name: "index_virtues_on_hero_id"
+  end
+
+  add_foreign_key "virtues", "heroes"
 end

@@ -4,7 +4,10 @@ class CreateParameters < ActiveRecord::Migration[6.0]
       t.integer :value
       t.string :name
       t.string :type
-      t.references :hero, foreign_key: true
+      t.bigint :entity_id
+      t.string :entity_type
     end
+
+    add_index :parameters, [:entity_id, :entity_type]
   end
 end
