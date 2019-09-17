@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2019_09_17_074221) do
     t.integer "value"
     t.string "name"
     t.string "type"
+    t.string "bonus_type", default: ""
     t.bigint "entity_id"
     t.string "entity_type"
     t.index ["entity_id", "entity_type"], name: "index_parameters_on_entity_id_and_entity_type"

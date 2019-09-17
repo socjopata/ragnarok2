@@ -4,6 +4,7 @@ class CreateParameters < ActiveRecord::Migration[6.0]
       t.integer :value
       t.string :name
       t.string :type
+      t.string :bonus_type, default: ""
       t.bigint :entity_id
       t.string :entity_type
     end

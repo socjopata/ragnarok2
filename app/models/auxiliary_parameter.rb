@@ -1,0 +1,2 @@
+class AuxiliaryParameter < Parameter
+end
