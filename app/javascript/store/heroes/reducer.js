@@ -38,7 +38,8 @@ export const reducer = (state = initialState, action) => {
           name: state.character.name,
           usedFlexibleSecondaryParameters: [],
           selectedFlexibleSecondaryParameters: {},
-          experiencePointsSpent: 0
+          experiencePointsSpent: 0,
+          mainParametersIncreased: {}
         }
       };
     case INPUT_CHANGE:

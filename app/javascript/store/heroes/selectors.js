@@ -17,7 +17,8 @@ export const mainParameterBase = (state, name) => {
     const chosenHero = state.heroes.byId[parseInt(state.heroes.character.id)];
     if (chosenHero) {
       const base = chosenHero.parameters.filter(parameter => parameter.name === name && parameter.type === "MainParameter")[0].value;
-      return (base)
+      const userChanges = get(state, ["heroes", "character", 'mainParametersIncreased', name], 0);
+      return (base + userChanges)
     } else {
       return 0
     }

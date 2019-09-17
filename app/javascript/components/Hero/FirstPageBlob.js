@@ -103,7 +103,6 @@ class FirstPageBlob extends Component {
     const heroSelected = this.props.heroSelected;
     if (heroSelected) {
       const canDeduct = this.props.mainParameterUserChanges(skillName);
-      console.log(canDeduct);
       if (canDeduct) {
         const costDeducted = this.props.mainParameterTotal(skillName) * 2;
         return (<Button key={"decrement" + skillName} color="danger" className="tiny__button float_right"
