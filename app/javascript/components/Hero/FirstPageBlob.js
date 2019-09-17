@@ -169,7 +169,7 @@ class FirstPageBlob extends Component {
         </tr>
         <tr className="solid-border__cell">
           <td rowSpan="3" className="white-and-black__cell">
-            ZRĘCZNOŚĆ
+            {this.renderIncrementMainParameterButton("dexterity")} ZRĘCZNOŚĆ {this.renderDecrementMainParameterButton("dexterity")}
             <br/>
             {this.props.mainParameterBase("dexterity")} + {this.props.mainParameterFromImplants("dexterity")} = {this.props.mainParameterTotal("dexterity")}
             <br/>
@@ -214,7 +214,7 @@ class FirstPageBlob extends Component {
         </tr>
         <tr className="solid-border__cell">
           <td rowSpan="3" className="white-and-black__cell">
-            PERCEPCJA
+            {this.renderIncrementMainParameterButton("perception")} PERCEPCJA {this.renderDecrementMainParameterButton("perception")}
             <br/>
             {this.props.mainParameterBase("perception")} + {this.props.mainParameterFromImplants("perception")} = {this.props.mainParameterTotal("perception")}
             <br/>
@@ -253,7 +253,7 @@ class FirstPageBlob extends Component {
         </tr>
         <tr className="solid-border__cell">
           <td rowSpan="3" className="white-and-black__cell">
-            INTELIGENCJA
+            {this.renderIncrementMainParameterButton("inteligence")} INTELIGENCJA {this.renderDecrementMainParameterButton("inteligence")}
             <br/>
             {this.props.mainParameterBase("inteligence")} + {this.props.mainParameterFromImplants("inteligence")} = {this.props.mainParameterTotal("inteligence")}
             <br/>
@@ -292,7 +292,7 @@ class FirstPageBlob extends Component {
         </tr>
         <tr className="solid-border__cell">
           <td rowSpan="3" className="white-and-black__cell">
-            OPANOWANIE
+            {this.renderIncrementMainParameterButton("self_control")} OPANOWANIE {this.renderDecrementMainParameterButton("self_control")}
             <br/>
             {this.props.mainParameterBase("self_control")} + {this.props.mainParameterFromImplants("self_control")} = {this.props.mainParameterTotal("self_control")}
             <br/>
@@ -331,7 +331,7 @@ class FirstPageBlob extends Component {
         </tr>
         <tr className="solid-border__cell">
           <td rowSpan="3" className="white-and-black__cell">
-            ENTROPIA
+            {this.renderIncrementMainParameterButton("entropy")} ENTROPIA {this.renderDecrementMainParameterButton("entropy")}
             <br/>
             {this.props.mainParameterBase("entropy")} + {this.props.mainParameterFromImplants("entropy")} = {this.props.mainParameterTotal("entropy")}
             <br/>
