@@ -90,7 +90,7 @@ end
 Virtue.create(hero_id: hero.id, name: "Chwila Chwały", internal_name: "a_moment_of_glory", description: "podczas walki Huskarl podnosi swoją Obronę o wartość  Entropii. Premia aktywowana jest na początku rundy i utrzymuje się do końca następnej. Dopóki działa, Weteran odporny jest na Pecha oraz na wszystkie zasady Krytyków – przeciw niemu, co oznacza, że nadal należy przewyższyć lub zrównać się z jego Obroną, itd. Aby ponownie skorzystać z tej zalety, Weteran musi odbyć medytację przez co najmniej 5 minut, podczas której jest bezbronny.")
 Virtue.create(hero_id: hero.id, name: "Hekser", internal_name: "hexer", description: "Weteran może rzucać Hekseri w walce nie dając przeciwnikowi darmowego ataku.")
 virtue = Virtue.create(hero_id: hero.id, name: "Wyga", internal_name: "stager", description: "na etapie tworzenia postaci Weteran otrzymuje dodatkową ilość PD równą wartości swojej Entropii, a koszt nauczenia się wszystkich Hekseri na stałe zmniejszony jest o 1pkt.")
-virtue.virtual_parameters.create(name: "experience_points", value: 0) #TODO remember to apply the Entropy bonus and smaller cost
+virtue.virtual_parameters.create(name: "experience_points", value: 6) #TODO remember to apply the smaller cost forspells
 
 hero = Hero.find_by(name: 'Jarl')
 { physique: 5, dexterity: 4, perception: 4, inteligence: 5, self_control: 5, entropy: 4 }.each do |param_name, value|
