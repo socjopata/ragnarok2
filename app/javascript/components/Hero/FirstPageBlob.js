@@ -70,16 +70,22 @@ class FirstPageBlob extends Component {
     if (heroSelected) {
       const flexibleParameters = heroSelected.parameters.filter(parameter => parameter.name.includes("_or_") || parameter.name.includes("any_") && parameter.type === "SecondaryParameter");
       return (map(flexibleParameters, ({id, name: flexibleParameterName, value}) => {
-        if (usedFlexibleSecondaryParameters.includes(flexibleParameterName)) { return false }
-        if (get(chosenFlexibleSecondaryParameters, skillName, 0) > 0) { return false }
+        if (usedFlexibleSecondaryParameters.includes(flexibleParameterName)) {
+          return false
+        }
+        if (get(chosenFlexibleSecondaryParameters, skillName, 0) > 0) {
+          return false
+        }
 
         if (flexibleParameterName.includes(skillName)) {
-          return (<Button key={id + name} color="primary" className="tiny__button float_left" onClick={() => this.handleFlexibleSecondarySkillChoice(flexibleParameterName, skillName, value)}>{value}</Button>)
+          return (<Button key={id + name} color="primary" className="tiny__button float_left"
+                          onClick={() => this.handleFlexibleSecondarySkillChoice(flexibleParameterName, skillName, value)}>{value}</Button>)
         } else if (flexibleParameterName.includes("any_")) {
           const base = heroSelected.parameters.filter(parameter => parameter.name === skillName && parameter.type === "SecondaryParameter")[0].value; //FIXME this is a duplication, when we consider a method defined in selectors.js
           const secondaryParameterAtZero = base === 0;
           if (secondaryParameterAtZero) {
-            return (<Button key={id + name} color="primary" className="tiny__button float_right" onClick={() => this.handleFlexibleSecondarySkillChoice(flexibleParameterName, skillName, value)}>{value}</Button>)
+            return (<Button key={id + name} color="primary" className="tiny__button float_right"
+                            onClick={() => this.handleFlexibleSecondarySkillChoice(flexibleParameterName, skillName, value)}>{value}</Button>)
           }
         }
       }))
@@ -126,7 +132,8 @@ class FirstPageBlob extends Component {
         </tr>
         <tr className="solid-border__cell">
           <td rowSpan="3" className="white-and-black__cell">
-            {this.renderIncrementMainParameterButton("physique")} BUDOWA CIAŁA {this.renderDecrementMainParameterButton("physique")}
+            {this.renderIncrementMainParameterButton("physique")} BUDOWA
+            CIAŁA {this.renderDecrementMainParameterButton("physique")}
             <br/>
             {this.props.mainParameterBase("physique")} + {this.props.mainParameterFromImplants("physique")} = {this.props.mainParameterTotal("physique")}
             <br/>
@@ -191,14 +198,17 @@ class FirstPageBlob extends Component {
           </td>
         </tr>
         <tr className="solid-border__cell">
-          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('vehicle_handling')}Obsługa Pojazdów</td>
+          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('vehicle_handling')}Obsługa
+            Pojazdów
+          </td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterBase('vehicle_handling')}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterFromImplants('vehicle_handling')}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterBonus('vehicle_handling')}
           </span></td>
           <td className="grey-and-black__cell">{this.props.secondaryParameterTotal('vehicle_handling')}</td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterTotalBonus('dexterity', 'vehicle_handling')}</td>
+          <td
+            className="grey-and-black__cell">{this.props.secondaryParameterTotalBonus('dexterity', 'vehicle_handling')}</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
           <td>{this.renderFlexibleSecondarySkillChoice('reflex')}Refleks</td>
@@ -265,7 +275,8 @@ class FirstPageBlob extends Component {
             &emsp;&emsp;{this.props.secondaryParameterBonus('connections')}
           </span></td>
           <td className="white-and-black__cell">{this.props.secondaryParameterTotal('connections')}</td>
-          <td className="white-and-black__cell">{this.props.secondaryParameterTotalBonus('inteligence', 'connections')}</td>
+          <td
+            className="white-and-black__cell">{this.props.secondaryParameterTotalBonus('inteligence', 'connections')}</td>
           <td className="centered__cell" rowSpan="2">{this.props.focus}</td>
         </tr>
         <tr className="solid-border__cell">
@@ -276,7 +287,8 @@ class FirstPageBlob extends Component {
             &emsp;&emsp;{this.props.secondaryParameterBonus('technology')}
           </span></td>
           <td className="grey-and-black__cell">{this.props.secondaryParameterTotal('technology')}</td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterTotalBonus('inteligence', 'technology')}</td>
+          <td
+            className="grey-and-black__cell">{this.props.secondaryParameterTotalBonus('inteligence', 'technology')}</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
           <td>{this.renderFlexibleSecondarySkillChoice('knowledge')}Wiedza</td>
@@ -318,14 +330,17 @@ class FirstPageBlob extends Component {
           <td>{this.props.secondaryParameterTotalBonus('self_control', 'infiltration')}</td>
         </tr>
         <tr className="solid-border__cell">
-          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('trick_and_subterfuge')}Trik i Fortel</td>
+          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('trick_and_subterfuge')}Trik i
+            Fortel
+          </td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterBase('trick_and_subterfuge')}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterFromImplants('trick_and_subterfuge')}&emsp;&emsp;+
             &emsp;&emsp;{this.props.secondaryParameterBonus('trick_and_subterfuge')}
           </span></td>
           <td className="grey-and-black__cell">{this.props.secondaryParameterTotal('trick_and_subterfuge')}</td>
-          <td className="grey-and-black__cell">{this.props.secondaryParameterTotalBonus('self_control', 'trick_and_subterfuge')}</td>
+          <td
+            className="grey-and-black__cell">{this.props.secondaryParameterTotalBonus('self_control', 'trick_and_subterfuge')}</td>
           <td className="black-and-white__cell">Wysportowanie (BC+ZR)</td>
         </tr>
         <tr className="solid-border__cell">
@@ -369,7 +384,8 @@ class FirstPageBlob extends Component {
         </tr>
         <tr className="black-and-white__cell">
           <td colSpan="5">ZALETY</td>
-          <td className="no-horizontal-border__cell white-and-black__cell centered__cell">{this.props.movementSpeed}</td>
+          <td
+            className="no-horizontal-border__cell white-and-black__cell centered__cell">{this.props.movementSpeed}</td>
         </tr>
         <tr className="solid-border__cell">
           <td rowSpan="2" colSpan="2">&nbsp;</td>
