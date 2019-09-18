@@ -8,6 +8,7 @@ export const HERO_CLASS_CHANGED = 'creator/HERO_CLASS_CHANGED';
 export const FLEXIBLE_PARAMETER_SELECTED = 'creator/FLEXIBLE_PARAMETER_SELECTED';
 export const MAIN_PARAMETER_INCREMENTED = 'creator/MAIN_PARAMETER_INCREMENTED';
 export const MAIN_PARAMETER_DECREMENTED = 'creator/MAIN_PARAMETER_DECREMENTED';
+export const VIRTUE_SELECTED = 'creator/VIRTUE_SELECTED';
 
 export const inputChange = (value, fieldName) => ({type: INPUT_CHANGE, value: value, fieldName: fieldName});
 export const heroClassSelected = (value) => ({type: HERO_CLASS_CHANGED, value: value});
@@ -28,6 +29,12 @@ export const mainParameterDecremented = (skillName, costDeducted) => ({
   type: MAIN_PARAMETER_DECREMENTED,
   skillName: skillName,
   costDeducted: costDeducted
+});
+
+export const virtueSelected = (virtueIndex, virtue) => ({
+  type: VIRTUE_SELECTED,
+  virtueIndex,
+  virtue
 });
 
 export const fetchHeroesStarted = () => ({

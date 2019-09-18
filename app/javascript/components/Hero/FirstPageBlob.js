@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {get, isEmpty, map} from 'lodash';
+import {get, isEmpty, map, find, toNumber} from 'lodash';
 import {Input, Button} from 'reactstrap';
 import {connect} from "react-redux";
 import TestDifficultyCheatSheet from "./TestDifficultyCheatSheet";
@@ -9,12 +9,14 @@ import {
   heroClassSelected,
   flexibleSecondarySkillSelected,
   mainParameterIncremented,
-  mainParameterDecremented
+  mainParameterDecremented,
+  virtueSelected,
 } from '../../store/heroes';
 //selectors
 import {
   heroSelected, characterName, characterId, usedFlexibleSecondaryParameters,
   chosenFlexibleSecondaryParameters,
+  selectedVirtues,
   mainParameterBase,
   mainParameterFromImplants,
   mainParameterTotal,
@@ -53,6 +55,13 @@ class FirstPageBlob extends Component {
 
   handleDecrementMainParameter = (skillName, costDeducted) => {
     this.props.mainParameterDecremented(skillName, costDeducted);
+  };
+
+  handleVirtueSelected = (virtueIndex) => (data) => {
+    const virtueId = toNumber(data.target.value);
+    const virtue = find(this.props.heroSelected.virtues, {id: virtueId});
+
+    this.props.virtueSelected(virtueIndex, virtue);
   };
 
   renderHeroesForSelect() {
@@ -114,10 +123,33 @@ class FirstPageBlob extends Component {
         return (<Button key={"decrement" + skillName} color="danger" className="tiny__button float_right"
                         onClick={() => this.handleDecrementMainParameter(skillName, costDeducted)}>-</Button>)
       }
-      //  after the click, decrease the baseParameter and amend the  experiencePointsSpent
     }
   };
 
+  renderVirtueSelectOptions(virtues) {
+    return ([
+        <option disabled value key={0} value={0}> -- Wybierz zaletę
+          --
+        </option>
+      ].concat(map(virtues, ({id, name}) => <option key={id} value={id}>{name}</option>))
+    )
+  };
+
+  renderVirtueSelect(virtueIndex) {
+    const {heroSelected} = this.props;
+    if (heroSelected) {
+      const selectedVirtue = this.props.selectedVirtues[virtueIndex];
+      if (selectedVirtue) {
+        return <p>{selectedVirtue.name}</p>
+      } else {
+        const selectedVirtuesIds = map(this.props.selectedVirtues, "id");
+        const virtues = heroSelected.virtues.filter(virtue => !selectedVirtuesIds.includes(virtue.id));
+        return (<Input type="select" name="virtueSelect" placeholder="Wybierz zaletę"
+                       defaultValue={0}
+                       onChange={this.handleVirtueSelected(virtueIndex)}>{this.renderVirtueSelectOptions(virtues)}</Input>)
+      }
+    }
+  };
 
   render() {
     return (
@@ -388,8 +420,8 @@ class FirstPageBlob extends Component {
             className="no-horizontal-border__cell white-and-black__cell centered__cell">{this.props.movementSpeed}</td>
         </tr>
         <tr className="solid-border__cell">
-          <td rowSpan="2" colSpan="2">&nbsp;</td>
-          <td rowSpan="2" colSpan="3">&nbsp;</td>
+          <td className="white-and-black__cell" rowSpan="2" colSpan="2">{this.renderVirtueSelect(0)}</td>
+          <td className="white-and-black__cell" rowSpan="2" colSpan="3">{this.renderVirtueSelect(1)}</td>
           <td className="no-horizontal-border__cell white-and-black__cell">&nbsp;</td>
         </tr>
         <tr className="solid-border__cell">
@@ -533,7 +565,8 @@ const mapStateToProps = (state) => ({
   secondaryParameterTotal: name => secondaryParameterTotal(state, name),
   secondaryParameterTotalBonus: (mainName, secondaryName) => secondaryParameterTotalBonus(state, mainName, secondaryName),
   heroesList: get(state, "heroes.byId"),
-  heroSelected: heroSelected(state)
+  heroSelected: heroSelected(state),
+  selectedVirtues: selectedVirtues(state)
 });
 
 const mapDispatchToProps = {
@@ -542,6 +575,7 @@ const mapDispatchToProps = {
   flexibleSecondarySkillSelected,
   mainParameterIncremented,
   mainParameterDecremented,
+  virtueSelected
 };
 
 export default connect(

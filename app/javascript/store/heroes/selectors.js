@@ -10,6 +10,7 @@ export const characterName = state => get(state, "heroes.character.name");
 export const characterId = state => get(state, "heroes.character.id");
 export const usedFlexibleSecondaryParameters = state => get(state, "heroes.character.usedFlexibleSecondaryParameters");
 export const chosenFlexibleSecondaryParameters = state => get(state, "heroes.character.selectedFlexibleSecondaryParameters");
+export const selectedVirtues = state => get(state, "heroes.character.selectedVirtues");
 const experiencePointsSpent = state => get(state, "heroes.character.experiencePointsSpent");
 
 export const mainParameterBase = (state, name) => {

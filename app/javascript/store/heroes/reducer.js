@@ -8,8 +8,10 @@ import {
   HERO_CLASS_CHANGED,
   FLEXIBLE_PARAMETER_SELECTED,
   MAIN_PARAMETER_INCREMENTED,
-  MAIN_PARAMETER_DECREMENTED
+  MAIN_PARAMETER_DECREMENTED,
+  VIRTUE_SELECTED
 } from './actions';
+import {heroSelected} from "./selectors";
 
 const initialState = {
   byId: {},
@@ -24,7 +26,8 @@ const initialState = {
     usedFlexibleSecondaryParameters: [],
     selectedFlexibleSecondaryParameters: {},
     experiencePointsSpent: 0,
-    mainParametersIncreased: {}
+    mainParametersIncreased: {},
+    selectedVirtues: [null, null]
   }
 };
 
@@ -39,7 +42,8 @@ export const reducer = (state = initialState, action) => {
           usedFlexibleSecondaryParameters: [],
           selectedFlexibleSecondaryParameters: {},
           experiencePointsSpent: 0,
-          mainParametersIncreased: {}
+          mainParametersIncreased: {},
+          selectedVirtues: [null, null]
         }
       };
     case INPUT_CHANGE:
@@ -87,6 +91,16 @@ export const reducer = (state = initialState, action) => {
             ...state.character.mainParametersIncreased,
             [action.skillName]: get(state, ['character', 'mainParametersIncreased', action.skillName], 0) - 1
           }
+        }
+      };
+    case VIRTUE_SELECTED:
+      const clonedSelectedVirtues = [...state.character.selectedVirtues];
+      clonedSelectedVirtues[action.virtueIndex] = action.virtue;
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          selectedVirtues: clonedSelectedVirtues
         }
       };
     case FETCH_HEROES_STARTED:
