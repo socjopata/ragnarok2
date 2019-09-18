@@ -110,10 +110,14 @@ table {
   padding-bottom: 0;
 }
 
-.float_left {
+.float-left {
   float: left;
 }
 
-.float_right {
+.float-right {
   float: right;
+}
+
+.pick-me-first {
+  background-color: greenyellow;
 }

@@ -1,4 +1,4 @@
-import {get} from 'lodash';
+import {get, compact} from 'lodash';
 import {createSelector} from 'reselect';
 
 export const getHeroes = state => ({
@@ -11,6 +11,8 @@ export const characterId = state => get(state, "heroes.character.id");
 export const usedFlexibleSecondaryParameters = state => get(state, "heroes.character.usedFlexibleSecondaryParameters");
 export const chosenFlexibleSecondaryParameters = state => get(state, "heroes.character.selectedFlexibleSecondaryParameters");
 export const selectedVirtues = state => get(state, "heroes.character.selectedVirtues");
+export const allVirtuesSelected = state => compact(state.heroes.character.selectedVirtues).length === 2;
+
 const experiencePointsSpent = state => get(state, "heroes.character.experiencePointsSpent");
 
 export const mainParameterBase = (state, name) => {
@@ -82,6 +84,25 @@ export const mainParameterPerceptionTotal = state => mainParameterTotal(state, '
 export const mainParameterInteligenceTotal = state => mainParameterTotal(state, 'inteligence');
 export const mainParameterSelfControlTotal = state => mainParameterTotal(state, 'self_control');
 export const mainParameterEntropyTotal = state => mainParameterTotal(state, 'entropy');
+
+export const flexibleParameters = createSelector(heroSelected, (
+  chosenHero) => {
+    if (chosenHero) {
+      return (chosenHero.parameters.filter(parameter => parameter.name.includes("_or_") || parameter.name.includes("any_") && parameter.type === "SecondaryParameter"));
+    }
+  }
+);
+
+export const allFlexibleParametersAssigned = createSelector(heroSelected, flexibleParameters, usedFlexibleSecondaryParameters,
+  (chosenHero, flexibleParameters, usedFlexibleSecondaryParameters) => {
+    if (chosenHero) {
+      if (flexibleParameters.length === 0) {
+        return true
+      }
+      return (flexibleParameters.length === usedFlexibleSecondaryParameters.length);
+    }
+  }
+);
 
 export const experiencePoints = createSelector(heroSelected, mainParameterInteligenceTotal, experiencePointsSpent,
   (chosenHero, inteligenceTotal, experiencePointsSpent) => {

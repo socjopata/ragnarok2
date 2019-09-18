@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {get, isEmpty, map, find, toNumber} from 'lodash';
 import {Input, Button} from 'reactstrap';
 import {connect} from "react-redux";
+import classNames from 'classnames'
 import TestDifficultyCheatSheet from "./TestDifficultyCheatSheet";
 //actions
 import {
@@ -17,6 +18,9 @@ import {
   heroSelected, characterName, characterId, usedFlexibleSecondaryParameters,
   chosenFlexibleSecondaryParameters,
   selectedVirtues,
+  allVirtuesSelected,
+  flexibleParameters,
+  allFlexibleParametersAssigned,
   mainParameterBase,
   mainParameterFromImplants,
   mainParameterTotal,
@@ -73,11 +77,10 @@ class FirstPageBlob extends Component {
   }
 
   renderFlexibleSecondarySkillChoice(skillName) {
-    const heroSelected = this.props.heroSelected;
-    const usedFlexibleSecondaryParameters = this.props.usedFlexibleSecondaryParameters;
-    const chosenFlexibleSecondaryParameters = this.props.chosenFlexibleSecondaryParameters;
-    if (heroSelected) {
-      const flexibleParameters = heroSelected.parameters.filter(parameter => parameter.name.includes("_or_") || parameter.name.includes("any_") && parameter.type === "SecondaryParameter");
+    const { heroSelected, usedFlexibleSecondaryParameters, chosenFlexibleSecondaryParameters, allVirtuesSelected} = this.props;
+
+    if (heroSelected && allVirtuesSelected) {
+      const flexibleParameters = this.props.flexibleParameters;
       return (map(flexibleParameters, ({id, name: flexibleParameterName, value}) => {
         if (usedFlexibleSecondaryParameters.includes(flexibleParameterName)) {
           return false
@@ -87,13 +90,13 @@ class FirstPageBlob extends Component {
         }
 
         if (flexibleParameterName.includes(skillName)) {
-          return (<Button key={id + name} color="primary" className="tiny__button float_left"
+          return (<Button key={id + name} color="primary" className="tiny__button float-left"
                           onClick={() => this.handleFlexibleSecondarySkillChoice(flexibleParameterName, skillName, value)}>{value}</Button>)
         } else if (flexibleParameterName.includes("any_")) {
           const base = heroSelected.parameters.filter(parameter => parameter.name === skillName && parameter.type === "SecondaryParameter")[0].value; //FIXME this is a duplication, when we consider a method defined in selectors.js
           const secondaryParameterAtZero = base === 0;
           if (secondaryParameterAtZero) {
-            return (<Button key={id + name} color="primary" className="tiny__button float_right"
+            return (<Button key={id + name} color="primary" className="tiny__button float-right"
                             onClick={() => this.handleFlexibleSecondarySkillChoice(flexibleParameterName, skillName, value)}>{value}</Button>)
           }
         }
@@ -102,25 +105,25 @@ class FirstPageBlob extends Component {
   };
 
   renderIncrementMainParameterButton(skillName) {
-    const heroSelected = this.props.heroSelected;
-    if (heroSelected) {
+    const { heroSelected, allFlexibleParametersAssigned, allVirtuesSelected}  = this.props;
+    if (heroSelected && allVirtuesSelected && allFlexibleParametersAssigned) {
       const baseParameter = this.props.mainParameterTotal(skillName);
       const experiencePoints = this.props.experiencePoints;
       const cost = (baseParameter + 1) * 2;
       if (cost <= experiencePoints) {
-        return (<Button key={"increment" + skillName} color="success" className="tiny__button float_left"
+        return (<Button key={"increment" + skillName} color="success" className="tiny__button float-left"
                         onClick={() => this.handleIncrementMainParameter(skillName, cost)}>+</Button>)
       }
     }
   };
 
   renderDecrementMainParameterButton(skillName) {
-    const heroSelected = this.props.heroSelected;
-    if (heroSelected) {
+    const { heroSelected, allFlexibleParametersAssigned, allVirtuesSelected}  = this.props;
+    if (heroSelected && allVirtuesSelected && allFlexibleParametersAssigned) {
       const canDeduct = this.props.mainParameterUserChanges(skillName);
       if (canDeduct) {
         const costDeducted = this.props.mainParameterTotal(skillName) * 2;
-        return (<Button key={"decrement" + skillName} color="danger" className="tiny__button float_right"
+        return (<Button key={"decrement" + skillName} color="danger" className="tiny__button float-right"
                         onClick={() => this.handleDecrementMainParameter(skillName, costDeducted)}>-</Button>)
       }
     }
@@ -149,6 +152,11 @@ class FirstPageBlob extends Component {
                        onChange={this.handleVirtueSelected(virtueIndex)}>{this.renderVirtueSelectOptions(virtues)}</Input>)
       }
     }
+  };
+
+  pickMeFirst(_classNames) {
+    const {heroSelected, allVirtuesSelected} = this.props;
+    return(classNames(_classNames, { "pick-me-first": heroSelected && !allVirtuesSelected }));
   };
 
   render() {
@@ -420,8 +428,8 @@ class FirstPageBlob extends Component {
             className="no-horizontal-border__cell white-and-black__cell centered__cell">{this.props.movementSpeed}</td>
         </tr>
         <tr className="solid-border__cell">
-          <td className="white-and-black__cell" rowSpan="2" colSpan="2">{this.renderVirtueSelect(0)}</td>
-          <td className="white-and-black__cell" rowSpan="2" colSpan="3">{this.renderVirtueSelect(1)}</td>
+          <td className={this.pickMeFirst("white-and-black__cell")} rowSpan="2" colSpan="2">{this.renderVirtueSelect(0)}</td>
+          <td className={this.pickMeFirst("white-and-black__cell")} rowSpan="2" colSpan="3">{this.renderVirtueSelect(1)}</td>
           <td className="no-horizontal-border__cell white-and-black__cell">&nbsp;</td>
         </tr>
         <tr className="solid-border__cell">
@@ -566,7 +574,10 @@ const mapStateToProps = (state) => ({
   secondaryParameterTotalBonus: (mainName, secondaryName) => secondaryParameterTotalBonus(state, mainName, secondaryName),
   heroesList: get(state, "heroes.byId"),
   heroSelected: heroSelected(state),
-  selectedVirtues: selectedVirtues(state)
+  selectedVirtues: selectedVirtues(state),
+  allVirtuesSelected: allVirtuesSelected(state),
+  flexibleParameters: flexibleParameters(state),
+  allFlexibleParametersAssigned: allFlexibleParametersAssigned(state)
 });
 
 const mapDispatchToProps = {
