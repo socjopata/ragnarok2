@@ -9,6 +9,8 @@ import {
   FLEXIBLE_PARAMETER_SELECTED,
   MAIN_PARAMETER_INCREMENTED,
   MAIN_PARAMETER_DECREMENTED,
+  SECONDARY_PARAMETER_INCREMENTED,
+  SECONDARY_PARAMETER_DECREMENTED,
   VIRTUE_SELECTED
 } from './actions';
 import {heroSelected} from "./selectors";
@@ -27,6 +29,7 @@ const initialState = {
     selectedFlexibleSecondaryParameters: {},
     experiencePointsSpent: 0,
     mainParametersIncreased: {},
+    secondaryParametersIncreased: {},
     selectedVirtues: [null, null]
   }
 };
@@ -43,6 +46,7 @@ export const reducer = (state = initialState, action) => {
           selectedFlexibleSecondaryParameters: {},
           experiencePointsSpent: 0,
           mainParametersIncreased: {},
+          secondaryParametersIncreased: {},
           selectedVirtues: [null, null]
         }
       };
@@ -90,6 +94,30 @@ export const reducer = (state = initialState, action) => {
           mainParametersIncreased: {
             ...state.character.mainParametersIncreased,
             [action.skillName]: get(state, ['character', 'mainParametersIncreased', action.skillName], 0) - 1
+          }
+        }
+      };
+    case SECONDARY_PARAMETER_INCREMENTED:
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          experiencePointsSpent: state.character.experiencePointsSpent + action.cost,
+          secondaryParametersIncreased: {
+            ...state.character.secondaryParametersIncreased,
+            [action.skillName]: get(state, ['character', 'secondaryParametersIncreased', action.skillName], 0) + 1
+          }
+        }
+      };
+    case SECONDARY_PARAMETER_DECREMENTED:
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          experiencePointsSpent: state.character.experiencePointsSpent - action.costDeducted,
+          secondaryParametersIncreased: {
+            ...state.character.secondaryParametersIncreased,
+            [action.skillName]: get(state, ['character', 'secondaryParametersIncreased', action.skillName], 0) - 1
           }
         }
       };

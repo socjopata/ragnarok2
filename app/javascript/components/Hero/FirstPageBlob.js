@@ -11,6 +11,8 @@ import {
   flexibleSecondarySkillSelected,
   mainParameterIncremented,
   mainParameterDecremented,
+  secondaryParameterIncremented,
+  secondaryParameterDecremented,
   virtueSelected,
 } from '../../store/heroes';
 //selectors
@@ -37,7 +39,8 @@ import {
   secondaryParameterBonus,
   secondaryParameterTotal,
   secondaryParameterTotalBonus,
-  mainParameterUserChanges
+  mainParameterUserChanges,
+  secondaryParameterUserChanges
 } from '../../store/heroes';
 
 class FirstPageBlob extends Component {
@@ -61,6 +64,15 @@ class FirstPageBlob extends Component {
     this.props.mainParameterDecremented(skillName, costDeducted);
   };
 
+  handleIncrementSecondaryParameter = (skillName, cost) => {
+    this.props.secondaryParameterIncremented(skillName, cost);
+  };
+
+  handleDecrementSecondaryParameter = (skillName, costDeducted) => {
+    this.props.secondaryParameterDecremented(skillName, costDeducted);
+  };
+
+
   handleVirtueSelected = (virtueIndex) => (data) => {
     const virtueId = toNumber(data.target.value);
     const virtue = find(this.props.heroSelected.virtues, {id: virtueId});
@@ -77,7 +89,7 @@ class FirstPageBlob extends Component {
   }
 
   renderFlexibleSecondarySkillChoice(skillName) {
-    const { heroSelected, usedFlexibleSecondaryParameters, chosenFlexibleSecondaryParameters, allVirtuesSelected} = this.props;
+    const {heroSelected, usedFlexibleSecondaryParameters, chosenFlexibleSecondaryParameters, allVirtuesSelected} = this.props;
 
     if (heroSelected && allVirtuesSelected) {
       const flexibleParameters = this.props.flexibleParameters;
@@ -105,7 +117,7 @@ class FirstPageBlob extends Component {
   };
 
   renderIncrementMainParameterButton(skillName) {
-    const { heroSelected, allFlexibleParametersAssigned, allVirtuesSelected}  = this.props;
+    const {heroSelected, allFlexibleParametersAssigned, allVirtuesSelected} = this.props;
     if (heroSelected && allVirtuesSelected && allFlexibleParametersAssigned) {
       const baseParameter = this.props.mainParameterTotal(skillName);
       const experiencePoints = this.props.experiencePoints;
@@ -118,13 +130,38 @@ class FirstPageBlob extends Component {
   };
 
   renderDecrementMainParameterButton(skillName) {
-    const { heroSelected, allFlexibleParametersAssigned, allVirtuesSelected}  = this.props;
+    const {heroSelected, allFlexibleParametersAssigned, allVirtuesSelected} = this.props;
     if (heroSelected && allVirtuesSelected && allFlexibleParametersAssigned) {
       const canDeduct = this.props.mainParameterUserChanges(skillName);
       if (canDeduct) {
         const costDeducted = this.props.mainParameterTotal(skillName) * 2;
         return (<Button key={"decrement" + skillName} color="danger" className="tiny__button float-right"
                         onClick={() => this.handleDecrementMainParameter(skillName, costDeducted)}>-</Button>)
+      }
+    }
+  };
+
+  renderIncrementSecondaryParameterButton(skillName) {
+    const {heroSelected, allFlexibleParametersAssigned, allVirtuesSelected} = this.props;
+    if (heroSelected && allVirtuesSelected && allFlexibleParametersAssigned) {
+      const secondaryParameter = this.props.secondaryParameterTotal(skillName);
+      const experiencePoints = this.props.experiencePoints;
+      const cost = (secondaryParameter + 1);
+      if (cost <= experiencePoints) {
+        return (<Button key={"increment" + skillName} color="success" className="tiny__button float-left"
+                        onClick={() => this.handleIncrementSecondaryParameter(skillName, cost)}>+</Button>)
+      }
+    }
+  };
+
+  renderDecrementSecondaryParameterButton(skillName) {
+    const {heroSelected, allFlexibleParametersAssigned, allVirtuesSelected} = this.props;
+    if (heroSelected && allVirtuesSelected && allFlexibleParametersAssigned) {
+      const canDeduct = this.props.secondaryParameterUserChanges(skillName);
+      if (canDeduct) {
+        const costDeducted = this.props.secondaryParameterTotal(skillName);
+        return (<Button key={"decrement" + skillName} color="danger" className="tiny__button float-right"
+                        onClick={() => this.handleDecrementSecondaryParameter(skillName, costDeducted)}>-</Button>)
       }
     }
   };
@@ -156,7 +193,7 @@ class FirstPageBlob extends Component {
 
   pickMeFirst(_classNames) {
     const {heroSelected, allVirtuesSelected} = this.props;
-    return(classNames(_classNames, { "pick-me-first": heroSelected && !allVirtuesSelected }));
+    return (classNames(_classNames, {"pick-me-first": heroSelected && !allVirtuesSelected}));
   };
 
   render() {
@@ -179,7 +216,9 @@ class FirstPageBlob extends Component {
             <br/>
             Podstawa Wszczepy
           </td>
-          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('fencing')}Broń Biała</td>
+          <td
+            className="grey-and-black__cell">{this.renderIncrementSecondaryParameterButton("fencing")}{this.renderFlexibleSecondarySkillChoice('fencing')}Broń
+            Biała{this.renderDecrementSecondaryParameterButton("fencing")}</td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterBase("fencing")}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterFromImplants("fencing")}&emsp;&emsp;+
@@ -193,7 +232,8 @@ class FirstPageBlob extends Component {
           </td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
-          <td>{this.renderFlexibleSecondarySkillChoice('martial_arts')}Walka Wręcz</td>
+          <td>{this.renderIncrementSecondaryParameterButton("martial_arts")}{this.renderFlexibleSecondarySkillChoice('martial_arts')}Walka
+            Wręcz{this.renderDecrementSecondaryParameterButton("martial_arts")}</td>
           <td><span>
             {this.props.secondaryParameterBase('martial_arts')}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterFromImplants("martial_arts")}&emsp;&emsp;+
@@ -203,7 +243,8 @@ class FirstPageBlob extends Component {
           <td>{this.props.secondaryParameterTotalBonus("physique", "martial_arts")}</td>
         </tr>
         <tr className="solid-border__cell">
-          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('endurance')}Wytrzymałość</td>
+          <td
+            className="grey-and-black__cell">{this.renderIncrementSecondaryParameterButton("endurance")}{this.renderFlexibleSecondarySkillChoice('endurance')} Wytrzymałość {this.renderDecrementSecondaryParameterButton("endurance")}</td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterBase("endurance")}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterFromImplants("endurance")}&emsp;&emsp;+
@@ -221,7 +262,9 @@ class FirstPageBlob extends Component {
             <br/>
             Podstawa Wszczepy
           </td>
-          <td className="white-and-black__cell">{this.renderFlexibleSecondarySkillChoice('pistols')}Broń Krótka</td>
+          <td
+            className="white-and-black__cell">{this.renderIncrementSecondaryParameterButton("pistols")}{this.renderFlexibleSecondarySkillChoice('pistols')}Broń
+            Krótka{this.renderDecrementSecondaryParameterButton("pistols")}</td>
           <td className="white-and-black__cell"><span>
             {this.props.secondaryParameterBase("pistols")}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterFromImplants("pistols")}&emsp;&emsp;+
@@ -238,8 +281,9 @@ class FirstPageBlob extends Component {
           </td>
         </tr>
         <tr className="solid-border__cell">
-          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('vehicle_handling')}Obsługa
-            Pojazdów
+          <td
+            className="grey-and-black__cell">{this.renderIncrementSecondaryParameterButton("vehicle_handling")}{this.renderFlexibleSecondarySkillChoice('vehicle_handling')}Obsługa
+            Pojazdów{this.renderDecrementSecondaryParameterButton("vehicle_handling")}
           </td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterBase('vehicle_handling')}&emsp;&emsp;+&ensp;
@@ -251,7 +295,7 @@ class FirstPageBlob extends Component {
             className="grey-and-black__cell">{this.props.secondaryParameterTotalBonus('dexterity', 'vehicle_handling')}</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
-          <td>{this.renderFlexibleSecondarySkillChoice('reflex')}Refleks</td>
+          <td>{this.renderIncrementSecondaryParameterButton("reflex")}{this.renderFlexibleSecondarySkillChoice('reflex')}Refleks{this.renderDecrementSecondaryParameterButton("reflex")}</td>
           <td><span>
             {this.props.secondaryParameterBase('reflex')}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterFromImplants('reflex')}&emsp;&emsp;+
@@ -269,7 +313,9 @@ class FirstPageBlob extends Component {
             <br/>
             Podstawa Wszczepy
           </td>
-          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('rifles')}Broń Długa</td>
+          <td
+            className="grey-and-black__cell">{this.renderIncrementSecondaryParameterButton("reflex")}{this.renderFlexibleSecondarySkillChoice('rifles')}Broń
+            Długa{this.renderDecrementSecondaryParameterButton("rifles")}</td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterBase('rifles')}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterFromImplants('rifles')}&emsp;&emsp;+
@@ -280,7 +326,8 @@ class FirstPageBlob extends Component {
           <td className="centered__cell" rowSpan="2">{this.props.experiencePoints}</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
-          <td>{this.renderFlexibleSecondarySkillChoice('spaceships_handling')}Gwiezdny Pilotaż</td>
+          <td>{this.renderIncrementSecondaryParameterButton("spaceships_handling")}{this.renderFlexibleSecondarySkillChoice('spaceships_handling')}Gwiezdny
+            Pilotaż{this.renderDecrementSecondaryParameterButton("spaceships_handling")}</td>
           <td><span>
             {this.props.secondaryParameterBase('spaceships_handling')}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterFromImplants('spaceships_handling')}&emsp;&emsp;+
@@ -290,7 +337,10 @@ class FirstPageBlob extends Component {
           <td>{this.props.secondaryParameterTotalBonus('perception', 'spaceships_handling')}</td>
         </tr>
         <tr className="solid-border__cell">
-          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('senses')}Wyczulone Zmysły</td>
+          <td
+            className="grey-and-black__cell">{this.renderIncrementSecondaryParameterButton("senses")}{this.renderFlexibleSecondarySkillChoice('senses')}Wyczulone
+            Zmysły{this.renderDecrementSecondaryParameterButton("senses")}
+          </td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterBase('senses')}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterFromImplants('senses')}&emsp;&emsp;+
@@ -308,7 +358,8 @@ class FirstPageBlob extends Component {
             <br/>
             Podstawa Wszczepy
           </td>
-          <td className="white-and-black__cell">{this.renderFlexibleSecondarySkillChoice('connections')}Koneksje</td>
+          <td
+            className="white-and-black__cell">{this.renderIncrementSecondaryParameterButton("connections")}{this.renderFlexibleSecondarySkillChoice('connections')}Koneksje{this.renderDecrementSecondaryParameterButton("connections")}</td>
           <td className="white-and-black__cell"><span>
             {this.props.secondaryParameterBase('connections')}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterFromImplants('connections')}&emsp;&emsp;+
@@ -320,7 +371,9 @@ class FirstPageBlob extends Component {
           <td className="centered__cell" rowSpan="2">{this.props.focus}</td>
         </tr>
         <tr className="solid-border__cell">
-          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('technology')}Technika</td>
+          <td
+            className="grey-and-black__cell">{this.renderIncrementSecondaryParameterButton("technology")}{this.renderFlexibleSecondarySkillChoice('technology')}Technika{this.renderDecrementSecondaryParameterButton("technology")}
+          </td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterBase('technology')}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterFromImplants('technology')}&emsp;&emsp;+
@@ -331,7 +384,7 @@ class FirstPageBlob extends Component {
             className="grey-and-black__cell">{this.props.secondaryParameterTotalBonus('inteligence', 'technology')}</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
-          <td>{this.renderFlexibleSecondarySkillChoice('knowledge')}Wiedza</td>
+          <td>{this.renderIncrementSecondaryParameterButton("knowledge")}{this.renderFlexibleSecondarySkillChoice('knowledge')}Wiedza{this.renderDecrementSecondaryParameterButton("knowledge")}</td>
           <td><span>
             {this.props.secondaryParameterBase('knowledge')}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterFromImplants('knowledge')}&emsp;&emsp;+
@@ -349,7 +402,7 @@ class FirstPageBlob extends Component {
             <br/>
             Podstawa Wszczepy
           </td>
-          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('hacking')}Hackowanie</td>
+          <td className="grey-and-black__cell">{this.renderIncrementSecondaryParameterButton("hacking")}{this.renderFlexibleSecondarySkillChoice('hacking')}Hackowanie{this.renderDecrementSecondaryParameterButton("hacking")}</td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterBase('hacking')}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterFromImplants('hacking')}&emsp;&emsp;+
@@ -360,7 +413,7 @@ class FirstPageBlob extends Component {
           <td className="centered__cell" rowSpan="2">{this.props.neurostability}</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
-          <td>{this.renderFlexibleSecondarySkillChoice('infiltration')}Infiltracja</td>
+          <td>{this.renderIncrementSecondaryParameterButton("infiltration")}{this.renderFlexibleSecondarySkillChoice('infiltration')}Infiltracja{this.renderDecrementSecondaryParameterButton("infiltration")}</td>
           <td><span>
             {this.props.secondaryParameterBase('infiltration')}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterFromImplants('infiltration')}&emsp;&emsp;+
@@ -370,8 +423,8 @@ class FirstPageBlob extends Component {
           <td>{this.props.secondaryParameterTotalBonus('self_control', 'infiltration')}</td>
         </tr>
         <tr className="solid-border__cell">
-          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('trick_and_subterfuge')}Trik i
-            Fortel
+          <td className="grey-and-black__cell">{this.renderIncrementSecondaryParameterButton("trick_and_subterfuge")}{this.renderFlexibleSecondarySkillChoice('trick_and_subterfuge')}Trik i
+            Fortel{this.renderDecrementSecondaryParameterButton("trick_and_subterfuge")}
           </td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterBase('trick_and_subterfuge')}&emsp;&emsp;+&ensp;
@@ -391,7 +444,7 @@ class FirstPageBlob extends Component {
             <br/>
             Podstawa Wszczepy
           </td>
-          <td className="white-and-black__cell">{this.renderFlexibleSecondarySkillChoice('charisma')}Charyzma</td>
+          <td className="white-and-black__cell">{this.renderIncrementSecondaryParameterButton("charisma")}{this.renderFlexibleSecondarySkillChoice('charisma')}Charyzma{this.renderDecrementSecondaryParameterButton("charisma")}</td>
           <td className="white-and-black__cell"><span>
             {this.props.secondaryParameterBase('charisma')}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterFromImplants('charisma')}&emsp;&emsp;+
@@ -402,7 +455,7 @@ class FirstPageBlob extends Component {
           <td className="centered__cell" rowSpan="2">{this.props.sportiness}</td>
         </tr>
         <tr className="solid-border__cell">
-          <td className="grey-and-black__cell">{this.renderFlexibleSecondarySkillChoice('hexeri')}Hekseri</td>
+          <td className="grey-and-black__cell">{this.renderIncrementSecondaryParameterButton("hexeri")}{this.renderFlexibleSecondarySkillChoice('hexeri')}Hekseri{this.renderDecrementSecondaryParameterButton("hexeri")}</td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterBase('hexeri')}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterFromImplants('hexeri')}&emsp;&emsp;+
@@ -412,7 +465,7 @@ class FirstPageBlob extends Component {
           <td className="grey-and-black__cell">{this.props.secondaryParameterTotalBonus('entropy', 'hexeri')}</td>
         </tr>
         <tr className="solid-border__cell white-and-black__cell">
-          <td>{this.renderFlexibleSecondarySkillChoice('willpower')}Siła Woli</td>
+          <td>{this.renderIncrementSecondaryParameterButton("willpower")}{this.renderFlexibleSecondarySkillChoice('willpower')}Siła Woli{this.renderDecrementSecondaryParameterButton("willpower")}</td>
           <td><span>
             {this.props.secondaryParameterBase('willpower')}&emsp;&emsp;+&ensp;
             &emsp;{this.props.secondaryParameterFromImplants('willpower')}&emsp;&emsp;+
@@ -428,8 +481,10 @@ class FirstPageBlob extends Component {
             className="no-horizontal-border__cell white-and-black__cell centered__cell">{this.props.movementSpeed}</td>
         </tr>
         <tr className="solid-border__cell">
-          <td className={this.pickMeFirst("white-and-black__cell")} rowSpan="2" colSpan="2">{this.renderVirtueSelect(0)}</td>
-          <td className={this.pickMeFirst("white-and-black__cell")} rowSpan="2" colSpan="3">{this.renderVirtueSelect(1)}</td>
+          <td className={this.pickMeFirst("white-and-black__cell")} rowSpan="2"
+              colSpan="2">{this.renderVirtueSelect(0)}</td>
+          <td className={this.pickMeFirst("white-and-black__cell")} rowSpan="2"
+              colSpan="3">{this.renderVirtueSelect(1)}</td>
           <td className="no-horizontal-border__cell white-and-black__cell">&nbsp;</td>
         </tr>
         <tr className="solid-border__cell">
@@ -557,6 +612,7 @@ const mapStateToProps = (state) => ({
   mainParameterFromImplants: name => mainParameterFromImplants(state, name),
   mainParameterTotal: name => mainParameterTotal(state, name),
   mainParameterUserChanges: name => mainParameterUserChanges(state, name),
+  secondaryParameterUserChanges: name => secondaryParameterUserChanges(state, name),
   usedFlexibleSecondaryParameters: usedFlexibleSecondaryParameters(state),
   chosenFlexibleSecondaryParameters: chosenFlexibleSecondaryParameters(state),
   experiencePoints: experiencePoints(state),
@@ -586,6 +642,8 @@ const mapDispatchToProps = {
   flexibleSecondarySkillSelected,
   mainParameterIncremented,
   mainParameterDecremented,
+  secondaryParameterIncremented,
+  secondaryParameterDecremented,
   virtueSelected
 };
 

@@ -45,8 +45,9 @@ export const secondaryParameterBase = (state, name) => {
     const chosenHero = state.heroes.byId[parseInt(state.heroes.character.id)];
     if (chosenHero) {
       const defaultBase = chosenHero.parameters.filter(parameter => parameter.name === name && parameter.type === "SecondaryParameter")[0].value;
+      const userChanges = get(state, ["heroes", "character", 'secondaryParametersIncreased', name], 0);
       const flexibleSkillChoice = get(chosenFlexibleSecondaryParameters(state), name, 0);
-      return (defaultBase + flexibleSkillChoice + bonusFromVirtues(state, name, "SecondaryParameter"))
+      return (defaultBase + flexibleSkillChoice + userChanges + bonusFromVirtues(state, name, "SecondaryParameter"))
     } else {
       return 0
     }
@@ -78,6 +79,14 @@ export const mainParameterUserChanges = (state, name) => {
   //TODO this is a duplication (mainParameterBase), but createSelector kinda didn't fit here
   if (state.heroes && state.heroes.byId) {
     const changes = state.heroes.character.mainParametersIncreased;
+    return(get(changes, name, 0));
+  }
+};
+
+export const secondaryParameterUserChanges = (state, name) => {
+  //TODO this is a duplication (mainParameterBase), but createSelector kinda didn't fit here
+  if (state.heroes && state.heroes.byId) {
+    const changes = state.heroes.character.secondaryParametersIncreased;
     return(get(changes, name, 0));
   }
 };

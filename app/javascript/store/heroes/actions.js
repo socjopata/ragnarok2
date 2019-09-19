@@ -8,6 +8,8 @@ export const HERO_CLASS_CHANGED = 'creator/HERO_CLASS_CHANGED';
 export const FLEXIBLE_PARAMETER_SELECTED = 'creator/FLEXIBLE_PARAMETER_SELECTED';
 export const MAIN_PARAMETER_INCREMENTED = 'creator/MAIN_PARAMETER_INCREMENTED';
 export const MAIN_PARAMETER_DECREMENTED = 'creator/MAIN_PARAMETER_DECREMENTED';
+export const SECONDARY_PARAMETER_INCREMENTED = 'creator/SECONDARY_PARAMETER_INCREMENTED';
+export const SECONDARY_PARAMETER_DECREMENTED = 'creator/SECONDARY_PARAMETER_DECREMENTED';
 export const VIRTUE_SELECTED = 'creator/VIRTUE_SELECTED';
 
 export const inputChange = (value, fieldName) => ({type: INPUT_CHANGE, value: value, fieldName: fieldName});
@@ -27,6 +29,18 @@ export const mainParameterIncremented = (skillName, cost) => ({
 
 export const mainParameterDecremented = (skillName, costDeducted) => ({
   type: MAIN_PARAMETER_DECREMENTED,
+  skillName: skillName,
+  costDeducted: costDeducted
+});
+
+export const secondaryParameterIncremented = (skillName, cost) => ({
+  type: SECONDARY_PARAMETER_INCREMENTED,
+  skillName: skillName,
+  cost: cost
+});
+
+export const secondaryParameterDecremented = (skillName, costDeducted) => ({
+  type: SECONDARY_PARAMETER_DECREMENTED,
   skillName: skillName,
   costDeducted: costDeducted
 });
