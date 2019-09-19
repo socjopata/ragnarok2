@@ -314,7 +314,7 @@ class FirstPageBlob extends Component {
             Podstawa Wszczepy
           </td>
           <td
-            className="grey-and-black__cell">{this.renderIncrementSecondaryParameterButton("reflex")}{this.renderFlexibleSecondarySkillChoice('rifles')}Broń
+            className="grey-and-black__cell">{this.renderIncrementSecondaryParameterButton("rifles")}{this.renderFlexibleSecondarySkillChoice('rifles')}Broń
             Długa{this.renderDecrementSecondaryParameterButton("rifles")}</td>
           <td className="grey-and-black__cell"><span>
             {this.props.secondaryParameterBase('rifles')}&emsp;&emsp;+&ensp;
