@@ -89,6 +89,14 @@ export const mainParameterInteligenceTotal = state => mainParameterTotal(state, 
 export const mainParameterSelfControlTotal = state => mainParameterTotal(state, 'self_control');
 export const mainParameterEntropyTotal = state => mainParameterTotal(state, 'entropy');
 
+const focusFromVirtues = state => bonusFromVirtues(state, 'focus', "VirtualParameter");
+const neurostabilityFromVirtues = state => bonusFromVirtues(state, 'neurostability', "VirtualParameter");
+const sportinessFromVirtues = state => bonusFromVirtues(state, 'sportiness', "VirtualParameter");
+const movementSpeedFromVirtues = state => bonusFromVirtues(state, 'movementSpeed', "VirtualParameter");
+const hitPointsFromVirtues = state => bonusFromVirtues(state, 'hitPoints', "VirtualParameter");
+const powerFromVirtues = state => bonusFromVirtues(state, 'power', "VirtualParameter");
+const apparitionFromVirtues = state => bonusFromVirtues(state, 'apparition', "VirtualParameter");
+
 export const flexibleParameters = createSelector(heroSelected, (
   chosenHero) => {
     if (chosenHero) {
@@ -118,63 +126,63 @@ export const experiencePoints = createSelector(heroSelected, mainParameterInteli
   }
 );
 
-export const focus = createSelector(heroSelected, mainParameterSelfControlTotal, mainParameterEntropyTotal,
-  (chosenHero, selfControlTotal, entropyTotal) => {
+export const focus = createSelector(heroSelected, mainParameterSelfControlTotal, mainParameterEntropyTotal, focusFromVirtues,
+  (chosenHero, selfControlTotal, entropyTotal, fromVirtues) => {
     if (chosenHero) {
-      return (selfControlTotal + entropyTotal)
+      return (selfControlTotal + entropyTotal + fromVirtues)
     }
   }
 );
 
-export const neurostability = createSelector(heroSelected, mainParameterInteligenceTotal,
-  (chosenHero, inteligenceTotal) => {
+export const neurostability = createSelector(heroSelected, mainParameterInteligenceTotal, neurostabilityFromVirtues,
+  (chosenHero, inteligenceTotal, fromVirtues) => {
     if (chosenHero) {
       const baseMultiplier = 5;
-      return (inteligenceTotal * baseMultiplier)
+      return ((inteligenceTotal * baseMultiplier) + fromVirtues)
     }
   }
 );
 
-export const sportiness = createSelector(heroSelected, mainParameterBodyBuildingTotal, mainParameterDexterityTotal,
-  (chosenHero, bodyBulidingTotal, dexterityTotal) => {
+export const sportiness = createSelector(heroSelected, mainParameterBodyBuildingTotal, mainParameterDexterityTotal, sportinessFromVirtues,
+  (chosenHero, bodyBulidingTotal, dexterityTotal, fromVirtues) => {
     if (chosenHero) {
-      return (bodyBulidingTotal + dexterityTotal)
+      return (bodyBulidingTotal + dexterityTotal + fromVirtues)
     }
   }
 );
 
-export const movementSpeed = createSelector(heroSelected, sportiness,
-  (chosenHero, sportiness) => {
+export const movementSpeed = createSelector(heroSelected, sportiness, movementSpeedFromVirtues,
+  (chosenHero, sportiness, fromVirtues) => {
     if (chosenHero) {
       const defaultValue = 5;
-      return (sportiness + defaultValue)
+      return (sportiness + defaultValue + fromVirtues)
     }
   }
 );
 
-export const hitPoints = createSelector(heroSelected, mainParameterBodyBuildingTotal,
-  (chosenHero, bodyBuildingTotal) => {
+export const hitPoints = createSelector(heroSelected, mainParameterBodyBuildingTotal, hitPointsFromVirtues,
+  (chosenHero, bodyBuildingTotal, fromVirtues) => {
     if (chosenHero) {
       const defaultValue = 10;
       const defaultMultiplier = 5;
-      return (bodyBuildingTotal * defaultMultiplier + defaultValue)
+      return (bodyBuildingTotal * defaultMultiplier + defaultValue + fromVirtues)
     }
   }
 );
 
-export const power = createSelector(heroSelected, mainParameterInteligenceTotal,
-  (chosenHero, inteligenceTotal) => {
+export const power = createSelector(heroSelected, mainParameterInteligenceTotal, powerFromVirtues,
+  (chosenHero, inteligenceTotal,  fromVirtues) => {
     if (chosenHero) {
       const defaultMultiplier = 5;
-      return (inteligenceTotal * defaultMultiplier)
+      return ((inteligenceTotal * defaultMultiplier) + fromVirtues)
     }
   }
 );
 
-export const apparition = createSelector(heroSelected, mainParameterBodyBuildingTotal, mainParameterEntropyTotal,
-  (chosenHero, bodyBuildingTotal, entropyTotal) => {
+export const apparition = createSelector(heroSelected, mainParameterBodyBuildingTotal, mainParameterEntropyTotal, apparitionFromVirtues,
+  (chosenHero, bodyBuildingTotal, entropyTotal, fromVirtues) => {
     if (chosenHero) {
-      return (bodyBuildingTotal + entropyTotal)
+      return (bodyBuildingTotal + entropyTotal + fromVirtues)
     }
   }
 );
