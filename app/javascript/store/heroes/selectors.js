@@ -1,4 +1,4 @@
-import {get, compact} from 'lodash';
+import {get, compact, flatMap} from 'lodash';
 import {createSelector} from 'reselect';
 
 export const getHeroes = state => ({
@@ -14,6 +14,10 @@ export const selectedVirtues = state => get(state, "heroes.character.selectedVir
 export const allVirtuesSelected = state => compact(state.heroes.character.selectedVirtues).length === 2;
 
 const experiencePointsSpent = state => get(state, "heroes.character.experiencePointsSpent");
+const bonusFromVirtues = (state, name, type) => {
+  const selectedVirtueParameters = flatMap(compact(selectedVirtues(state)), (virtue) => virtue.parameters);
+  return (selectedVirtueParameters.filter(parameter => parameter.name === name && parameter.type === type).reduce((acc, parameter) => +acc + +parameter.value, 0) || 0);
+};
 
 export const mainParameterBase = (state, name) => {
   if (state.heroes && state.heroes.byId) {
@@ -21,7 +25,7 @@ export const mainParameterBase = (state, name) => {
     if (chosenHero) {
       const base = chosenHero.parameters.filter(parameter => parameter.name === name && parameter.type === "MainParameter")[0].value;
       const userChanges = get(state, ["heroes", "character", 'mainParametersIncreased', name], 0);
-      return (base + userChanges)
+      return (base + userChanges + bonusFromVirtues(state, name, "MainParameter"))
     } else {
       return 0
     }
@@ -42,7 +46,7 @@ export const secondaryParameterBase = (state, name) => {
     if (chosenHero) {
       const defaultBase = chosenHero.parameters.filter(parameter => parameter.name === name && parameter.type === "SecondaryParameter")[0].value;
       const flexibleSkillChoice = get(chosenFlexibleSecondaryParameters(state), name, 0);
-      return (defaultBase + flexibleSkillChoice)
+      return (defaultBase + flexibleSkillChoice + bonusFromVirtues(state, name, "SecondaryParameter"))
     } else {
       return 0
     }
