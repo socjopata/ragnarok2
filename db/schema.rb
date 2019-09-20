@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_17_074221) do
+ActiveRecord::Schema.define(version: 2019_09_20_070521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "advantages", force: :cascade do |t|
+    t.string "name"
+    t.string "internal_name"
+    t.text "description"
+    t.string "kind", null: false
+    t.integer "pd_cost", default: 0
+    t.integer "use_again_cost"
+  end
 
   create_table "heroes", force: :cascade do |t|
     t.string "name"
@@ -27,6 +36,15 @@ ActiveRecord::Schema.define(version: 2019_09_17_074221) do
     t.bigint "entity_id"
     t.string "entity_type"
     t.index ["entity_id", "entity_type"], name: "index_parameters_on_entity_id_and_entity_type"
+  end
+
+  create_table "requirements", force: :cascade do |t|
+    t.string "check_applies_to"
+    t.string "name"
+    t.string "value"
+    t.bigint "entity_id"
+    t.string "entity_type"
+    t.index ["entity_id", "entity_type"], name: "index_requirements_on_entity_id_and_entity_type"
   end
 
   create_table "virtues", force: :cascade do |t|
