@@ -186,4 +186,90 @@ advantage = Advantage.create(kind: "battle_general", internal_name: "iron_warrio
 advantage.auxiliary_parameters.create(name: "armor", bonus_type: "defense", value: 2)
 advantage.requirements.create(check_applies_to: "MainParameter", name: "physique", value: "5")
 
-puts "...done"
+advantage = Advantage.create(kind: "general", internal_name: "first_aid", name: "Błogosławieństwo Eir (Medycyna)", description: "Weteran zapoznał się z nowoczesną Medycyną dzięki czemu wie jakie medykamenty należy podawać, potrafi przeprowadzić operację, zabiegi, itp. Za każdym razem kiedy używa Med-Packów może rzucić jedną kostką więcej i wybrać korzystniejszy wynik. Ponadto w przypadku testowania Wiedzy w zakresie medycyny i biologii Weteran otrzymuje premię do rzutu +3pkt.", pd_cost: 3)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "inteligence", value: "4")
+
+advantage = Advantage.create(kind: "general", internal_name: "etiquette", name: "Etykieta", description: "kontakty z wyższymi sferami, tańce, modne tematy rozmów, moda, itp. Weteran zyskuje +3pkt do rzutu na Charyzmę podczas kontaktów z elitami.", pd_cost: 2)
+advantage.requirements.create(check_applies_to: "SecondaryParameter", name: "charisma", value: "4")
+
+advantage = Advantage.create(kind: "general", internal_name: "barter_3", name: "Handel/3", description: "kupno i sprzedaż na korzystnych warunkach oraz umiejętne prowadzenie negocjacji biznesowych. W przypadku udanego przeciwstawnego testu Charyzmy Weteran może zaniżyć lub zawyżyć cenę o następującą wartość: 15%/20%/25%. Po wybraniu tego Atutu Weteran otrzymuje, w zależności od zainwestowanych PD, 200/400/600S (również podczas tworzenia postaci). Krytyczny Sukces podczas testu modyfikuje cenę zakupu o dodatkowe +/-10%. Postać, która wykupiła atut na najwyższym poziomie (6pd) zwiększa swoją Prezencję i Charyzmę o +1pkt.", pd_cost: 3)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "inteligence", value: "5")
+advantage = Advantage.create(kind: "general", internal_name: "barter_5", name: "Handel/5", description: "kupno i sprzedaż na korzystnych warunkach oraz umiejętne prowadzenie negocjacji biznesowych. W przypadku udanego przeciwstawnego testu Charyzmy Weteran może zaniżyć lub zawyżyć cenę o następującą wartość: 15%/20%/25%. Po wybraniu tego Atutu Weteran otrzymuje, w zależności od zainwestowanych PD, 200/400/600S (również podczas tworzenia postaci). Krytyczny Sukces podczas testu modyfikuje cenę zakupu o dodatkowe +/-10%. Postać, która wykupiła atut na najwyższym poziomie (6pd) zwiększa swoją Prezencję i Charyzmę o +1pkt.", pd_cost: 5)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "inteligence", value: "5")
+advantage = Advantage.create(kind: "general", internal_name: "barter_7", name: "Handel/7", description: "kupno i sprzedaż na korzystnych warunkach oraz umiejętne prowadzenie negocjacji biznesowych. W przypadku udanego przeciwstawnego testu Charyzmy Weteran może zaniżyć lub zawyżyć cenę o następującą wartość: 15%/20%/25%. Po wybraniu tego Atutu Weteran otrzymuje, w zależności od zainwestowanych PD, 200/400/600S (również podczas tworzenia postaci). Krytyczny Sukces podczas testu modyfikuje cenę zakupu o dodatkowe +/-10%. Postać, która wykupiła atut na najwyższym poziomie (6pd) zwiększa swoją Prezencję i Charyzmę o +1pkt.", pd_cost: 7)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "inteligence", value: "5")
+advantage.virtual_parameters.create(name: "apparition", value: 1)
+advantage.secondary_parameters.create(name: "charisma", value: 1)
+
+advantage = Advantage.create(kind: "general", internal_name: "mastery_in_endurance", name: "Mistrzostwo (Wytrzymałość)", description: "Weteran zwiększa wybraną Umiejętność nie związaną z walką (posługiwaniem się bronią) ani Hekseri o +2pkt.", pd_cost: 5)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "self_control", value: "5")
+advantage.secondary_parameters.create(name: "endurance", value: 2)
+
+advantage = Advantage.create(kind: "general", internal_name: "mastery_in_vehicle_handling", name: "Mistrzostwo (Obsługa Pojazdów)", description: "Weteran zwiększa wybraną Umiejętność nie związaną z walką (posługiwaniem się bronią) ani Hekseri o +2pkt.", pd_cost: 5)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "self_control", value: "5")
+advantage.secondary_parameters.create(name: "vehicle_handling", value: 2)
+
+advantage = Advantage.create(kind: "general", internal_name: "mastery_in_reflex", name: "Mistrzostwo (Refleks)", description: "Weteran zwiększa wybraną Umiejętność nie związaną z walką (posługiwaniem się bronią) ani Hekseri o +2pkt.", pd_cost: 5)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "self_control", value: "5")
+advantage.secondary_parameters.create(name: "reflex", value: 2)
+
+advantage = Advantage.create(kind: "general", internal_name: "mastery_in_spaceships_handling", name: "Mistrzostwo (Gwiezdny Pilotaż)", description: "Weteran zwiększa wybraną Umiejętność nie związaną z walką (posługiwaniem się bronią) ani Hekseri o +2pkt.", pd_cost: 5)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "self_control", value: "5")
+advantage.secondary_parameters.create(name: "spaceships_handling", value: 2)
+
+advantage = Advantage.create(kind: "general", internal_name: "mastery_in_senses", name: "Mistrzostwo (Wyczulone Zmysły)", description: "Weteran zwiększa wybraną Umiejętność nie związaną z walką (posługiwaniem się bronią) ani Hekseri o +2pkt.", pd_cost: 5)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "self_control", value: "5")
+advantage.secondary_parameters.create(name: "senses", value: 2)
+
+advantage = Advantage.create(kind: "general", internal_name: "mastery_in_connections", name: "Mistrzostwo (Koneksje)", description: "Weteran zwiększa wybraną Umiejętność nie związaną z walką (posługiwaniem się bronią) ani Hekseri o +2pkt.", pd_cost: 5)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "self_control", value: "5")
+advantage.secondary_parameters.create(name: "connections", value: 2)
+
+advantage = Advantage.create(kind: "general", internal_name: "mastery_in_technology", name: "Mistrzostwo (Technika)", description: "Weteran zwiększa wybraną Umiejętność nie związaną z walką (posługiwaniem się bronią) ani Hekseri o +2pkt.", pd_cost: 5)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "self_control", value: "5")
+advantage.secondary_parameters.create(name: "technology", value: 2)
+
+advantage = Advantage.create(kind: "general", internal_name: "mastery_in_knowledge", name: "Mistrzostwo (Wiedza)", description: "Weteran zwiększa wybraną Umiejętność nie związaną z walką (posługiwaniem się bronią) ani Hekseri o +2pkt.", pd_cost: 5)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "self_control", value: "5")
+advantage.secondary_parameters.create(name: "knowledge", value: 2)
+
+advantage = Advantage.create(kind: "general", internal_name: "mastery_in_hacking", name: "Mistrzostwo (Hackowanie)", description: "Weteran zwiększa wybraną Umiejętność nie związaną z walką (posługiwaniem się bronią) ani Hekseri o +2pkt.", pd_cost: 5)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "self_control", value: "5")
+advantage.secondary_parameters.create(name: "hacking", value: 2)
+
+advantage = Advantage.create(kind: "general", internal_name: "mastery_in_infiltration", name: "Mistrzostwo (Infiltracja)", description: "Weteran zwiększa wybraną Umiejętność nie związaną z walką (posługiwaniem się bronią) ani Hekseri o +2pkt.", pd_cost: 5)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "self_control", value: "5")
+advantage.secondary_parameters.create(name: "infiltration", value: 2)
+
+advantage = Advantage.create(kind: "general", internal_name: "mastery_in_trick_and_subterfuge", name: "Mistrzostwo (Trik i Fortel)", description: "Weteran zwiększa wybraną Umiejętność nie związaną z walką (posługiwaniem się bronią) ani Hekseri o +2pkt.", pd_cost: 5)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "self_control", value: "5")
+advantage.secondary_parameters.create(name: "trick_and_subterfuge", value: 2)
+
+advantage = Advantage.create(kind: "general", internal_name: "mastery_in_charisma", name: "Mistrzostwo (Charyzma)", description: "Weteran zwiększa wybraną Umiejętność nie związaną z walką (posługiwaniem się bronią) ani Hekseri o +2pkt.", pd_cost: 5)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "self_control", value: "5")
+advantage.secondary_parameters.create(name: "charisma", value: 2)
+
+advantage = Advantage.create(kind: "general", internal_name: "mastery_in_willpower", name: "Mistrzostwo (Siła Woli)", description: "Weteran zwiększa wybraną Umiejętność nie związaną z walką (posługiwaniem się bronią) ani Hekseri o +2pkt.", pd_cost: 5)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "self_control", value: "5")
+advantage.secondary_parameters.create(name: "willpower", value: 2)
+
+advantage = Advantage.create(kind: "general", internal_name: "focused", name: "Skupiony", description: "Weteran na stałe podnosi ilość posiadanych punktów Koncentracji o +3pkt.", pd_cost: 5)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "self_control", value: "7")
+advantage.virtual_parameters.create(name: "focus", value: 3)
+
+advantage = Advantage.create(kind: "general", internal_name: "asgardian_sportiness", name: "Sprawność Asgardczyka", description: "postać na stałe podnosi swoje Wysportowanie o +3pkt.", pd_cost: 5)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "physique", value: "5")
+advantage.requirements.create(check_applies_to: "MainParameter", name: "dexterity", value: "5")
+advantage.virtual_parameters.create(name: "sportiness", value: 3)
+
+Advantage.create(kind: "general", internal_name: "surts_look", name: "Spojrzenie Surta", description: "Weteran otrzymuje premię +3pkt do wszystkich testów Zastraszania oraz Pojedynków Spojrzeń.", pd_cost: 2)
+
+Advantage.create(kind: "general", internal_name: "survival", name: "Sztuka przetrwania", description: "Weteran doskonale radzi sobie w środowisku naturalnym, potrafi zdobyć wodę i pokarm, wie jak wyznaczyć drogę, rozpoznaje florę i faunę, itp. Testy Infiltracji odpowiedzialne za wspomniane wcześniej działania otrzymują premię +3pkt.", pd_cost: 3)
+
+advantage = Advantage.create(kind: "general", internal_name: "the_chosen", name: "Wybraniec Losu", description: "Weteran otrzymuje dwa dodatkowe Przerzuty na sesję ponad te, które wynikają z Entropii.", pd_cost: 6)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "entropy", value: "6")
+advantage.virtual_parameters.create(name: "dice_rerolls", value: 2)
+
+Advantage.create(kind: "general", internal_name: "thug_life", name: "Znajomość Półświatka ", description: "kontakty z przestępcami, grypserka, znajomość gangów i organizacji przestępczych. Postać zyskuje +3pkt do rzutu na Charyzmę i Koneksje podczas kontaktów z marginesem społecznym.", pd_cost: 3)
+
+puts "...done!"
