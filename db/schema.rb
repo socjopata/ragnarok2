@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2019_09_20_070521) do
     t.string "kind", null: false
     t.integer "pd_cost", default: 0
     t.integer "use_again_cost"
+    t.index ["internal_name"], name: "index_advantages_on_internal_name"
   end
 
   create_table "heroes", force: :cascade do |t|
@@ -53,6 +54,7 @@ ActiveRecord::Schema.define(version: 2019_09_20_070521) do
     t.text "description"
     t.bigint "hero_id"
     t.index ["hero_id"], name: "index_virtues_on_hero_id"
+    t.index ["internal_name"], name: "index_virtues_on_internal_name"
   end
 
   add_foreign_key "virtues", "heroes"

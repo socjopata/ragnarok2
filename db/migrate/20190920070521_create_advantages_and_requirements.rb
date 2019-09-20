@@ -1,8 +1,8 @@
 class CreateAdvantagesAndRequirements < ActiveRecord::Migration[6.0]
   def change
     create_table :advantages do |t|
-      t.string :name
-      t.string :internal_name
+      t.string :name, index: true, unique: true
+      t.string :internal_name, index: true, unique: true
       t.text :description
       t.string :kind, null: false # melee, ranged, general...
       t.integer :pd_cost, default: 0
