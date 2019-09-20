@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2019_09_20_070521) do
     t.string "internal_name"
     t.text "description"
     t.string "kind", null: false
-    t.integer "pd_cost", default: 0
+    t.integer "pd_cost", default: 0, null: false
     t.integer "use_again_cost"
     t.index ["internal_name"], name: "index_advantages_on_internal_name"
     t.index ["name"], name: "index_advantages_on_name"

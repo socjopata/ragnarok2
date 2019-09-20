@@ -270,6 +270,53 @@ advantage = Advantage.create(kind: "general", internal_name: "the_chosen", name:
 advantage.requirements.create(check_applies_to: "MainParameter", name: "entropy", value: "6")
 advantage.virtual_parameters.create(name: "dice_rerolls", value: 2)
 
-Advantage.create(kind: "general", internal_name: "thug_life", name: "Znajomość Półświatka ", description: "kontakty z przestępcami, grypserka, znajomość gangów i organizacji przestępczych. Postać zyskuje +3pkt do rzutu na Charyzmę i Koneksje podczas kontaktów z marginesem społecznym.", pd_cost: 3)
+Advantage.create(kind: "general", internal_name: "thug_life", name: "Znajomość Półświatka", description: "kontakty z przestępcami, grypserka, znajomość gangów i organizacji przestępczych. Postać zyskuje +3pkt do rzutu na Charyzmę i Koneksje podczas kontaktów z marginesem społecznym.", pd_cost: 3)
 
-puts "...done!"
+advantage = Advantage.create(kind: "hexeri", internal_name: "its_gonna_hurt", name: "Będzie Bolało!", description: "wszystkie zaklęcia zadające Obrażenia zwiększają ilość zadawanych ran  o +3pkt.", pd_cost: 5)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "entropy", value: "6")
+advantage.auxiliary_parameters.create(name: "hexeri", bonus_type: "damage", value: 3)
+
+advantage = Advantage.create(kind: "hexeri", internal_name: "its_gonna_really_hurt", name: "Będzie Bardzo Bolało!", description: "wszystkie zaklęcia zadające Obrażenia zwiększają ilość zadawanych ran o +5pkt. Kumuluje się z efektem atutu Będzie Bolało!", pd_cost: 8)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "entropy", value: "8")
+advantage.auxiliary_parameters.create(name: "hexeri", bonus_type: "damage", value: 5)
+advantage.requirements.create(check_applies_to: "Advantage", name: "its_gonna_hurt")
+
+advantage = Advantage.create(kind: "hexeri", internal_name: "mystical_language", name: "Będzie Bolało!", description: "Weteran posiadł wiedzę i umiejętność posługiwania się językiem wybranej, obcej rasy. Dzięki temu atutowi postać może nauczyć się dodatkowej ścieżki Hekseri.", pd_cost: 15)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "inteligence", value: "7") #TODO choose language on the FT
+
+advantage = Advantage.create(kind: "hexeri", internal_name: "counterspell", name: "Kontra", description: "Weteran może spróbować zniszczyć przywołaną przez przeciwnika Moc Hekseri (zgodnie z zasadami akcji wolnej) wydając 1pkt Koncentracji oraz 5PM. Aby odnieść sukces należy pokonać przeciwnika w Przeciwstawnym teście Hekseri.", pd_cost: 5)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "entropy", value: "5")
+advantage.requirements.create(check_applies_to: "Advantage", name: "speed")
+
+advantage = Advantage.create(kind: "hexeri", internal_name: "bloody_work", name: "Krwawe Dzieło", description: "kiedy Weteran zabije żywą istotę za pomocą Hekseri może wydać 1pkt Koncentracji aby odzyskać k10PM i Witalności.", pd_cost: 8)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "entropy", value: "6")
+
+advantage = Advantage.create(kind: "hexeri", internal_name: "craftsmanship_of_asgardians", name: "Kunszt Asów", description: "zasięg wszystkich Hekseri podnoszony jest o +15metrów. Natomiast Hekseri, które działają w określonym promieniu/średnicy zwiększają pole o połowę podstawowej wartości, np.: promień 10metrów zwiększony jest do 15m, itd.", pd_cost: 4)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "entropy", value: "7")
+
+advantage = Advantage.create(kind: "hexeri", internal_name: "got_ya", name: "Mam Cię", description: "Weteran może zmienić zasięg czaru z: Dotyk na 10metrów (w żaden inny sposób nie można zwiększyć już tego zasięgu). ", pd_cost: 5, use_again_cost: 3)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "entropy", value: "6")
+
+advantage = Advantage.create(kind: "hexeri", internal_name: "master", name: "Mistrz", description: "wydając 2pkt Koncentracji Weteran może rzucić dodatkowy czar w rundzie", pd_cost: 15)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "entropy", value: "8")
+advantage.requirements.create(check_applies_to: "MainParameter", name: "inteligence", value: "8")
+advantage.requirements.create(check_applies_to: "Advantage", name: "slyboots")
+
+Advantage.create(kind: "hexeri", internal_name: "regeneration", name: "Odnowa", description: "Weteran odzyskuje 1PM na godzinę, nawet jeżeli nie odpoczywa. Kumuluje się z innymi formami regeneracji Mocy.", pd_cost: 2)
+Advantage.create(kind: "hexeri", internal_name: "power_of_experience", name: "Potęga Doświadczenia", description: "Szansa na Perfekcyjne przywołanie Hekseri zwiększona jest o +1pkt, ponadto uzyskanie Krytyka oznacza natychmiastowe odzyskanie k5 PM.", pd_cost: 10)
+
+advantage = Advantage.create(kind: "hexeri", internal_name: "power_of_magic", name: "Potęga Magii", description: "Moc Weterana zwiększana jest na stałe o +10pkt.", pd_cost: 7)
+advantage.virtual_parameters.create(name: "power", value: 10)
+
+Advantage.create(kind: "hexeri", internal_name: "vanirs_regeneration", name: "Regeneracja Vanirów", description: "Weteran odzyskuje dodatkowe 2PM na godzinę, nawet jeżeli nie odpoczywa. Kumuluje się z innymi formami regeneracji Mocy.", pd_cost: 4)
+
+advantage = Advantage.create(kind: "hexeri", internal_name: "slyboots", name: "Spryciarz", description: "Weteran może rzucić dwa Proste zaklęcia w rundzie nie tracąc opcji ruchu ani ataku.", pd_cost: 10)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "dexterity", value: "6")
+advantage.requirements.create(check_applies_to: "Advantage", name: "speed")
+
+Advantage.create(kind: "hexeri", internal_name: "synchronisation", name: "Synchronizacja", description: "za każdym razem kiedy Weteran podczas testu Hekseri uzyska Dublet, zwiększa efekt przyzwanego zjawiska o wartość parametru E. Dotyczy to zarówno zasięgu, zadawanych obrażeń jak i np. leczenia utraconych PŻ.", pd_cost: 3)
+
+advantage = Advantage.create(kind: "hexeri", internal_name: "synchronisation", name: "Synchronizacja", description: "wydając 3pkt Koncentracji, Weteran natychmiast odzyskuje k20+E Mocy. Atut nie może być aktywowany częściej niż raz na godzinę.", pd_cost: 7)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "self_control", value: "6")
+
+puts("...done!")
