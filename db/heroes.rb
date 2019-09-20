@@ -291,7 +291,7 @@ virtue = Virtue.create(hero_id: hero.id, name: "Córka Frei", internal_name: "da
 virtue.virtual_parameters.create(name: "apparition", value: 5)
 virtue.secondary_parameters.create(name: "charisma_or", value: 3) #TODO small hax. Can't think of an easier way of implementing this on the FT.
 virtue = Virtue.create(hero_id: hero.id, name: "Gwiazda Heimdala", internal_name: "star_of_heimdal", description: "Walkiria może podłączyć się do statku za pomocą specjalnego wszczepu, co daje jej pełną kontrolę nad pojazdem. Dzięki temu nie potrzebuje nikogo innego do jego obsługi. Kiedy postać jest podłączona do statku jego Parametry zwiększone są o +1pkt. Bohaterka zyskuje atut <Specjalista w Ostrzale Kosmicznym> i może wykonać tyle przerzutów testu Gwiezdnego Pilotażu ile wynosi jej Zręczność.")
-virtue.virtual_parameters.create(name: "skill", value: 0, bonus_type: "space_shelling_specialist") #TODO implement the conversion
+virtue.virtual_parameters.create(name: "skill", value: 0, bonus_type: "spaceship_gunner") #TODO implement the conversion
 Virtue.create(hero_id: hero.id, name: "Skrzydła Asgardu", internal_name: "wings_of_asgard", description: "postać posiada niezwykły wszczep – cybernetyczne Skrzydła schowane w plecach. Dzięki czemu może latać wydając 1 pkt Koncentracji za każde 10 minut lotu. Korzystanie z tej Zalety sprawdzane jest testem Obsługi Pojazdów w atmosferze lub testem Gwiezdnego Pilotażu w przestrzeni kosmicznej.")
 
 puts "...done!"

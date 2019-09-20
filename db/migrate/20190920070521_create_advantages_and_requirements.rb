@@ -5,7 +5,7 @@ class CreateAdvantagesAndRequirements < ActiveRecord::Migration[6.0]
       t.string :internal_name, index: true, unique: true
       t.text :description
       t.string :kind, null: false # melee, ranged, general...
-      t.integer :pd_cost, default: 0
+      t.integer :pd_cost, default: 0, null: false
       t.integer :use_again_cost
     end
 

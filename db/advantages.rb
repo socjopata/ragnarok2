@@ -151,4 +151,39 @@ advantage.auxiliary_parameters.create(name: "martial_arts", bonus_type: "accurac
 advantage.auxiliary_parameters.create(name: "improvised_weapons", bonus_type: "damage", value: 2)
 advantage.auxiliary_parameters.create(name: "improvised_weapons", bonus_type: "accuracy", value: 2)
 
-puts "...done!"
+advantage = Advantage.create(kind: "battle_general", internal_name: "finessee", name: "Walka z Wieloma Przeciwnikami", description: "Weteran może odjąć lub dodać +1pkt do wyniku na Kości Losu. Atut może być łączony z działaniem broni i/lub wpływem Entropii.", pd_cost: 3, use_again_cost: 1)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "dexterity", value: "4")
+
+advantage = Advantage.create(kind: "battle_general", internal_name: "ambidexterity", name: "Oburęczność", description: "postać nauczyła się walczyć dwoma lekkimi lub jednoręcznymi broniami równocześnie. W walce w zwarciu postać posługująca się dwoma orężami lub korzystająca z Walki Wręcz zwiększa swoje Trafienie i Obronę o +1pkt. Przed rzutem na trafienie Weteran musi określić, którą bronią będzie atakować.
+W walce strzeleckiej postać wybiera dwa pistolety lub rewolwery tego samego modelu dzięki czemu podwaja Szybkostrzelność broni, którą się posługuje.", pd_cost: 5)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "physique", value: "4")
+advantage.requirements.create(check_applies_to: "MainParameter", name: "dexterity", value: "4")
+
+Advantage.create(kind: "battle_general", internal_name: "beast_hunter", name: "Pogromca Bestii", description: "bohater otrzymuje premię do Trafienia i zadawanych Obrażeń +3pkt walcząc z dzikimi bestiami lub niehumanoidalnymi obcymi. Dotyczy zarówno walki w zwarciu jak i dystansowej.", pd_cost: 3)
+
+Advantage.create(kind: "battle_general", internal_name: "spaceship_gunner", name: "Specjalista w Ostrzale Kosmicznym", description: "bohater otrzymuje premię do Trafienia i zadawanych Obrażeń +3pkt walcząc z dzikimi bestiami lub niehumanoidalnymi obcymi. Dotyczy zarówno walki w zwarciu jak i dystansowej.", pd_cost: 3)
+
+advantage = Advantage.create(kind: "battle_general", internal_name: "steel_warrior", name: "Stalowy Wojownik", description: "Weteran zwiększa Wartość każdego noszonego przez siebie Pancerza o +2pkt. Ponadto raz na scenę walki może zignorować/skasować karę wynikającą z wrogich akcji tj: otumanienie, działanie Hekseri, toksyny, itp.", pd_cost: 9)
+advantage.auxiliary_parameters.create(name: "armor", bonus_type: "defense", value: 2)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "physique", value: "7")
+advantage.requirements.create(check_applies_to: "Advantage", name: "iron_warrior")
+
+advantage = Advantage.create(kind: "battle_general", internal_name: "speed", name: "Szybkość", description: "postać zwiększa Refleks o +1pkt oraz podnosi parametr Ruch o +3pkt.", pd_cost: 4)
+advantage.virtual_parameters.create(name: "movement_speed", value: 3)
+advantage.secondary_parameters.create(name: "reflex", value: 1)
+
+advantage = Advantage.create(kind: "battle_general", internal_name: "sleipnirs_speed", name: "Szybkość Sleipnira", description: "postać może wykonać Sprint nie tracąc ataków. Wysportowanie i Ruch Herosa zostają zwiększone o +1pkt. Kumuluje się z efektami atutu Szybkość.", pd_cost: 5, use_again_cost: 2)
+advantage.virtual_parameters.create(name: "movement_speed", value: 1)
+advantage.virtual_parameters.create(name: "sportiness", value: 1)
+
+Advantage.create(kind: "battle_general", internal_name: "exoskeletons", name: "Walka w Egzoszkieletach", description: "Weteran zapoznał się z obsługą Egzoszkieletów dzięki czemu nie otrzymuje kary za poruszanie się w sprzęcie, którego nie zna (standardowo -5pkt do wysportowania, trafienia, obrony i testów, itp).", pd_cost: 4)
+
+Advantage.create(kind: "battle_general", internal_name: "power_armors", name: "Walka w Pancerzach Wspomaganych", description: "Weteran zapoznał się z obsługą Pancerzy Bojowych dzięki czemu nie otrzymuje kary za poruszanie się w sprzęcie, którego nie zna (standardowo -5pkt do wysportowania, trafienia, obrony i testów, itp).", pd_cost: 4)
+
+Advantage.create(kind: "battle_general", internal_name: "difficult_conditions_combat", name: "Walka w Trudnych Warunkach", description: "Weteran zmniejsza Karę wynikającą z niedogodnych warunków panujących na polu walki o 3pkt. Ponadto raz na minutę, kiedy Weteran musi wykonać test Wysportowania, może obniżyć jego PT o jeden stopień.", pd_cost: 4)
+
+advantage = Advantage.create(kind: "battle_general", internal_name: "iron_warrior", name: "Żelazny Wojownik", description: "Weteran zwiększa Wartość każdego noszonego przez siebie Pancerza o +1pkt. Ponadto wartość ta nie może być redukowana przy wykorzystaniu Atutów ani zdolności przeciwników (obniżyć nadal może tylko odpowiednia broń, amunicja, itp.).", pd_cost: 7)
+advantage.auxiliary_parameters.create(name: "armor", bonus_type: "defense", value: 2)
+advantage.requirements.create(check_applies_to: "MainParameter", name: "physique", value: "5")
+
+puts "...done"
