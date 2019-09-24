@@ -1,11 +1,6 @@
 import {get, compact, flatMap} from 'lodash';
 import {createSelector} from 'reselect';
 
-export const getHeroes = state => ({
-  ...state.heroes.list,
-  data: state.heroes.list.ids.map(id => state.heroes.byId[id]),
-});
-
 export const characterName = state => get(state, "heroes.character.name");
 export const characterId = state => get(state, "heroes.character.id");
 export const usedFlexibleSecondaryParameters = state => get(state, "heroes.character.usedFlexibleSecondaryParameters");

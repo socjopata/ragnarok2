@@ -13,7 +13,6 @@ import {
   SECONDARY_PARAMETER_DECREMENTED,
   VIRTUE_SELECTED
 } from './actions';
-import {heroSelected} from "./selectors";
 
 const initialState = {
   byId: {},

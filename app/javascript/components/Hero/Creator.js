@@ -13,12 +13,16 @@ import WealthAndGrenades from './WealthAndGrenades';
 
 import "./hero.scss"
 import {fetchHeroes} from "../../store/heroes";
+import {fetchAdvantages} from "../../store/advantages";
 
 class Creator extends Component {
   componentDidMount() {
-    const {heroesList, fetchHeroes} = this.props;
+    const {heroesList, fetchHeroes, advantagesList, fetchAdvantages} = this.props;
     if (isEmpty(heroesList)) {
       fetchHeroes();
+    }
+    if (isEmpty(advantagesList)) {
+      fetchAdvantages();
     }
   }
 
@@ -43,11 +47,13 @@ class Creator extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  heroesList: get(state, "heroes.byId")
+  heroesList: get(state, "heroes.byId"),
+  advantagesList: get(state, "advantages.byId")
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchHeroes: () => fetchHeroes(dispatch)
+  fetchHeroes: () => fetchHeroes(dispatch),
+  fetchAdvantages: () => fetchAdvantages(dispatch)
 });
 
 export default connect(

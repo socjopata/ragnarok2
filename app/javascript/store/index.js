@@ -3,11 +3,12 @@ import thunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 
 import heroes from './heroes/reducer';
+import advantages from './advantages/reducer';
 
 export const history = createBrowserHistory();
 
 export default createStore(
-  combineReducers({ heroes }),
+  combineReducers({ heroes, advantages }),
   compose(
     applyMiddleware(thunk),
     window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
