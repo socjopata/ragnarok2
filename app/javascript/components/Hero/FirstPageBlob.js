@@ -4,6 +4,7 @@ import {Input, Button} from 'reactstrap';
 import {connect} from "react-redux";
 import classNames from 'classnames'
 import TestDifficultyCheatSheet from "./TestDifficultyCheatSheet";
+import ChooseAdvantageModal from "./ChooseAdvantageModal";
 //actions
 import {
   inputChange,
@@ -40,7 +41,8 @@ import {
   secondaryParameterTotal,
   secondaryParameterTotalBonus,
   mainParameterUserChanges,
-  secondaryParameterUserChanges
+  secondaryParameterUserChanges,
+  chosenAdvantages
 } from '../../store/heroes';
 
 class FirstPageBlob extends Component {
@@ -71,7 +73,6 @@ class FirstPageBlob extends Component {
   handleDecrementSecondaryParameter = (skillName, costDeducted) => {
     this.props.secondaryParameterDecremented(skillName, costDeducted);
   };
-
 
   handleVirtueSelected = (virtueIndex) => (data) => {
     const virtueId = toNumber(data.target.value);
@@ -187,6 +188,19 @@ class FirstPageBlob extends Component {
         return (<Input type="select" name="virtueSelect" placeholder="Wybierz zaletę"
                        defaultValue={0}
                        onChange={this.handleVirtueSelected(virtueIndex)}>{this.renderVirtueSelectOptions(virtues)}</Input>)
+      }
+    }
+  };
+  //TODO consider renaming this method and other methods, as it's not only a button
+  renderAdvantageChoiceButton(advantageIndex) {
+    const {heroSelected, allFlexibleParametersAssigned, allVirtuesSelected, chosenAdvantages} = this.props;
+    if (heroSelected && allVirtuesSelected && allFlexibleParametersAssigned) {
+      if (!!chosenAdvantages[advantageIndex]) {
+        return (<p>{chosenAdvantages[advantageIndex].name}</p>)
+        // render skill name <p> with on hover tooltip with desc + cost of use again
+        // also a remove advantage button
+      } else if (chosenAdvantages.indexOf(null) === advantageIndex) {
+        return(<ChooseAdvantageModal/>);
       }
     }
   };
@@ -495,33 +509,33 @@ class FirstPageBlob extends Component {
           <td className="centered__cell no-horizontal-border__cell white-and-black__cell">{this.props.hitPoints}</td>
         </tr>
         <tr className="solid-border__cell">
-          <td colSpan="2">&nbsp;</td>
-          <td colSpan="3">&nbsp;</td>
+          <td colSpan="2">{this.renderAdvantageChoiceButton(0)}</td>
+          <td colSpan="3">{this.renderAdvantageChoiceButton(6)}</td>
           <td className="no-horizontal-border__cell white-and-black__cell">&nbsp;</td>
         </tr>
         <tr className="solid-border__cell">
-          <td colSpan="2">&nbsp;</td>
-          <td colSpan="3">&nbsp;</td>
+          <td colSpan="2">{this.renderAdvantageChoiceButton(1)}</td>
+          <td colSpan="3">{this.renderAdvantageChoiceButton(7)}</td>
           <td className="black-and-white__cell">Moc (INTx5)</td>
         </tr>
         <tr className="solid-border__cell">
-          <td colSpan="2">&nbsp;</td>
-          <td colSpan="3">&nbsp;</td>
+          <td colSpan="2">{this.renderAdvantageChoiceButton(2)}</td>
+          <td colSpan="3">{this.renderAdvantageChoiceButton(8)}</td>
           <td className="centered__cell no-horizontal-border__cell white-and-black__cell">{this.props.power}</td>
         </tr>
         <tr className="solid-border__cell">
-          <td colSpan="2">&nbsp;</td>
-          <td colSpan="3">&nbsp;</td>
+          <td colSpan="2">{this.renderAdvantageChoiceButton(3)}</td>
+          <td colSpan="3">{this.renderAdvantageChoiceButton(9)}</td>
           <td className="no-horizontal-border__cell white-and-black__cell">&nbsp;</td>
         </tr>
         <tr className="solid-border__cell">
-          <td colSpan="2">&nbsp;</td>
-          <td colSpan="3">&nbsp;</td>
+          <td colSpan="2">{this.renderAdvantageChoiceButton(4)}</td>
+          <td colSpan="3">{this.renderAdvantageChoiceButton(10)}</td>
           <td className="black-and-white__cell">Prezencja (BC+E)</td>
         </tr>
         <tr className="solid-border__cell">
-          <td colSpan="2">&nbsp;</td>
-          <td colSpan="3">&nbsp;</td>
+          <td colSpan="2">{this.renderAdvantageChoiceButton(5)}</td>
+          <td colSpan="3">{this.renderAdvantageChoiceButton(11)}</td>
           <td className="centered__cell no-horizontal-border__cell white-and-black__cell">{this.props.apparition}</td>
         </tr>
         <tr className="solid-border__cell black-and-white__cell">
@@ -633,7 +647,8 @@ const mapStateToProps = (state) => ({
   selectedVirtues: selectedVirtues(state),
   allVirtuesSelected: allVirtuesSelected(state),
   flexibleParameters: flexibleParameters(state),
-  allFlexibleParametersAssigned: allFlexibleParametersAssigned(state)
+  allFlexibleParametersAssigned: allFlexibleParametersAssigned(state),
+  chosenAdvantages: chosenAdvantages(state),
 });
 
 const mapDispatchToProps = {

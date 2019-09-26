@@ -29,7 +29,8 @@ const initialState = {
     experiencePointsSpent: 0,
     mainParametersIncreased: {},
     secondaryParametersIncreased: {},
-    selectedVirtues: [null, null]
+    selectedVirtues: [null, null],
+    chosenAdvantages: new Array(12).fill(null)
   }
 };
 
@@ -46,7 +47,8 @@ export const reducer = (state = initialState, action) => {
           experiencePointsSpent: 0,
           mainParametersIncreased: {},
           secondaryParametersIncreased: {},
-          selectedVirtues: [null, null]
+          selectedVirtues: [null, null],
+          chosenAdvantages: new Array(12).fill(null)
         }
       };
     case INPUT_CHANGE:

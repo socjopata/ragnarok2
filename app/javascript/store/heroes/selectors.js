@@ -14,6 +14,12 @@ const bonusFromVirtues = (state, name, type) => {
   return (selectedVirtueParameters.filter(parameter => parameter.name === name && parameter.type === type).reduce((acc, parameter) => +acc + +parameter.value, 0) || 0);
 };
 
+export const chosenAdvantages = state => {
+  if (state.heroes && state.heroes.byId) {
+    return(state.heroes.character.chosenAdvantages);
+  }
+};
+
 export const mainParameterBase = (state, name) => {
   if (state.heroes && state.heroes.byId) {
     const chosenHero = state.heroes.byId[parseInt(state.heroes.character.id)];
