@@ -63,7 +63,7 @@ advantage.requirements.create(check_applies_to: "MainParameter", name: "self_con
 advantage = Advantage.create(kind: "melee", internal_name: "till_blood_gets_spilled", name: "Aż Poleje się Krew", description: "Weteran może wykonać tyle Przerzutów testu Trafienia w Walce w Zwarciu ile wynosi jego OP.", pd_cost: 6)
 advantage.requirements.create(check_applies_to: "MainParameter", name: "self_control", value: "6")
 
-Advantage.create(kind: "carnage_time", internal_name: "Czas Rzezi", name: "Aż Poleje się Krew", description: "atut aktywowany jest na początku rundy. Wszystkie Trafione w tej rundzie ciosy w walce w zwarciu mają specjalną zasadę: rzut na Obrażenia wykonywany jest z jedną dodatkową kością, a bohater odrzuca najniższy wynik.", pd_cost: 3, use_again_cost: 2)
+Advantage.create(kind: "melee", internal_name: "Czas Rzezi", name: "Aż Poleje się Krew", description: "atut aktywowany jest na początku rundy. Wszystkie Trafione w tej rundzie ciosy w walce w zwarciu mają specjalną zasadę: rzut na Obrażenia wykonywany jest z jedną dodatkową kością, a bohater odrzuca najniższy wynik.", pd_cost: 3, use_again_cost: 2)
 
 advantage = Advantage.create(kind: "melee", internal_name: "till_blood_gets_spilled", name: "Fechtmistrz", description: "Weteran potrafi wyprowadzić o jeden Atak więcej (za pomocą oręża), stosowne kary uzależnione są od rodzaju broni jaką się posługuje. Szczegóły należy sprawdzić w rozdziale Walka w Zwarciu lub na rewersie karty postaci. Ponadto Bohater zwiększa umiejętność Broń Biała o +1pk", pd_cost: 10)
 advantage.secondary_parameters.create(name: "fencing", value: 1)
