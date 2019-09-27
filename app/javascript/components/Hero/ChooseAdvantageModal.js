@@ -1,9 +1,10 @@
 import React, {Component, Fragment} from 'react';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
-import { Formik } from 'formik';
+import {Formik, Field, Form} from 'formik';
 import Select from 'react-select';
 import {connect} from "react-redux";
 import {get, map, uniq, startCase} from "lodash";
+import AdvantagesChoiceList from "./AdvantagesChoiceList";
 
 import {
   characterId,
@@ -21,7 +22,7 @@ const ADVANTAGES_MAP = {
 
 class ChooseAdvantageModal extends Component {
   state = {
-    isOpen: false
+    isOpen: false,
   };
 
   toggleOpen = () => {
@@ -48,8 +49,8 @@ class ChooseAdvantageModal extends Component {
           <ModalHeader toggle={this.toggleOpen}>Wybierz Atut</ModalHeader>
           <ModalBody>
             <Formik
-              initialValues={{ advantageType: '' }}
-              onSubmit={(values, { setSubmitting }) => {
+              initialValues={{advantageType: '', advantagesChoiceList: []}}
+              onSubmit={(values, {setSubmitting}) => {
                 setTimeout(() => {
                   alert(JSON.stringify(values, null, 2));
                   setSubmitting(false);
@@ -62,21 +63,21 @@ class ChooseAdvantageModal extends Component {
                   handleBlur,
                   handleSubmit,
                   isSubmitting,
+                  setFieldValue
                   /* and other goodies */
                 }) => (
-                <form onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit}>
                   <Select
                     id="color"
                     options={this.advantageTypes()}
                     multi={false}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.advantageType}
+                    onChange={selected => setFieldValue("advantageType", selected.value)}
                   />
+                  <Field component={AdvantagesChoiceList} name="advantagesChoiceList" selectedAdvantageType={values.advantageType}/>
                   <button type="submit" disabled={isSubmitting}>
                     Submit
                   </button>
-                </form>
+                </Form>
               )}
             </Formik>
           </ModalBody>
