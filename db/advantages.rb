@@ -63,7 +63,7 @@ advantage.requirements.create(check_applies_to: "MainParameter", name: "self_con
 advantage = Advantage.create(kind: "melee", internal_name: "till_blood_gets_spilled", name: "Aż Poleje się Krew", description: "Weteran może wykonać tyle Przerzutów testu Trafienia w Walce w Zwarciu ile wynosi jego OP.", pd_cost: 6)
 advantage.requirements.create(check_applies_to: "MainParameter", name: "self_control", value: "6")
 
-Advantage.create(kind: "melee", internal_name: "Czas Rzezi", name: "Aż Poleje się Krew", description: "atut aktywowany jest na początku rundy. Wszystkie Trafione w tej rundzie ciosy w walce w zwarciu mają specjalną zasadę: rzut na Obrażenia wykonywany jest z jedną dodatkową kością, a bohater odrzuca najniższy wynik.", pd_cost: 3, use_again_cost: 2)
+Advantage.create(kind: "melee", internal_name: "carnage_time", name: "Czas Rzezi", description: "atut aktywowany jest na początku rundy. Wszystkie Trafione w tej rundzie ciosy w walce w zwarciu mają specjalną zasadę: rzut na Obrażenia wykonywany jest z jedną dodatkową kością, a bohater odrzuca najniższy wynik.", pd_cost: 3, use_again_cost: 2)
 
 advantage = Advantage.create(kind: "melee", internal_name: "till_blood_gets_spilled", name: "Fechtmistrz", description: "Weteran potrafi wyprowadzić o jeden Atak więcej (za pomocą oręża), stosowne kary uzależnione są od rodzaju broni jaką się posługuje. Szczegóły należy sprawdzić w rozdziale Walka w Zwarciu lub na rewersie karty postaci. Ponadto Bohater zwiększa umiejętność Broń Biała o +1pk", pd_cost: 10)
 advantage.secondary_parameters.create(name: "fencing", value: 1)
@@ -281,7 +281,7 @@ advantage.requirements.create(check_applies_to: "MainParameter", name: "entropy"
 advantage.auxiliary_parameters.create(name: "hexeri", bonus_type: "damage", value: 5)
 advantage.requirements.create(check_applies_to: "Advantage", name: "its_gonna_hurt")
 
-advantage = Advantage.create(kind: "hexeri", internal_name: "mystical_language", name: "Będzie Bolało!", description: "Weteran posiadł wiedzę i umiejętność posługiwania się językiem wybranej, obcej rasy. Dzięki temu atutowi postać może nauczyć się dodatkowej ścieżki Hekseri.", pd_cost: 15)
+advantage = Advantage.create(kind: "hexeri", internal_name: "mystical_language", name: "Język  Mistyczny", description: "Weteran posiadł wiedzę i umiejętność posługiwania się językiem wybranej, obcej rasy. Dzięki temu atutowi postać może nauczyć się dodatkowej ścieżki Hekseri.", pd_cost: 15)
 advantage.requirements.create(check_applies_to: "MainParameter", name: "inteligence", value: "7") #TODO choose language on the FT
 
 advantage = Advantage.create(kind: "hexeri", internal_name: "counterspell", name: "Kontra", description: "Weteran może spróbować zniszczyć przywołaną przez przeciwnika Moc Hekseri (zgodnie z zasadami akcji wolnej) wydając 1pkt Koncentracji oraz 5PM. Aby odnieść sukces należy pokonać przeciwnika w Przeciwstawnym teście Hekseri.", pd_cost: 5)
@@ -316,7 +316,7 @@ advantage.requirements.create(check_applies_to: "Advantage", name: "speed")
 
 Advantage.create(kind: "hexeri", internal_name: "synchronisation", name: "Synchronizacja", description: "za każdym razem kiedy Weteran podczas testu Hekseri uzyska Dublet, zwiększa efekt przyzwanego zjawiska o wartość parametru E. Dotyczy to zarówno zasięgu, zadawanych obrażeń jak i np. leczenia utraconych PŻ.", pd_cost: 3)
 
-advantage = Advantage.create(kind: "hexeri", internal_name: "synchronisation", name: "Synchronizacja", description: "wydając 3pkt Koncentracji, Weteran natychmiast odzyskuje k20+E Mocy. Atut nie może być aktywowany częściej niż raz na godzinę.", pd_cost: 7)
+advantage = Advantage.create(kind: "hexeri", internal_name: "reserves_of_power", name: "Zapasy Mocy", description: "wydając 3pkt Koncentracji, Weteran natychmiast odzyskuje k20+E Mocy. Atut nie może być aktywowany częściej niż raz na godzinę.", pd_cost: 7)
 advantage.requirements.create(check_applies_to: "MainParameter", name: "self_control", value: "6")
 
 puts("...done!")
