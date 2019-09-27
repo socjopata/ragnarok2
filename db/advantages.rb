@@ -145,13 +145,13 @@ advantage.requirements.create(check_applies_to: "Advantage", name: "evasion")
 
 Advantage.create(kind: "melee", internal_name: "group_fighting", name: "Walka z Wieloma Przeciwnikami", description: "odczas walki z wieloma przeciwnikami Weteran otrzymuje premię +3 pkt do Obrony w zwarciu.", pd_cost: 3)
 
-Advantage.create(kind: "melee", internal_name: "hector", name: "Walka z Wieloma Przeciwnikami", description: "Postać walcząca bronią improwizowaną lub za pomocą Walki Wręcz zwiększa Trafienie i zadawane nią Obrażenia o +2pkt.", pd_cost: 6)
+Advantage.create(kind: "melee", internal_name: "hector", name: "Zabijaka", description: "Postać walcząca bronią improwizowaną lub za pomocą Walki Wręcz zwiększa Trafienie i zadawane nią Obrażenia o +2pkt.", pd_cost: 6)
 advantage.auxiliary_parameters.create(name: "martial_arts", bonus_type: "damage", value: 2)
 advantage.auxiliary_parameters.create(name: "martial_arts", bonus_type: "accuracy", value: 2)
 advantage.auxiliary_parameters.create(name: "improvised_weapons", bonus_type: "damage", value: 2)
 advantage.auxiliary_parameters.create(name: "improvised_weapons", bonus_type: "accuracy", value: 2)
 
-advantage = Advantage.create(kind: "battle_general", internal_name: "finessee", name: "Walka z Wieloma Przeciwnikami", description: "Weteran może odjąć lub dodać +1pkt do wyniku na Kości Losu. Atut może być łączony z działaniem broni i/lub wpływem Entropii.", pd_cost: 3, use_again_cost: 1)
+advantage = Advantage.create(kind: "battle_general", internal_name: "finessee", name: "Finezja", description: "Weteran może odjąć lub dodać +1pkt do wyniku na Kości Losu. Atut może być łączony z działaniem broni i/lub wpływem Entropii.", pd_cost: 3, use_again_cost: 1)
 advantage.requirements.create(check_applies_to: "MainParameter", name: "dexterity", value: "4")
 
 advantage = Advantage.create(kind: "battle_general", internal_name: "ambidexterity", name: "Oburęczność", description: "postać nauczyła się walczyć dwoma lekkimi lub jednoręcznymi broniami równocześnie. W walce w zwarciu postać posługująca się dwoma orężami lub korzystająca z Walki Wręcz zwiększa swoje Trafienie i Obronę o +1pkt. Przed rzutem na trafienie Weteran musi określić, którą bronią będzie atakować.
