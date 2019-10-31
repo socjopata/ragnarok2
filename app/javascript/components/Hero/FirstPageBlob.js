@@ -42,6 +42,7 @@ import {
   secondaryParameterTotalBonus,
   mainParameterUserChanges,
   secondaryParameterUserChanges,
+  chosenAdvantagesIds,
   chosenAdvantages
 } from '../../store/heroes';
 
@@ -193,13 +194,13 @@ class FirstPageBlob extends Component {
   };
   //TODO consider renaming this method and other methods, as it's not only a button
   renderAdvantageChoiceButton(advantageIndex) {
-    const {heroSelected, allFlexibleParametersAssigned, allVirtuesSelected, chosenAdvantages} = this.props;
+    const {heroSelected, allFlexibleParametersAssigned, allVirtuesSelected, chosenAdvantagesIds, chosenAdvantages} = this.props;
     if (heroSelected && allVirtuesSelected && allFlexibleParametersAssigned) {
-      if (!!chosenAdvantages[advantageIndex]) {
+      if (!!chosenAdvantagesIds[advantageIndex]) {
         return (<p>{chosenAdvantages[advantageIndex].name}</p>)
         // render skill name <p> with on hover tooltip with desc + cost of use again
         // also a remove advantage button
-      } else if (chosenAdvantages.indexOf(null) === advantageIndex) {
+      } else if (chosenAdvantagesIds.indexOf(null) === advantageIndex) {
         return(<ChooseAdvantageModal/>);
       }
     }
@@ -648,6 +649,7 @@ const mapStateToProps = (state) => ({
   allVirtuesSelected: allVirtuesSelected(state),
   flexibleParameters: flexibleParameters(state),
   allFlexibleParametersAssigned: allFlexibleParametersAssigned(state),
+  chosenAdvantagesIds: chosenAdvantagesIds(state),
   chosenAdvantages: chosenAdvantages(state),
 });
 

@@ -6,6 +6,12 @@ import {connect} from "react-redux";
 import {get, map, uniq, startCase} from "lodash";
 import AdvantagesChoiceList from "./AdvantagesChoiceList";
 
+//actions
+import {
+  advantageSelected
+} from '../../store/heroes';
+
+//selectors
 import {
   characterId,
   chosenAdvantages,
@@ -38,6 +44,16 @@ class ChooseAdvantageModal extends Component {
     }));
   };
 
+  handleAdvantageChoice = (values, {setSubmitting}) => {
+    setTimeout(() => {
+      setSubmitting(false);
+    }, 400);
+    const id = values.advantagesChoiceList;
+    const cost = this.props.advantagesList[id].pd_cost;
+    this.toggleOpen();
+    this.props.advantageSelected(id, cost);
+  };
+
   //  use reactstrap Modal and Uncontrolled Tooltip
   //  and then bundle formik to handle the form rendering and interactions between inputs... nice :)
   render() {
@@ -50,13 +66,7 @@ class ChooseAdvantageModal extends Component {
           <ModalBody>
             <Formik
               initialValues={{advantageType: '', advantagesChoiceList: []}}
-              onSubmit={(values, {setSubmitting}) => {
-                setTimeout(() => {
-                  alert(JSON.stringify(values, null, 2));
-                  setSubmitting(false);
-                }, 400);
-              }}
-            >
+              onSubmit={this.handleAdvantageChoice}>
               {({
                   values,
                   handleChange,
@@ -74,16 +84,15 @@ class ChooseAdvantageModal extends Component {
                     onChange={selected => setFieldValue("advantageType", selected.value)}
                   />
                   <Field component={AdvantagesChoiceList} name="advantagesChoiceList" selectedAdvantageType={values.advantageType}/>
-                  <button type="submit" disabled={isSubmitting}>
-                    Submit
+                  <button color="primary" type="submit" disabled={isSubmitting}>
+                    Wybierz
                   </button>
                 </Form>
               )}
             </Formik>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggleOpen}>Do Something</Button>{' '}
-            <Button color="secondary" onClick={this.toggleOpen}>Cancel</Button>
+            <Button color="secondary" onClick={this.toggleOpen}>Zamknij</Button>
           </ModalFooter>
         </Modal>
       </Fragment>
@@ -98,6 +107,11 @@ const mapStateToProps = (state) => ({
   advantagesList: get(state, "advantages.byId"),
 });
 
+const mapDispatchToProps = {
+  advantageSelected,
+};
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps,
 )(ChooseAdvantageModal);

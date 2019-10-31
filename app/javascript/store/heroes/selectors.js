@@ -1,4 +1,4 @@
-import {get, compact, flatMap} from 'lodash';
+import {get, compact, flatMap, filter, isEmpty, values} from 'lodash';
 import {createSelector} from 'reselect';
 
 export const characterName = state => get(state, "heroes.character.name");
@@ -14,9 +14,18 @@ const bonusFromVirtues = (state, name, type) => {
   return (selectedVirtueParameters.filter(parameter => parameter.name === name && parameter.type === type).reduce((acc, parameter) => +acc + +parameter.value, 0) || 0);
 };
 
-export const chosenAdvantages = state => {
+export const chosenAdvantagesIds = state => {
   if (state.heroes && state.heroes.byId) {
-    return(state.heroes.character.chosenAdvantages);
+    return (state.heroes.character.chosenAdvantagesIds);
+  }
+};
+
+export const chosenAdvantages = state => {
+  if (state.advantages && state.advantages.byId) {
+    const advantageIds = compact(state.heroes.character.chosenAdvantagesIds);
+    const advantages = get(state, "advantages.byId");
+
+    return (values(advantages).filter(advantage => advantageIds.includes(advantage.id)));
   }
 };
 

@@ -22,7 +22,6 @@ class AdvantagesChoiceList extends Component {
   };
 
   render() {
-    console.log( this.props.field.value);
     return (
       <ul>
         {map(this.currentAdvantagesList(), (props) => <li key={props.id}>
