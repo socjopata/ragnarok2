@@ -12,7 +12,8 @@ import {
   SECONDARY_PARAMETER_INCREMENTED,
   SECONDARY_PARAMETER_DECREMENTED,
   VIRTUE_SELECTED,
-  ADVANTAGE_SELECTED
+  ADVANTAGE_SELECTED,
+  ADVANTAGE_REMOVED
 } from './actions';
 
 const initialState = {
@@ -134,14 +135,25 @@ export const reducer = (state = initialState, action) => {
         }
       };
     case ADVANTAGE_SELECTED:
-      let clonedchosenAdvantagesIds = [...state.character.chosenAdvantagesIds];
-      clonedchosenAdvantagesIds[state.character.chosenAdvantagesIds.indexOf(null)] = parseInt(action.advantageId);
+      let clonedChosenAdvantagesIds = [...state.character.chosenAdvantagesIds];
+      clonedChosenAdvantagesIds[state.character.chosenAdvantagesIds.indexOf(null)] = parseInt(action.advantageId);
       return {
         ...state,
         character: {
           ...state.character,
           experiencePointsSpent: state.character.experiencePointsSpent + action.cost,
-          chosenAdvantagesIds: clonedchosenAdvantagesIds
+          chosenAdvantagesIds: clonedChosenAdvantagesIds
+        }
+      };
+    case ADVANTAGE_REMOVED:
+      let _clonedChosenAdvantagesIds = [...state.character.chosenAdvantagesIds];
+      _clonedChosenAdvantagesIds[state.character.chosenAdvantagesIds.indexOf(parseInt(action.advantageId))] = null;
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          experiencePointsSpent: state.character.experiencePointsSpent - action.cost,
+          chosenAdvantagesIds: _clonedChosenAdvantagesIds
         }
       };
     case FETCH_HEROES_STARTED:

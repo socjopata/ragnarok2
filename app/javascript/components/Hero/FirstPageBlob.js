@@ -14,6 +14,7 @@ import {
   mainParameterDecremented,
   secondaryParameterIncremented,
   secondaryParameterDecremented,
+  advantageRemoved,
   virtueSelected,
 } from '../../store/heroes';
 //selectors
@@ -80,6 +81,10 @@ class FirstPageBlob extends Component {
     const virtue = find(this.props.heroSelected.virtues, {id: virtueId});
 
     this.props.virtueSelected(virtueIndex, virtue);
+  };
+
+  handleRemoveAdvantageChoice = (advantageId, pdCost) => {
+    this.props.advantageRemoved(advantageId, pdCost);
   };
 
   renderHeroesForSelect() {
@@ -197,9 +202,13 @@ class FirstPageBlob extends Component {
     const {heroSelected, allFlexibleParametersAssigned, allVirtuesSelected, chosenAdvantagesIds, chosenAdvantages} = this.props;
     if (heroSelected && allVirtuesSelected && allFlexibleParametersAssigned) {
       if (!!chosenAdvantagesIds[advantageIndex]) {
-        return (<p>{chosenAdvantages[advantageIndex].name}</p>)
+        const advantage = chosenAdvantages[advantageIndex];
+        return (<p>{advantage.name} <Button key={"removeAdvantage" + advantage.id} color="danger"
+                                            className="tiny__button float-right"
+                                            onClick={() => this.handleRemoveAdvantageChoice(advantage.id, advantage.pd_cost)}>-</Button>
+        </p>)
+
         // render skill name <p> with on hover tooltip with desc + cost of use again
-        // also a remove advantage button
       } else if (chosenAdvantagesIds.indexOf(null) === advantageIndex) {
         return(<ChooseAdvantageModal/>);
       }
@@ -661,6 +670,7 @@ const mapDispatchToProps = {
   mainParameterDecremented,
   secondaryParameterIncremented,
   secondaryParameterDecremented,
+  advantageRemoved,
   virtueSelected
 };
 

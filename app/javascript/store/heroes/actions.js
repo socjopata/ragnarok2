@@ -12,6 +12,7 @@ export const SECONDARY_PARAMETER_INCREMENTED = 'creator/SECONDARY_PARAMETER_INCR
 export const SECONDARY_PARAMETER_DECREMENTED = 'creator/SECONDARY_PARAMETER_DECREMENTED';
 export const VIRTUE_SELECTED = 'creator/VIRTUE_SELECTED';
 export const ADVANTAGE_SELECTED = 'creator/ADVANTAGE_SELECTED';
+export const ADVANTAGE_REMOVED = 'creator/ADVANTAGE_REMOVED';
 
 export const inputChange = (value, fieldName) => ({type: INPUT_CHANGE, value: value, fieldName: fieldName});
 export const heroClassSelected = (value) => ({type: HERO_CLASS_CHANGED, value: value});
@@ -54,6 +55,12 @@ export const virtueSelected = (virtueIndex, virtue) => ({
 
 export const advantageSelected = (advantageId, cost) => ({
   type: ADVANTAGE_SELECTED,
+  advantageId,
+  cost
+});
+
+export const advantageRemoved = (advantageId, cost) => ({
+  type: ADVANTAGE_REMOVED,
   advantageId,
   cost
 });
