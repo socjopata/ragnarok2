@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import {get, isEmpty, map, find, toNumber} from 'lodash';
-import {Input, Button} from 'reactstrap';
+import {Input, Button, UncontrolledTooltip} from 'reactstrap';
 import {connect} from "react-redux";
 import classNames from 'classnames'
 import TestDifficultyCheatSheet from "./TestDifficultyCheatSheet";
@@ -203,9 +203,15 @@ class FirstPageBlob extends Component {
     if (heroSelected && allVirtuesSelected && allFlexibleParametersAssigned) {
       if (!!chosenAdvantagesIds[advantageIndex]) {
         const advantage = chosenAdvantages[advantageIndex];
-        return (<p>{advantage.name} <Button key={"removeAdvantage" + advantage.id} color="danger"
-                                            className="tiny__button float-right"
-                                            onClick={() => this.handleRemoveAdvantageChoice(advantage.id, advantage.pd_cost)}>-</Button>
+        return (<p>
+          <span href="#" id={"advantageDescription" + advantage.id}>{advantage.name}</span>
+          <UncontrolledTooltip placement="right" target={"advantageDescription" + advantage.id}>
+            {advantage.description}
+          </UncontrolledTooltip>
+          <Button key={"removeAdvantage" + advantage.id} color="danger"
+                  className="tiny__button float-right"
+                  onClick={() => this.handleRemoveAdvantageChoice(advantage.id, advantage.pd_cost)}>-
+          </Button>
         </p>)
 
         // render skill name <p> with on hover tooltip with desc + cost of use again

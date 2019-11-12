@@ -54,8 +54,6 @@ class ChooseAdvantageModal extends Component {
     this.props.advantageSelected(id, cost);
   };
 
-  //  use reactstrap Modal and Uncontrolled Tooltip
-  //  and then bundle formik to handle the form rendering and interactions between inputs... nice :)
   render() {
     return (
       <Fragment>
