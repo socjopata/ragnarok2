@@ -84,9 +84,9 @@ class ChooseAdvantageModal extends Component {
                     onChange={selected => setFieldValue("advantageType", selected.value)}
                   />
                   <Field component={AdvantagesChoiceList} name="advantagesChoiceList" selectedAdvantageType={values.advantageType}/>
-                  <button color="primary" type="submit" disabled={isSubmitting}>
+                  <Button type="submit" color="primary" disabled={isSubmitting}>
                     Wybierz
-                  </button>
+                  </Button>
                 </Form>
               )}
             </Formik>
