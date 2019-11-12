@@ -1,18 +1,21 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from "react-redux";
-import {get, map, filter, toString} from "lodash";
+import {get, map, filter, toString, compact, includes} from "lodash";
 
 import {
   characterId,
   chosenAdvantages,
+  chosenAdvantagesIds,
   experiencePoints,
 } from "../../store/heroes";
 
 class AdvantagesChoiceList extends Component {
   currentAdvantagesList = () => {
-    const {advantagesList, selectedAdvantageType} = this.props;
+    const {advantagesList, selectedAdvantageType, chosenAdvantagesIds} = this.props;
     if (advantagesList) {
-      return (filter(advantagesList, ['kind', selectedAdvantageType]));
+      const advantagesOfSelectedType = filter(advantagesList, ['kind', selectedAdvantageType]);
+      const currentAdvantages = advantagesOfSelectedType.filter(advantage => !includes(compact(chosenAdvantagesIds), advantage.id));
+      return (currentAdvantages);
     }
   };
 
@@ -44,6 +47,7 @@ const mapStateToProps = (state) => ({
   characterId: characterId(state),
   experiencePoints: experiencePoints(state),
   chosenAdvantages: chosenAdvantages(state),
+  chosenAdvantagesIds: chosenAdvantagesIds(state),
   advantagesList: get(state, "advantages.byId"),
 });
 
