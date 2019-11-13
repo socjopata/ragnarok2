@@ -9,7 +9,7 @@ export const selectedVirtues = state => get(state, "heroes.character.selectedVir
 export const allVirtuesSelected = state => compact(state.heroes.character.selectedVirtues).length === 2;
 
 const experiencePointsSpent = state => get(state, "heroes.character.experiencePointsSpent");
-const bonusFromVirtues = (state, name, type) => {
+export const bonusFromVirtues = (state, name, type) => {
   const selectedVirtueParameters = flatMap(compact(selectedVirtues(state)), (virtue) => virtue.parameters);
   return (selectedVirtueParameters.filter(parameter => parameter.name === name && parameter.type === type).reduce((acc, parameter) => +acc + +parameter.value, 0) || 0);
 };
@@ -111,8 +111,8 @@ export const mainParameterEntropyTotal = state => mainParameterTotal(state, 'ent
 const focusFromVirtues = state => bonusFromVirtues(state, 'focus', "VirtualParameter");
 const neurostabilityFromVirtues = state => bonusFromVirtues(state, 'neurostability', "VirtualParameter");
 const sportinessFromVirtues = state => bonusFromVirtues(state, 'sportiness', "VirtualParameter");
-const movementSpeedFromVirtues = state => bonusFromVirtues(state, 'movementSpeed', "VirtualParameter");
-const hitPointsFromVirtues = state => bonusFromVirtues(state, 'hitPoints', "VirtualParameter");
+const movementSpeedFromVirtues = state => bonusFromVirtues(state, 'movement_speed', "VirtualParameter");
+const hitPointsFromVirtues = state => bonusFromVirtues(state, 'hit_points', "VirtualParameter");
 const powerFromVirtues = state => bonusFromVirtues(state, 'power', "VirtualParameter");
 const apparitionFromVirtues = state => bonusFromVirtues(state, 'apparition', "VirtualParameter");
 

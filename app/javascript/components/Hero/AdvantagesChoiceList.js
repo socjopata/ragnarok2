@@ -1,11 +1,14 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from "react-redux";
-import {get, map, filter, toString, compact, includes} from "lodash";
+import {get, map, filter, toString, compact, includes, reject} from "lodash";
 
 import {
   characterId,
   chosenAdvantages,
   chosenAdvantagesIds,
+  mainParameterTotal,
+  secondaryParameterTotal,
+  bonusFromVirtues,
   experiencePoints,
 } from "../../store/heroes";
 import {UncontrolledTooltip} from "reactstrap";
@@ -25,20 +28,27 @@ class AdvantagesChoiceList extends Component {
     this.props.form.setFieldValue(this.props.field.name, targetId)
   };
 
-//TODO implement all cases
   advantageChoiceDisabled = (advantage) => {
     const booleans = map(advantage.requirements, requirement => {
       switch (requirement.check_applies_to) {
         case "MainParameter":
-          return (false);
+          return (this.props.mainParameterTotal(requirement.name) >= parseInt(requirement.value));
         case "Advantage":
-          return (false);
+          const advantagesList = this.props.advantagesList;
+          return map(advantagesList, 'internal_name').includes(requirement.name);
         case "VirtualParameter":
-          return (false);
+          return (this.props.bonusFromVirtues(requirement.name, "VirtualParameter") >= parseInt(requirement.value));
         case "EitherMainParameter":
-          return (false);
+          const skillRequirements = reject(requirement.name.split('_'), name => { return(name === "or") } );
+          if (map(skillRequirements, skillName => {
+            return (this.props.mainParameterTotal(skillName) >= parseInt(requirement.value))
+          }).includes(true)) {
+            return (true);
+          } else {
+            return (false);
+          }
         case "SecondaryParameter":
-          return (false);
+          return (this.props.secondaryParameterTotal(requirement.name) >= parseInt(requirement.value));
       }
     });
 
@@ -78,6 +88,9 @@ const mapStateToProps = (state) => ({
   experiencePoints: experiencePoints(state),
   chosenAdvantages: chosenAdvantages(state),
   chosenAdvantagesIds: chosenAdvantagesIds(state),
+  mainParameterTotal: name => mainParameterTotal(state, name),
+  secondaryParameterTotal: name => secondaryParameterTotal(state, name),
+  bonusFromVirtues: (name, type) => bonusFromVirtues(state, name, type),
   advantagesList: get(state, "advantages.byId"),
 });
 
