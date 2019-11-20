@@ -16,7 +16,10 @@ export const bonusFromVirtues = (state, name, type) => {
 };
 
 export const bonusFromAdvantages = (state, name, type) => {
-  const relevantdvantageParameters = filter(flatMap(chosenAdvantages(state), (advantage) => advantage.parameters), parameter => { return(parameter.name === name && parameter.type === type) });
+  const relevantdvantageParameters = filter(
+    flatMap(chosenAdvantages(state), 'parameters'),
+    parameter => parameter.name === name && parameter.type === type
+  );
   return (relevantdvantageParameters.reduce((acc, parameter) => +acc + +parameter.value, 0) || 0);
 };
 

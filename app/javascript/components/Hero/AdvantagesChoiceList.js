@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from "react-redux";
-import {get, map, filter, toString, compact, includes, reject} from "lodash";
+import {get, map, filter, toString, compact, includes, reject, find} from "lodash";
 
 import {
   characterId,
@@ -29,26 +29,20 @@ class AdvantagesChoiceList extends Component {
   };
 
   advantageChoiceDisabled = (advantage) => {
+    const {mainParameterTotal, advantagesList, bonusFromVirtues, secondaryParameterTotal} = this.props;
     const booleans = map(advantage.requirements, requirement => {
       switch (requirement.check_applies_to) {
         case "MainParameter":
-          return (this.props.mainParameterTotal(requirement.name) >= parseInt(requirement.value));
+          return (mainParameterTotal(requirement.name) >= parseInt(requirement.value));
         case "Advantage":
-          const advantagesList = this.props.advantagesList;
           return map(advantagesList, 'internal_name').includes(requirement.name);
         case "VirtualParameter":
-          return (this.props.bonusFromVirtues(requirement.name, "VirtualParameter") >= parseInt(requirement.value));
+          return (bonusFromVirtues(requirement.name, "VirtualParameter") >= parseInt(requirement.value));
         case "EitherMainParameter":
-          const skillRequirements = reject(requirement.name.split('_'), name => { return(name === "or") } );
-          if (map(skillRequirements, skillName => {
-            return (this.props.mainParameterTotal(skillName) >= parseInt(requirement.value))
-          }).includes(true)) {
-            return (true);
-          } else {
-            return (false);
-          }
+          const skillRequirements = requirement.name.split('_or_');
+          return(!find(skillRequirements, skillName => (mainParameterTotal(skillName) >= parseInt(requirement.value))));
         case "SecondaryParameter":
-          return (this.props.secondaryParameterTotal(requirement.name) >= parseInt(requirement.value));
+          return (secondaryParameterTotal(requirement.name) >= parseInt(requirement.value));
       }
     });
 
