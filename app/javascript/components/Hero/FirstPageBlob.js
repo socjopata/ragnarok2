@@ -187,7 +187,12 @@ class FirstPageBlob extends Component {
     if (heroSelected) {
       const selectedVirtue = this.props.selectedVirtues[virtueIndex];
       if (selectedVirtue) {
-        return <p>{selectedVirtue.name}</p>
+        return (<p>
+          <span href="#" id={"virtueDescription" + selectedVirtue.id}>{selectedVirtue.name}</span>
+          <UncontrolledTooltip placement="right" target={"virtueDescription" + selectedVirtue.id}>
+            {selectedVirtue.description}
+          </UncontrolledTooltip>
+        </p>)
       } else {
         const selectedVirtuesIds = map(this.props.selectedVirtues, "id");
         const virtues = heroSelected.virtues.filter(virtue => !selectedVirtuesIds.includes(virtue.id));
