@@ -224,3 +224,8 @@ export const apparition = createSelector(heroSelected, mainParameterBodyBuilding
     }
   }
 );
+
+export const money = state => {
+  const defaultAmount = 1500;
+  return(defaultAmount);
+};
