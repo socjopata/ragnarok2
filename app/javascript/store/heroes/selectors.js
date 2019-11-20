@@ -9,9 +9,15 @@ export const selectedVirtues = state => get(state, "heroes.character.selectedVir
 export const allVirtuesSelected = state => compact(state.heroes.character.selectedVirtues).length === 2;
 
 const experiencePointsSpent = state => get(state, "heroes.character.experiencePointsSpent");
+
 export const bonusFromVirtues = (state, name, type) => {
   const selectedVirtueParameters = flatMap(compact(selectedVirtues(state)), (virtue) => virtue.parameters);
   return (selectedVirtueParameters.filter(parameter => parameter.name === name && parameter.type === type).reduce((acc, parameter) => +acc + +parameter.value, 0) || 0);
+};
+
+export const bonusFromAdvantages = (state, name, type) => {
+  const relevantdvantageParameters = filter(flatMap(chosenAdvantages(state), (advantage) => advantage.parameters), parameter => { return(parameter.name === name && parameter.type === type) });
+  return (relevantdvantageParameters.reduce((acc, parameter) => +acc + +parameter.value, 0) || 0);
 };
 
 export const chosenAdvantagesIds = state => {
@@ -35,7 +41,8 @@ export const mainParameterBase = (state, name) => {
     if (chosenHero) {
       const base = chosenHero.parameters.filter(parameter => parameter.name === name && parameter.type === "MainParameter")[0].value;
       const userChanges = get(state, ["heroes", "character", 'mainParametersIncreased', name], 0);
-      return (base + userChanges + bonusFromVirtues(state, name, "MainParameter"))
+
+      return (base + userChanges + bonusFromVirtues(state, name, "MainParameter") + bonusFromAdvantages(state, name, "MainParameter"))
     } else {
       return 0
     }
@@ -57,7 +64,8 @@ export const secondaryParameterBase = (state, name) => {
       const defaultBase = chosenHero.parameters.filter(parameter => parameter.name === name && parameter.type === "SecondaryParameter")[0].value;
       const userChanges = get(state, ["heroes", "character", 'secondaryParametersIncreased', name], 0);
       const flexibleSkillChoice = get(chosenFlexibleSecondaryParameters(state), name, 0);
-      return (defaultBase + flexibleSkillChoice + userChanges + bonusFromVirtues(state, name, "SecondaryParameter"))
+
+      return (defaultBase + flexibleSkillChoice + userChanges + bonusFromVirtues(state, name, "SecondaryParameter") + bonusFromAdvantages(state, name, "SecondaryParameter"))
     } else {
       return 0
     }
@@ -116,6 +124,14 @@ const hitPointsFromVirtues = state => bonusFromVirtues(state, 'hit_points', "Vir
 const powerFromVirtues = state => bonusFromVirtues(state, 'power', "VirtualParameter");
 const apparitionFromVirtues = state => bonusFromVirtues(state, 'apparition', "VirtualParameter");
 
+const focusFromAdvantages = state => bonusFromAdvantages(state, 'focus', "VirtualParameter");
+const neurostabilityFromAdvantages = state => bonusFromAdvantages(state, 'neurostability', "VirtualParameter");
+const sportinessFromAdvantages = state => bonusFromAdvantages(state, 'sportiness', "VirtualParameter");
+const movementSpeedFromAdvantages = state => bonusFromAdvantages(state, 'movement_speed', "VirtualParameter");
+const hitPointsFromAdvantages = state => bonusFromAdvantages(state, 'hit_points', "VirtualParameter");
+const powerFromAdvantages = state => bonusFromAdvantages(state, 'power', "VirtualParameter");
+const apparitionFromAdvantages = state => bonusFromAdvantages(state, 'apparition', "VirtualParameter");
+
 export const flexibleParameters = createSelector(heroSelected, (
   chosenHero) => {
     if (chosenHero) {
@@ -145,63 +161,63 @@ export const experiencePoints = createSelector(heroSelected, mainParameterInteli
   }
 );
 
-export const focus = createSelector(heroSelected, mainParameterSelfControlTotal, mainParameterEntropyTotal, focusFromVirtues,
-  (chosenHero, selfControlTotal, entropyTotal, fromVirtues) => {
+export const focus = createSelector(heroSelected, mainParameterSelfControlTotal, mainParameterEntropyTotal, focusFromVirtues, focusFromAdvantages,
+  (chosenHero, selfControlTotal, entropyTotal, fromVirtues, fromAdvantages) => {
     if (chosenHero) {
-      return (selfControlTotal + entropyTotal + fromVirtues)
+      return (selfControlTotal + entropyTotal + fromVirtues + fromAdvantages)
     }
   }
 );
 
-export const neurostability = createSelector(heroSelected, mainParameterInteligenceTotal, neurostabilityFromVirtues,
-  (chosenHero, inteligenceTotal, fromVirtues) => {
+export const neurostability = createSelector(heroSelected, mainParameterInteligenceTotal, neurostabilityFromVirtues, neurostabilityFromAdvantages,
+  (chosenHero, inteligenceTotal, fromVirtues, fromAdvantages) => {
     if (chosenHero) {
       const baseMultiplier = 5;
-      return ((inteligenceTotal * baseMultiplier) + fromVirtues)
+      return ((inteligenceTotal * baseMultiplier) + fromVirtues + fromAdvantages)
     }
   }
 );
 
-export const sportiness = createSelector(heroSelected, mainParameterBodyBuildingTotal, mainParameterDexterityTotal, sportinessFromVirtues,
-  (chosenHero, bodyBulidingTotal, dexterityTotal, fromVirtues) => {
+export const sportiness = createSelector(heroSelected, mainParameterBodyBuildingTotal, mainParameterDexterityTotal, sportinessFromVirtues, sportinessFromAdvantages,
+  (chosenHero, bodyBulidingTotal, dexterityTotal, fromVirtues, fromAdvantages) => {
     if (chosenHero) {
-      return (bodyBulidingTotal + dexterityTotal + fromVirtues)
+      return (bodyBulidingTotal + dexterityTotal + fromVirtues + fromAdvantages)
     }
   }
 );
 
-export const movementSpeed = createSelector(heroSelected, sportiness, movementSpeedFromVirtues,
-  (chosenHero, sportiness, fromVirtues) => {
+export const movementSpeed = createSelector(heroSelected, sportiness, movementSpeedFromVirtues, movementSpeedFromAdvantages,
+  (chosenHero, sportiness, fromVirtues, fromAdvantages) => {
     if (chosenHero) {
       const defaultValue = 5;
-      return (sportiness + defaultValue + fromVirtues)
+      return (sportiness + defaultValue + fromVirtues + fromAdvantages)
     }
   }
 );
 
-export const hitPoints = createSelector(heroSelected, mainParameterBodyBuildingTotal, hitPointsFromVirtues,
-  (chosenHero, bodyBuildingTotal, fromVirtues) => {
+export const hitPoints = createSelector(heroSelected, mainParameterBodyBuildingTotal, hitPointsFromVirtues, hitPointsFromAdvantages,
+  (chosenHero, bodyBuildingTotal, fromVirtues, fromAdvantages) => {
     if (chosenHero) {
       const defaultValue = 10;
       const defaultMultiplier = 5;
-      return (bodyBuildingTotal * defaultMultiplier + defaultValue + fromVirtues)
+      return (bodyBuildingTotal * defaultMultiplier + defaultValue + fromVirtues + fromAdvantages)
     }
   }
 );
 
-export const power = createSelector(heroSelected, mainParameterInteligenceTotal, powerFromVirtues,
-  (chosenHero, inteligenceTotal,  fromVirtues) => {
+export const power = createSelector(heroSelected, mainParameterInteligenceTotal, powerFromVirtues, powerFromAdvantages,
+  (chosenHero, inteligenceTotal, fromVirtues, fromAdvantages) => {
     if (chosenHero) {
       const defaultMultiplier = 5;
-      return ((inteligenceTotal * defaultMultiplier) + fromVirtues)
+      return ((inteligenceTotal * defaultMultiplier) + fromVirtues + fromAdvantages)
     }
   }
 );
 
-export const apparition = createSelector(heroSelected, mainParameterBodyBuildingTotal, mainParameterEntropyTotal, apparitionFromVirtues,
-  (chosenHero, bodyBuildingTotal, entropyTotal, fromVirtues) => {
+export const apparition = createSelector(heroSelected, mainParameterBodyBuildingTotal, mainParameterEntropyTotal, apparitionFromVirtues, apparitionFromAdvantages,
+  (chosenHero, bodyBuildingTotal, entropyTotal, fromVirtues, fromAdvantages) => {
     if (chosenHero) {
-      return (bodyBuildingTotal + entropyTotal + fromVirtues)
+      return (bodyBuildingTotal + entropyTotal + fromVirtues + fromAdvantages)
     }
   }
 );
