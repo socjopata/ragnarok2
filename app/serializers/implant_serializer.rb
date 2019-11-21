@@ -1,5 +1,6 @@
-class AdvantageSerializer < ActiveModel::Serializer
-  attributes :id, :name, :internal_name, :description, :pd_cost, :kind, :use_again_cost, :parameters, :requirements
+class ImplantSerializer < ActiveModel::Serializer
+  attributes :id, :name, :internal_name, :description, :construction, :neurostability_cost, :money_cost, :kind,
+    :parameters, :requirements
 
   def parameters
     object.parameters.map do |parameter|

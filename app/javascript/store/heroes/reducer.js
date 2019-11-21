@@ -32,7 +32,8 @@ const initialState = {
     mainParametersIncreased: {},
     secondaryParametersIncreased: {},
     selectedVirtues: [null, null],
-    chosenAdvantagesIds: new Array(12).fill(null)
+    chosenAdvantagesIds: new Array(12).fill(null),
+    chosenImplantsIds: new Array(10).fill(null),
   }
 };
 
@@ -50,7 +51,8 @@ export const reducer = (state = initialState, action) => {
           mainParametersIncreased: {},
           secondaryParametersIncreased: {},
           selectedVirtues: [null, null],
-          chosenAdvantagesIds: new Array(12).fill(null)
+          chosenAdvantagesIds: new Array(12).fill(null),
+          chosenImplantsIds: new Array(10).fill(null),
         }
       };
     case INPUT_CHANGE:
