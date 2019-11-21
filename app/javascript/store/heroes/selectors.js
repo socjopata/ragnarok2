@@ -126,6 +126,7 @@ const movementSpeedFromVirtues = state => bonusFromVirtues(state, 'movement_spee
 const hitPointsFromVirtues = state => bonusFromVirtues(state, 'hit_points', "VirtualParameter");
 const powerFromVirtues = state => bonusFromVirtues(state, 'power', "VirtualParameter");
 const apparitionFromVirtues = state => bonusFromVirtues(state, 'apparition', "VirtualParameter");
+const moneyFromVirtues = state => bonusFromVirtues(state, 'money', "VirtualParameter");
 
 const focusFromAdvantages = state => bonusFromAdvantages(state, 'focus', "VirtualParameter");
 const neurostabilityFromAdvantages = state => bonusFromAdvantages(state, 'neurostability', "VirtualParameter");
@@ -134,6 +135,7 @@ const movementSpeedFromAdvantages = state => bonusFromAdvantages(state, 'movemen
 const hitPointsFromAdvantages = state => bonusFromAdvantages(state, 'hit_points', "VirtualParameter");
 const powerFromAdvantages = state => bonusFromAdvantages(state, 'power', "VirtualParameter");
 const apparitionFromAdvantages = state => bonusFromAdvantages(state, 'apparition', "VirtualParameter");
+const moneyFromAdvantages = state => bonusFromAdvantages(state, 'money', "VirtualParameter");
 
 export const flexibleParameters = createSelector(heroSelected, (
   chosenHero) => {
@@ -225,7 +227,12 @@ export const apparition = createSelector(heroSelected, mainParameterBodyBuilding
   }
 );
 
-export const money = state => {
-  const defaultAmount = 1500;
-  return(defaultAmount);
-};
+export const money = createSelector(heroSelected, moneyFromVirtues, moneyFromAdvantages,
+  (chosenHero, fromVirtues, fromAdvantages) => {
+    if (chosenHero) {
+      const defaultAmount = 1500;
+      // #FIXME edge cases like Techmistrz
+      return (defaultAmount + fromVirtues + fromAdvantages);
+    }
+  }
+);

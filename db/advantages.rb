@@ -194,10 +194,13 @@ advantage.requirements.create(check_applies_to: "SecondaryParameter", name: "cha
 
 advantage = Advantage.create(kind: "general", internal_name: "barter_3", name: "Handel/3", description: "kupno i sprzedaż na korzystnych warunkach oraz umiejętne prowadzenie negocjacji biznesowych. W przypadku udanego przeciwstawnego testu Charyzmy Weteran może zaniżyć lub zawyżyć cenę o następującą wartość: 15%/20%/25%. Po wybraniu tego Atutu Weteran otrzymuje, w zależności od zainwestowanych PD, 200/400/600S (również podczas tworzenia postaci). Krytyczny Sukces podczas testu modyfikuje cenę zakupu o dodatkowe +/-10%. Postać, która wykupiła atut na najwyższym poziomie (6pd) zwiększa swoją Prezencję i Charyzmę o +1pkt.", pd_cost: 3)
 advantage.requirements.create(check_applies_to: "MainParameter", name: "inteligence", value: "5")
+advantage.virtual_parameters.create(name: "money", value: 200)
 advantage = Advantage.create(kind: "general", internal_name: "barter_5", name: "Handel/5", description: "kupno i sprzedaż na korzystnych warunkach oraz umiejętne prowadzenie negocjacji biznesowych. W przypadku udanego przeciwstawnego testu Charyzmy Weteran może zaniżyć lub zawyżyć cenę o następującą wartość: 15%/20%/25%. Po wybraniu tego Atutu Weteran otrzymuje, w zależności od zainwestowanych PD, 200/400/600S (również podczas tworzenia postaci). Krytyczny Sukces podczas testu modyfikuje cenę zakupu o dodatkowe +/-10%. Postać, która wykupiła atut na najwyższym poziomie (6pd) zwiększa swoją Prezencję i Charyzmę o +1pkt.", pd_cost: 5)
 advantage.requirements.create(check_applies_to: "MainParameter", name: "inteligence", value: "5")
+advantage.virtual_parameters.create(name: "money", value: 400)
 advantage = Advantage.create(kind: "general", internal_name: "barter_7", name: "Handel/7", description: "kupno i sprzedaż na korzystnych warunkach oraz umiejętne prowadzenie negocjacji biznesowych. W przypadku udanego przeciwstawnego testu Charyzmy Weteran może zaniżyć lub zawyżyć cenę o następującą wartość: 15%/20%/25%. Po wybraniu tego Atutu Weteran otrzymuje, w zależności od zainwestowanych PD, 200/400/600S (również podczas tworzenia postaci). Krytyczny Sukces podczas testu modyfikuje cenę zakupu o dodatkowe +/-10%. Postać, która wykupiła atut na najwyższym poziomie (6pd) zwiększa swoją Prezencję i Charyzmę o +1pkt.", pd_cost: 7)
 advantage.requirements.create(check_applies_to: "MainParameter", name: "inteligence", value: "5")
+advantage.virtual_parameters.create(name: "money", value: 600)
 advantage.virtual_parameters.create(name: "apparition", value: 1)
 advantage.secondary_parameters.create(name: "charisma", value: 1)
 
