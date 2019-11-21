@@ -118,7 +118,7 @@ advantage.requirements.create(check_applies_to: "MainParameter", name: "physique
 advantage.requirements.create(check_applies_to: "Advantage", name: "butcher")
 advantage.auxiliary_parameters.create(name: "martial_arts", bonus_type: "damage", value: 1)
 advantage.auxiliary_parameters.create(name: "martial_arts", bonus_type: "accuracy", value: 1)
-advantage.auxiliary_parameters.create(name: "ranged_defense", bonus_type: "ranged_defense", value: 1)
+advantage.auxiliary_parameters.create(name: "close_combat_defense", bonus_type: "close_combat_defense", value: 1)
 
 advantage = Advantage.create(kind: "melee", internal_name: "odins_strike", name: "Uderzenie Odyna", description: "postać deklarując wykorzystanie tej zalety, otrzymuję kare -2pkt  do Trafienia (do końca rundy) dzięki czemu każdy trafiony w tej rundzie przez nią cios obniża pancerz celu o połowę (zaokrąglając w górę).", pd_cost: 4)
 advantage.requirements.create(check_applies_to: "MainParameter", name: "physique", value: "6")
