@@ -4,22 +4,19 @@ import {Formik, Field, Form} from 'formik';
 import Select from 'react-select';
 import {connect} from "react-redux";
 import {get, map, uniq, startCase} from "lodash";
-import AdvantagesChoiceList from "./AdvantagesChoiceList";
+import ImplantsChoiceList from "./ImplantsChoiceList";
 
 //actions
 import {
-  advantageSelected
+  implantSelected
 } from '../../store/heroes';
 
-const ADVANTAGES_MAP = {
-  ranged: "Strzeleckie",
-  melee: "Walka w Zwarciu",
-  hexeri: "Hekseri",
-  general: "Ogólne",
-  battle_general: "Ogólne Bitewne"
-};
+//selectors
+import {
+  implantsList,
+} from "../../store/heroes";
 
-class ChooseAdvantageModal extends Component {
+class ChooseImplantModal extends Component {
   state = {
     isOpen: false,
   };
@@ -30,34 +27,35 @@ class ChooseAdvantageModal extends Component {
     }));
   };
 
-  advantageTypes = () => {
-    const kinds = uniq(map(this.props.advantagesList, "kind"));
+  implantTypes = () => {
+    const kinds = uniq(map(this.props.implantsList, "kind"));
     return (map(kinds, (kind) => {
-      return ({value: kind, label: ADVANTAGES_MAP[kind]})
+      return ({value: kind, label: kind})
     }));
   };
 
-  handleAdvantageChoice = (values, {setSubmitting}) => {
+  handleImplantChoice = (values, {setSubmitting}) => {
     setTimeout(() => {
       setSubmitting(false);
     }, 400);
-    const id = values.advantagesChoiceList;
-    const cost = this.props.advantagesList[id].pd_cost;
+    const id = values.implantsChoiceList;
+    const neurostabilityCost = this.props.implantsList[id].neurostability_cost;
+    const moneyCost = this.props.implantsList[id].money_cost;
     this.toggleOpen();
-    this.props.advantageSelected(id, cost);
+    this.props.implantSelected(id, neurostabilityCost, moneyCost);
   };
 
   render() {
     return (
       <Fragment>
-        <Button key={"addAnAdvantage"} color="success" className="tiny__button float-left"
+        <Button key={"addAnImplant"} color="success" className="tiny__button float-left"
                 onClick={this.toggleOpen}>+</Button>
         <Modal isOpen={this.state.isOpen} toggle={this.toggleOpen} className={this.props.className}>
-          <ModalHeader toggle={this.toggleOpen}>Wybierz Atut</ModalHeader>
+          <ModalHeader toggle={this.toggleOpen}>Wybierz Implant</ModalHeader>
           <ModalBody>
             <Formik
-              initialValues={{advantageType: '', advantagesChoiceList: []}}
-              onSubmit={this.handleAdvantageChoice}>
+              initialValues={{implantType: '', implantsChoiceList: []}}
+              onSubmit={this.handleImplantChoice}>
               {({
                   values,
                   handleChange,
@@ -70,11 +68,11 @@ class ChooseAdvantageModal extends Component {
                 <Form onSubmit={handleSubmit}>
                   <Select
                     id="color"
-                    options={this.advantageTypes()}
+                    options={this.implantTypes()}
                     multi={false}
-                    onChange={selected => setFieldValue("advantageType", selected.value)}
+                    onChange={selected => setFieldValue("implantType", selected.value)}
                   />
-                  <Field component={AdvantagesChoiceList} name="advantagesChoiceList" selectedAdvantageType={values.advantageType}/>
+                  <Field component={ImplantsChoiceList} name="implantsChoiceList" selectedImplantType={values.implantType}/>
                   <Button type="submit" color="primary" disabled={isSubmitting}>
                     Wybierz
                   </Button>
@@ -92,14 +90,14 @@ class ChooseAdvantageModal extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  advantagesList: get(state, "advantages.byId"),
+  implantsList: get(state, "implants.byId"),
 });
 
 const mapDispatchToProps = {
-  advantageSelected,
+  implantSelected,
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ChooseAdvantageModal);
+)(ChooseImplantModal);

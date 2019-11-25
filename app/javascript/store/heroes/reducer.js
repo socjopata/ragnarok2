@@ -13,7 +13,9 @@ import {
   SECONDARY_PARAMETER_DECREMENTED,
   VIRTUE_SELECTED,
   ADVANTAGE_SELECTED,
-  ADVANTAGE_REMOVED
+  ADVANTAGE_REMOVED,
+  IMPLANT_SELECTED,
+  IMPLANT_REMOVED,
 } from './actions';
 
 const initialState = {
@@ -29,6 +31,8 @@ const initialState = {
     usedFlexibleSecondaryParameters: [],
     selectedFlexibleSecondaryParameters: {},
     experiencePointsSpent: 0,
+    neurostabilityPointsSpent: 0,
+    moneySpent: 0,
     mainParametersIncreased: {},
     secondaryParametersIncreased: {},
     selectedVirtues: [null, null],
@@ -48,6 +52,8 @@ export const reducer = (state = initialState, action) => {
           usedFlexibleSecondaryParameters: [],
           selectedFlexibleSecondaryParameters: {},
           experiencePointsSpent: 0,
+          neurostabilityPointsSpent: 0,
+          moneySpent: 0,
           mainParametersIncreased: {},
           secondaryParametersIncreased: {},
           selectedVirtues: [null, null],
@@ -156,6 +162,30 @@ export const reducer = (state = initialState, action) => {
           ...state.character,
           experiencePointsSpent: state.character.experiencePointsSpent - action.cost,
           chosenAdvantagesIds: _clonedChosenAdvantagesIds
+        }
+      };
+    case IMPLANT_SELECTED:
+      let clonedChosenImplantsIds = [...state.character.chosenImplantsIds];
+      clonedChosenImplantsIds[state.character.chosenImplantsIds.indexOf(null)] = parseInt(action.implantId);
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          neurostabilityPointsSpent: state.character.neurostabilityPointsSpent + action.neurostabilityCost,
+          moneySpent: state.character.moneySpent + action.moneyCost,
+          chosenImplantsIds: clonedChosenImplantsIds
+        }
+      };
+    case IMPLANT_REMOVED:
+      let _clonedChosenImplantsIds = [...state.character.chosenImplantsIds];
+      _clonedChosenImplantsIds[state.character.chosenImplantsIds.indexOf(parseInt(action.implantId))] = null;
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          neurostabilityPointsSpent: state.character.neurostabilityPointsSpent - action.neurostabilityCost,
+          moneySpent: state.character.moneySpent - action.moneyCost,
+          chosenImplantsIds: _clonedChosenImplantsIds
         }
       };
     case FETCH_HEROES_STARTED:

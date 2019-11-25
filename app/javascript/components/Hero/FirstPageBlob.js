@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import classNames from 'classnames'
 import TestDifficultyCheatSheet from "./TestDifficultyCheatSheet";
 import ChooseAdvantageModal from "./ChooseAdvantageModal";
+import ChooseImplantModal from "./ChooseImplantModal";
 //actions
 import {
   inputChange,
@@ -15,6 +16,7 @@ import {
   secondaryParameterIncremented,
   secondaryParameterDecremented,
   advantageRemoved,
+  implantRemoved,
   virtueSelected,
 } from '../../store/heroes';
 //selectors
@@ -44,7 +46,9 @@ import {
   mainParameterUserChanges,
   secondaryParameterUserChanges,
   chosenAdvantagesIds,
-  chosenAdvantages
+  chosenAdvantages,
+  chosenImplantsIds,
+  chosenImplants,
 } from '../../store/heroes';
 
 class FirstPageBlob extends Component {
@@ -85,6 +89,10 @@ class FirstPageBlob extends Component {
 
   handleRemoveAdvantageChoice = (advantageId, pdCost) => {
     this.props.advantageRemoved(advantageId, pdCost);
+  };
+
+  handleRemoveImplantChoice = (implantId, neurostabilityCost, moneyCost) => {
+    this.props.implantRemoved(implantId, neurostabilityCost, moneyCost);
   };
 
   renderHeroesForSelect() {
@@ -222,6 +230,30 @@ class FirstPageBlob extends Component {
         // render skill name <p> with on hover tooltip with desc + cost of use again
       } else if (chosenAdvantagesIds.indexOf(null) === advantageIndex) {
         return(<ChooseAdvantageModal/>);
+      }
+    }
+  };
+
+  //TODO consider renaming this method and other methods, as it's not only a button
+  renderImplantChoiceButton(implantIndex) {
+    const {heroSelected, allFlexibleParametersAssigned, allVirtuesSelected, chosenImplantsIds, chosenImplants} = this.props;
+    if (heroSelected && allVirtuesSelected && allFlexibleParametersAssigned) {
+      if (!!chosenImplantsIds[implantIndex]) {
+        const implant = chosenImplants[implantIndex];
+        return (<p>
+          <span href="#" id={"implantDescription" + implant.id}>{implant.name}</span>
+          <UncontrolledTooltip placement="right" target={"implantDescription" + implant.id}>
+            {implant.description}
+          </UncontrolledTooltip>
+          <Button key={"removeImplant" + advantage.id} color="danger"
+                  className="tiny__button implant"
+                  onClick={() => this.handleRemoveImplantChoice(implant.id, implant.neurostability_cost, implant.money_cost)}>-
+          </Button>
+        </p>)
+
+        // render skill name <p> with on hover tooltip with desc + cost of use again
+      } else if (chosenImplantsIds.indexOf(null) === implantIndex) {
+        return(<ChooseImplantModal/>);
       }
     }
   };
@@ -564,28 +596,28 @@ class FirstPageBlob extends Component {
           <td className="no-horizontal-border__cell white-and-black__cell">&nbsp;</td>
         </tr>
         <tr className="solid-border__cell">
-          <td colSpan="2">&nbsp;</td>
-          <td colSpan="3">&nbsp;</td>
+          <td colSpan="2">{this.renderImplantChoiceButton(0)}</td>
+          <td colSpan="3">{this.renderImplantChoiceButton(5)}</td>
           <td className="black-and-white__cell">Przerzuty (E)</td>
         </tr>
         <tr className="solid-border__cell">
-          <td colSpan="2">&nbsp;</td>
-          <td colSpan="3">&nbsp;</td>
+          <td colSpan="2">{this.renderImplantChoiceButton(1)}</td>
+          <td colSpan="3">{this.renderImplantChoiceButton(6)}</td>
           <td className="no-horizontal-border__cell white-and-black__cell">OOOOO OOOOO</td>
         </tr>
         <tr className="solid-border__cell">
-          <td colSpan="2">&nbsp;</td>
-          <td colSpan="3">&nbsp;</td>
+          <td colSpan="2">{this.renderImplantChoiceButton(2)}</td>
+          <td colSpan="3">{this.renderImplantChoiceButton(7)}</td>
           <td className="no-horizontal-border__cell white-and-black__cell">OOOOO OOOOO</td>
         </tr>
         <tr className="solid-border__cell">
-          <td colSpan="2">&nbsp;</td>
-          <td colSpan="3">&nbsp;</td>
+          <td colSpan="2">{this.renderImplantChoiceButton(3)}</td>
+          <td colSpan="3">{this.renderImplantChoiceButton(8)}</td>
           <td className="black-and-white__cell">Przesunięcia (E)</td>
         </tr>
         <tr className="solid-border__cell">
-          <td colSpan="2">&nbsp;</td>
-          <td colSpan="3">&nbsp;</td>
+          <td colSpan="2">{this.renderImplantChoiceButton(4)}</td>
+          <td colSpan="3">{this.renderImplantChoiceButton(9)}</td>
           <td className="no-horizontal-border__cell white-and-black__cell">OOOOO OOOOO</td>
         </tr>
         <tr className="solid-border__cell black-and-white__cell">
@@ -671,6 +703,8 @@ const mapStateToProps = (state) => ({
   allFlexibleParametersAssigned: allFlexibleParametersAssigned(state),
   chosenAdvantagesIds: chosenAdvantagesIds(state),
   chosenAdvantages: chosenAdvantages(state),
+  chosenImplantsIds: chosenImplantsIds(state),
+  chosenImplants: chosenImplants(state),
 });
 
 const mapDispatchToProps = {
@@ -682,6 +716,7 @@ const mapDispatchToProps = {
   secondaryParameterIncremented,
   secondaryParameterDecremented,
   advantageRemoved,
+  implantRemoved,
   virtueSelected
 };
 

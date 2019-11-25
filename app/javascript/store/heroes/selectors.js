@@ -23,6 +23,21 @@ export const bonusFromAdvantages = (state, name, type) => {
   return (relevantdvantageParameters.reduce((acc, parameter) => +acc + +parameter.value, 0) || 0);
 };
 
+export const chosenImplantsIds = state => {
+  if (state.heroes && state.heroes.byId) {
+    return (state.heroes.character.chosenImplantsIds);
+  }
+};
+
+export const chosenImplants = state => {
+  if (state.implants && state.implants.byId) {
+    const implantsIds = compact(state.heroes.character.chosenImplantsIds);
+    const implants = get(state, "implants.byId");
+
+    return (values(implants).filter(implant => implantsIds.includes(implant.id)));
+  }
+};
+
 export const chosenAdvantagesIds = state => {
   if (state.heroes && state.heroes.byId) {
     return (state.heroes.character.chosenAdvantagesIds);
