@@ -245,7 +245,7 @@ class FirstPageBlob extends Component {
           <UncontrolledTooltip placement="right" target={"implantDescription" + implant.id}>
             {implant.description}
           </UncontrolledTooltip>
-          <Button key={"removeImplant" + advantage.id} color="danger"
+          <Button key={"removeImplant" + implant.id} color="danger"
                   className="tiny__button implant"
                   onClick={() => this.handleRemoveImplantChoice(implant.id, implant.neurostability_cost, implant.money_cost)}>-
           </Button>

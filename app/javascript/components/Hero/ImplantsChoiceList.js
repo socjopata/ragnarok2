@@ -32,10 +32,11 @@ class ImplantsChoiceList extends Component {
     const booleans = map(implant.requirements, requirement => {
       switch (requirement.check_applies_to) {
         case "Implant":
-          //TODO implement me
-          return(false);
+          return map(implantsList, 'internal_name').includes(requirement.name);
       }
     });
+    booleans.push(neurostability < implant.neurostability_cost);
+    booleans.push(money < implant.money_cost);
 
     if (booleans.includes(true)) {
       return (true);

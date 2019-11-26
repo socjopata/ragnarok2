@@ -29,7 +29,7 @@ class AdvantagesChoiceList extends Component {
   };
 
   advantageChoiceDisabled = (advantage) => {
-    const {mainParameterTotal, advantagesList, bonusFromVirtues, secondaryParameterTotal} = this.props;
+    const {mainParameterTotal, advantagesList, bonusFromVirtues, secondaryParameterTotal, experiencePoints} = this.props;
     const booleans = map(advantage.requirements, requirement => {
       switch (requirement.check_applies_to) {
         case "MainParameter":
@@ -46,6 +46,7 @@ class AdvantagesChoiceList extends Component {
       }
     });
 
+    booleans.push(experiencePoints < advantage.pd_cost);
     if (booleans.includes(true)) {
       return (true);
     }

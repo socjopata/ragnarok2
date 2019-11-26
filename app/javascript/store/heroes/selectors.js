@@ -9,6 +9,8 @@ export const selectedVirtues = state => get(state, "heroes.character.selectedVir
 export const allVirtuesSelected = state => compact(state.heroes.character.selectedVirtues).length === 2;
 
 const experiencePointsSpent = state => get(state, "heroes.character.experiencePointsSpent");
+const neurostabilityPointsSpent = state => get(state, "heroes.character.neurostabilityPointsSpent");
+const moneySpent = state => get(state, "heroes.character.moneySpent");
 
 export const bonusFromVirtues = (state, name, type) => {
   const selectedVirtueParameters = flatMap(compact(selectedVirtues(state)), (virtue) => virtue.parameters);
@@ -189,11 +191,11 @@ export const focus = createSelector(heroSelected, mainParameterSelfControlTotal,
   }
 );
 
-export const neurostability = createSelector(heroSelected, mainParameterInteligenceTotal, neurostabilityFromVirtues, neurostabilityFromAdvantages,
-  (chosenHero, inteligenceTotal, fromVirtues, fromAdvantages) => {
+export const neurostability = createSelector(heroSelected, mainParameterInteligenceTotal, neurostabilityFromVirtues, neurostabilityFromAdvantages, neurostabilityPointsSpent,
+  (chosenHero, inteligenceTotal, fromVirtues, fromAdvantages, neurostabilityPointsSpent) => {
     if (chosenHero) {
       const baseMultiplier = 5;
-      return ((inteligenceTotal * baseMultiplier) + fromVirtues + fromAdvantages)
+      return ((inteligenceTotal * baseMultiplier) + fromVirtues + fromAdvantages - neurostabilityPointsSpent)
     }
   }
 );
@@ -242,12 +244,12 @@ export const apparition = createSelector(heroSelected, mainParameterBodyBuilding
   }
 );
 
-export const money = createSelector(heroSelected, moneyFromVirtues, moneyFromAdvantages,
-  (chosenHero, fromVirtues, fromAdvantages) => {
+export const money = createSelector(heroSelected, moneyFromVirtues, moneyFromAdvantages, moneySpent,
+  (chosenHero, fromVirtues, fromAdvantages, moneySpent) => {
     if (chosenHero) {
       const defaultAmount = 1500;
       // #FIXME edge cases like Techmistrz
-      return (defaultAmount + fromVirtues + fromAdvantages);
+      return (defaultAmount + fromVirtues + fromAdvantages - moneySpent);
     }
   }
 );
