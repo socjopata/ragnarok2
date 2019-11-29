@@ -3,17 +3,20 @@ import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import {Formik, Field, Form} from 'formik';
 import Select from 'react-select';
 import {connect} from "react-redux";
-import {get, map, uniq, startCase} from "lodash";
+import {get, map, uniq, values, isEmpty} from "lodash";
 import ImplantsChoiceList from "./ImplantsChoiceList";
 
 //actions
 import {
-  implantSelected
+  implantSelected,
+  regionsFamiliarityUpdated,
 } from '../../store/heroes';
 
 //selectors
 import {
   implantsList,
+  selectedVirtues,
+  regionsFamiliarityChoice
 } from "../../store/heroes";
 
 class ChooseImplantModal extends Component {
@@ -34,15 +37,27 @@ class ChooseImplantModal extends Component {
     }));
   };
 
-  handleImplantChoice = (values, {setSubmitting}) => {
+  handleImplantChoice = (_values, {setSubmitting}) => {
     setTimeout(() => {
       setSubmitting(false);
     }, 400);
-    const id = values.implantsChoiceList;
-    const neurostabilityCost = this.props.implantsList[id].neurostability_cost;
-    const moneyCost = this.props.implantsList[id].money_cost;
     this.toggleOpen();
-    this.props.implantSelected(id, neurostabilityCost, moneyCost);
+
+    const id = _values.implantsChoiceList;
+    const implant = values(this.props.implantsList).filter(implant => implant.id === parseInt(id))[0];
+    this.props.implantSelected(id, implant.neurostability_cost, implant.money_cost);
+
+    const kind = implant.kind;
+    const { selectedVirtues, regionsFamiliarityChoice } = this.props;
+    const twoImplantGroupsAllowed = selectedVirtues && !isEmpty(selectedVirtues.filter(virtue => virtue.internal_name === "fraud"));
+
+    if (twoImplantGroupsAllowed && regionsFamiliarityChoice.length < 3) {
+      if (!(kind === "Midgard") && (regionsFamiliarityChoice[0] !== kind)) {
+        this.props.regionsFamiliarityUpdated([...regionsFamiliarityChoice, kind])
+      }
+    } else if (regionsFamiliarityChoice.length === 0) {
+      !(kind === "Midgard") && this.props.regionsFamiliarityUpdated([kind])
+    }
   };
 
   render() {
@@ -91,10 +106,13 @@ class ChooseImplantModal extends Component {
 
 const mapStateToProps = (state) => ({
   implantsList: get(state, "implants.byId"),
+  selectedVirtues: selectedVirtues(state),
+  regionsFamiliarityChoice: regionsFamiliarityChoice(state),
 });
 
 const mapDispatchToProps = {
   implantSelected,
+  regionsFamiliarityUpdated,
 };
 
 export default connect(

@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {get, isEmpty, map, find, toNumber} from 'lodash';
+import {get, isEmpty, map, find, toNumber, uniq} from 'lodash';
 import {Input, Button, UncontrolledTooltip} from 'reactstrap';
 import {connect} from "react-redux";
 import classNames from 'classnames'
@@ -17,6 +17,7 @@ import {
   secondaryParameterDecremented,
   advantageRemoved,
   implantRemoved,
+  regionsFamiliarityUpdated,
   virtueSelected,
 } from '../../store/heroes';
 //selectors
@@ -49,6 +50,7 @@ import {
   chosenAdvantages,
   chosenImplantsIds,
   chosenImplants,
+  regionsFamiliarityChoice,
 } from '../../store/heroes';
 
 class FirstPageBlob extends Component {
@@ -91,8 +93,17 @@ class FirstPageBlob extends Component {
     this.props.advantageRemoved(advantageId, pdCost);
   };
 
-  handleRemoveImplantChoice = (implantId, neurostabilityCost, moneyCost) => {
+  handleRemoveImplantChoice = (implantId, neurostabilityCost, moneyCost, kind) => {
+    const { selectedVirtues, regionsFamiliarityChoice, chosenImplants } = this.props;
+    const implantFamilies = uniq(map(chosenImplants.filter(implant => implant.id !== implantId), "kind"));
     this.props.implantRemoved(implantId, neurostabilityCost, moneyCost);
+
+    const twoImplantGroupsAllowed = selectedVirtues && !isEmpty(selectedVirtues.filter(virtue => virtue.internal_name === "fraud"));
+    if (twoImplantGroupsAllowed && (regionsFamiliarityChoice.length === 2) && (implantFamilies.length === 1)) {
+      this.props.regionsFamiliarityUpdated(implantFamilies)
+    } else if ((regionsFamiliarityChoice.length === 1) && (implantFamilies.length === 0)) {
+      this.props.regionsFamiliarityUpdated([])
+    }
   };
 
   renderHeroesForSelect() {
@@ -247,7 +258,7 @@ class FirstPageBlob extends Component {
           </UncontrolledTooltip>
           <Button key={"removeImplant" + implant.id} color="danger"
                   className="tiny__button implant"
-                  onClick={() => this.handleRemoveImplantChoice(implant.id, implant.neurostability_cost, implant.money_cost)}>-
+                  onClick={() => this.handleRemoveImplantChoice(implant.id, implant.neurostability_cost, implant.money_cost, implant.kind)}>-
           </Button>
         </p>)
 
@@ -705,6 +716,7 @@ const mapStateToProps = (state) => ({
   chosenAdvantages: chosenAdvantages(state),
   chosenImplantsIds: chosenImplantsIds(state),
   chosenImplants: chosenImplants(state),
+  regionsFamiliarityChoice: regionsFamiliarityChoice(state),
 });
 
 const mapDispatchToProps = {
@@ -717,6 +729,7 @@ const mapDispatchToProps = {
   secondaryParameterDecremented,
   advantageRemoved,
   implantRemoved,
+  regionsFamiliarityUpdated,
   virtueSelected
 };
 

@@ -16,6 +16,7 @@ import {
   ADVANTAGE_REMOVED,
   IMPLANT_SELECTED,
   IMPLANT_REMOVED,
+  REGIONS_FAMILIARITY_UPDATED
 } from './actions';
 
 const initialState = {
@@ -38,6 +39,7 @@ const initialState = {
     selectedVirtues: [null, null],
     chosenAdvantagesIds: new Array(12).fill(null),
     chosenImplantsIds: new Array(10).fill(null),
+    regionsFamiliarityChoice: [],
   }
 };
 
@@ -59,6 +61,7 @@ export const reducer = (state = initialState, action) => {
           selectedVirtues: [null, null],
           chosenAdvantagesIds: new Array(12).fill(null),
           chosenImplantsIds: new Array(10).fill(null),
+          regionsFamiliarityChoice: [],
         }
       };
     case INPUT_CHANGE:
@@ -173,7 +176,7 @@ export const reducer = (state = initialState, action) => {
           ...state.character,
           neurostabilityPointsSpent: state.character.neurostabilityPointsSpent + action.neurostabilityCost,
           moneySpent: state.character.moneySpent + action.moneyCost,
-          chosenImplantsIds: clonedChosenImplantsIds
+          chosenImplantsIds: clonedChosenImplantsIds,
         }
       };
     case IMPLANT_REMOVED:
@@ -185,7 +188,15 @@ export const reducer = (state = initialState, action) => {
           ...state.character,
           neurostabilityPointsSpent: state.character.neurostabilityPointsSpent - action.neurostabilityCost,
           moneySpent: state.character.moneySpent - action.moneyCost,
-          chosenImplantsIds: _clonedChosenImplantsIds
+          chosenImplantsIds: _clonedChosenImplantsIds,
+        }
+      };
+    case REGIONS_FAMILIARITY_UPDATED:
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          regionsFamiliarityChoice: action.regionsFamiliarityChoice,
         }
       };
     case FETCH_HEROES_STARTED:

@@ -15,6 +15,7 @@ export const ADVANTAGE_SELECTED = 'creator/ADVANTAGE_SELECTED';
 export const ADVANTAGE_REMOVED = 'creator/ADVANTAGE_REMOVED';
 export const IMPLANT_SELECTED = 'creator/IMPLANT_SELECTED';
 export const IMPLANT_REMOVED = 'creator/IMPLANT_REMOVED';
+export const REGIONS_FAMILIARITY_UPDATED = 'creator/REGIONS_FAMILIARITY_UPDATED';
 
 export const inputChange = (value, fieldName) => ({type: INPUT_CHANGE, value: value, fieldName: fieldName});
 export const heroClassSelected = (value) => ({type: HERO_CLASS_CHANGED, value: value});
@@ -67,18 +68,23 @@ export const advantageRemoved = (advantageId, cost) => ({
   cost
 });
 
-export const implantSelected = (implantId, neurostabilityCost, moneyCost) => ({
+export const implantSelected = (implantId, neurostabilityCost, moneyCost,) => ({
   type: IMPLANT_SELECTED,
   implantId,
   neurostabilityCost,
-  moneyCost
+  moneyCost,
 });
 
-export const implantRemoved = (implantId, neurostabilityCost, moneyCost) => ({
+export const implantRemoved = (implantId, neurostabilityCost, moneyCost,) => ({
   type: IMPLANT_REMOVED,
   implantId,
   neurostabilityCost,
-  moneyCost
+  moneyCost,
+});
+
+export const regionsFamiliarityUpdated = (regionsFamiliarityChoice) => ({
+  type: REGIONS_FAMILIARITY_UPDATED,
+  regionsFamiliarityChoice
 });
 
 export const fetchHeroesStarted = () => ({
