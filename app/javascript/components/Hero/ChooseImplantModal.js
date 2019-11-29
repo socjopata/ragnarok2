@@ -31,7 +31,11 @@ class ChooseImplantModal extends Component {
   };
 
   implantTypes = () => {
-    const kinds = uniq(map(this.props.implantsList, "kind"));
+    let kinds = uniq(map(this.props.implantsList, "kind"));
+    const regionsFamiliarityChoice = this.props.regionsFamiliarityChoice;
+    if (regionsFamiliarityChoice.length > 0) {
+      kinds = ["Midgard", ...kinds.filter(kind => regionsFamiliarityChoice.includes(kind))];
+    }
     return (map(kinds, (kind) => {
       return ({value: kind, label: kind})
     }));
