@@ -16,7 +16,9 @@ import {
   ADVANTAGE_REMOVED,
   IMPLANT_SELECTED,
   IMPLANT_REMOVED,
-  REGIONS_FAMILIARITY_UPDATED
+  REGIONS_FAMILIARITY_UPDATED,
+  HEXERI_SELECTED,
+  HEXERI_REMOVED,
 } from './actions';
 
 const initialState = {
@@ -40,6 +42,7 @@ const initialState = {
     chosenAdvantagesIds: new Array(12).fill(null),
     chosenImplantsIds: new Array(10).fill(null),
     regionsFamiliarityChoice: [],
+    chosenHexerisIds: new Array(10).fill(null),
   }
 };
 
@@ -62,6 +65,7 @@ export const reducer = (state = initialState, action) => {
           chosenAdvantagesIds: new Array(12).fill(null),
           chosenImplantsIds: new Array(10).fill(null),
           regionsFamiliarityChoice: [],
+          chosenHexerisIds: new Array(10).fill(null),
         }
       };
     case INPUT_CHANGE:
@@ -197,6 +201,28 @@ export const reducer = (state = initialState, action) => {
         character: {
           ...state.character,
           regionsFamiliarityChoice: action.regionsFamiliarityChoice,
+        }
+      };
+    case HEXERI_SELECTED:
+      let clonedChosenHexerisIds = [...state.character.chosenHexerisIds];
+      clonedChosenHexerisIds[state.character.chosenHexerisIds.indexOf(null)] = parseInt(action.hexeriId);
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          experiencePointsSpent: state.character.experiencePointsSpent + action.cost,
+          chosenHexerisIds: clonedChosenHexerisIds
+        }
+      };
+    case HEXERI_REMOVED:
+      let _clonedChosenHexerisIds = [...state.character.chosenHexerisIds];
+      _clonedChosenHexerisIds[state.character.chosenHexerisIds.indexOf(parseInt(action.hexeriId))] = null;
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          experiencePointsSpent: state.character.experiencePointsSpent - action.cost,
+          chosenHexerisIds: _clonedChosenHexerisIds
         }
       };
     case FETCH_HEROES_STARTED:

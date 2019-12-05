@@ -4,21 +4,14 @@ import {Formik, Field, Form} from 'formik';
 import Select from 'react-select';
 import {connect} from "react-redux";
 import {get, map, uniq, startCase} from "lodash";
-import AdvantagesChoiceList from "./AdvantagesChoiceList";
+import HexerisChoiceList from "./HexerisChoiceList";
 
 //actions
 import {
-  advantageSelected
+  hexeriSelected
 } from '../../store/heroes';
 
-const ADVANTAGES_MAP = {
-  ranged: "Strzeleckie",
-  melee: "Walka w Zwarciu",
-  general: "Ogólne",
-  battle_general: "Ogólne Bitewne"
-};
-
-class ChooseAdvantageModal extends Component {
+class ChooseHexeriModal extends Component {
   state = {
     isOpen: false,
   };
@@ -29,34 +22,27 @@ class ChooseAdvantageModal extends Component {
     }));
   };
 
-  advantageTypes = () => {
-    const kinds = uniq(map(this.props.advantagesList, "kind")).filter(kind => kind !== "hexeri");
-    return (map(kinds, (kind) => {
-      return ({value: kind, label: ADVANTAGES_MAP[kind]})
-    }));
-  };
-
-  handleAdvantageChoice = (values, {setSubmitting}) => {
+  handleHexeriChoice = (values, {setSubmitting}) => {
     setTimeout(() => {
       setSubmitting(false);
     }, 400);
-    const id = values.advantagesChoiceList;
-    const cost = this.props.advantagesList[id].pd_cost;
+    const id = values.hexerisChoiceList;
+    const cost = this.props.hexerisList[id].pd_cost;
     this.toggleOpen();
-    this.props.advantageSelected(id, cost);
+    this.props.hexeriSelected(id, cost);
   };
 
   render() {
     return (
       <Fragment>
-        <Button key={"addAnAdvantage"} color="success" className="tiny__button float-left"
+        <Button key={"addHexeri"} color="success" className="tiny__button float-left"
                 onClick={this.toggleOpen}>+</Button>
         <Modal isOpen={this.state.isOpen} toggle={this.toggleOpen} className={this.props.className}>
-          <ModalHeader toggle={this.toggleOpen}>Wybierz Atut</ModalHeader>
+          <ModalHeader toggle={this.toggleOpen}>Wybierz Hexeri</ModalHeader>
           <ModalBody>
             <Formik
-              initialValues={{advantageType: '', advantagesChoiceList: []}}
-              onSubmit={this.handleAdvantageChoice}>
+              initialValues={{hexerisChoiceList: []}}
+              onSubmit={this.handleHexeriChoice}>
               {({
                   values,
                   handleChange,
@@ -67,13 +53,7 @@ class ChooseAdvantageModal extends Component {
                   /* and other goodies */
                 }) => (
                 <Form onSubmit={handleSubmit}>
-                  <Select
-                    id="color"
-                    options={this.advantageTypes()}
-                    multi={false}
-                    onChange={selected => setFieldValue("advantageType", selected.value)}
-                  />
-                  <Field component={AdvantagesChoiceList} name="advantagesChoiceList" selectedAdvantageType={values.advantageType}/>
+                  <Field component={HexerisChoiceList} name="hexerisChoiceList"/>
                   <Button type="submit" color="primary" disabled={isSubmitting}>
                     Wybierz
                   </Button>
@@ -91,14 +71,14 @@ class ChooseAdvantageModal extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  advantagesList: get(state, "advantages.byId"),
+  hexerisList: get(state, "advantages.byId"),
 });
 
 const mapDispatchToProps = {
-  advantageSelected,
+  hexeriSelected,
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ChooseAdvantageModal);
+)(ChooseHexeriModal);

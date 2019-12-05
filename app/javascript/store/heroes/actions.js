@@ -16,6 +16,8 @@ export const ADVANTAGE_REMOVED = 'creator/ADVANTAGE_REMOVED';
 export const IMPLANT_SELECTED = 'creator/IMPLANT_SELECTED';
 export const IMPLANT_REMOVED = 'creator/IMPLANT_REMOVED';
 export const REGIONS_FAMILIARITY_UPDATED = 'creator/REGIONS_FAMILIARITY_UPDATED';
+export const HEXERI_SELECTED = 'creator/HEXERI_SELECTED';
+export const HEXERI_REMOVED = 'creator/HEXERI_REMOVED';
 
 export const inputChange = (value, fieldName) => ({type: INPUT_CHANGE, value: value, fieldName: fieldName});
 export const heroClassSelected = (value) => ({type: HERO_CLASS_CHANGED, value: value});
@@ -65,6 +67,18 @@ export const advantageSelected = (advantageId, cost) => ({
 export const advantageRemoved = (advantageId, cost) => ({
   type: ADVANTAGE_REMOVED,
   advantageId,
+  cost
+});
+
+export const hexeriSelected = (hexeriId, cost) => ({
+  type: HEXERI_SELECTED,
+  hexeriId,
+  cost
+});
+
+export const hexeriRemoved = (hexeriId, cost) => ({
+  type: HEXERI_REMOVED,
+  hexeriId,
   cost
 });
 

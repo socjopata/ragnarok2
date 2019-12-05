@@ -56,6 +56,21 @@ export const chosenAdvantages = state => {
   }
 };
 
+export const chosenHexerisIds = state => {
+  if (state.heroes && state.heroes.byId) {
+    return (state.heroes.character.chosenHexerisIds);
+  }
+};
+
+export const chosenHexeris = state => {
+  if (state.advantages && state.advantages.byId) {
+    const hexeriIds = compact(state.heroes.character.chosenHexerisIds);
+    const advantages = get(state, "advantages.byId");
+    //TODO maybe additionally filter out by kind...
+    return (values(advantages).filter(advantage => hexeriIds.includes(advantage.id)));
+  }
+};
+
 export const mainParameterBase = (state, name) => {
   if (state.heroes && state.heroes.byId) {
     const chosenHero = state.heroes.byId[parseInt(state.heroes.character.id)];

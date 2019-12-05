@@ -6,6 +6,7 @@ import classNames from 'classnames'
 import TestDifficultyCheatSheet from "./TestDifficultyCheatSheet";
 import ChooseAdvantageModal from "./ChooseAdvantageModal";
 import ChooseImplantModal from "./ChooseImplantModal";
+import ChooseHexeriModal from "./ChooseHexeriModal";
 //actions
 import {
   inputChange,
@@ -17,6 +18,7 @@ import {
   secondaryParameterDecremented,
   advantageRemoved,
   implantRemoved,
+  hexeriRemoved,
   regionsFamiliarityUpdated,
   virtueSelected,
 } from '../../store/heroes';
@@ -51,6 +53,8 @@ import {
   chosenImplantsIds,
   chosenImplants,
   regionsFamiliarityChoice,
+  chosenHexerisIds,
+  chosenHexeris,
 } from '../../store/heroes';
 
 class FirstPageBlob extends Component {
@@ -92,6 +96,11 @@ class FirstPageBlob extends Component {
   handleRemoveAdvantageChoice = (advantageId, pdCost) => {
     this.props.advantageRemoved(advantageId, pdCost);
   };
+
+  handleRemoveHexeriChoice = (hexeriId, pdCost) => {
+    this.props.hexeriRemoved(hexeriId, pdCost);
+  };
+
 
   handleRemoveImplantChoice = (implantId, neurostabilityCost, moneyCost, kind) => {
     const { selectedVirtues, regionsFamiliarityChoice, chosenImplants } = this.props;
@@ -265,6 +274,29 @@ class FirstPageBlob extends Component {
         // render skill name <p> with on hover tooltip with desc + cost of use again
       } else if (chosenImplantsIds.indexOf(null) === implantIndex) {
         return(<ChooseImplantModal/>);
+      }
+    }
+  };
+
+  renderHexeriChoiceButton(hexeriIndex) {
+    const {heroSelected, allFlexibleParametersAssigned, allVirtuesSelected, chosenHexerisIds, chosenHexeris} = this.props;
+    if (heroSelected && allVirtuesSelected && allFlexibleParametersAssigned) {
+      if (!!chosenHexerisIds[hexeriIndex]) {
+        const hexeri = chosenHexeris[hexeriIndex];
+        return (<p>
+          <span href="#" id={"hexeriDescription" + hexeri.id}>{hexeri.name}</span>
+          <UncontrolledTooltip placement="right" target={"hexeriDescription" + hexeri.id}>
+            {hexeri.description}
+          </UncontrolledTooltip>
+          <Button key={"removeHexeri" + hexeri.id} color="danger"
+                  className="tiny__button float-right"
+                  onClick={() => this.handleRemoveHexeriChoice(hexeri.id, hexeri.pd_cost)}>-
+          </Button>
+        </p>)
+
+        // render skill name <p> with on hover tooltip with desc + cost of use again
+      } else if (chosenHexerisIds.indexOf(null) === hexeriIndex) {
+        return(<ChooseHexeriModal/>);
       }
     }
   };
@@ -583,8 +615,8 @@ class FirstPageBlob extends Component {
           <td className="black-and-white__cell">Moc (INTx5)</td>
         </tr>
         <tr className="solid-border__cell">
-          <td colSpan="2">{this.renderAdvantageChoiceButton(2)}</td>
-          <td colSpan="3">{this.renderAdvantageChoiceButton(8)}</td>
+          <td colSpan="2">{this.renderAdvantageChoiceButton(2)}&nbsp;</td>
+          <td colSpan="3">{this.renderAdvantageChoiceButton(8)}&nbsp;</td>
           <td className="centered__cell no-horizontal-border__cell white-and-black__cell">{this.props.power}</td>
         </tr>
         <tr className="solid-border__cell">
@@ -636,28 +668,28 @@ class FirstPageBlob extends Component {
           <td className="no-horizontal-border__cell white-and-black__cell">OOOOO OOOOO</td>
         </tr>
         <tr className="solid-border__cell">
-          <td colSpan="2">&nbsp;</td>
-          <td colSpan="3">&nbsp;</td>
+          <td colSpan="2">{this.renderHexeriChoiceButton(0)}&nbsp;</td>
+          <td colSpan="3">{this.renderHexeriChoiceButton(5)}&nbsp;</td>
           <td rowSpan="2" className="black-and-white__cell">Poziom Trudności Testów</td>
         </tr>
         <tr className="solid-border__cell">
-          <td colSpan="2">&nbsp;</td>
-          <td colSpan="3">&nbsp;</td>
+          <td colSpan="2">{this.renderHexeriChoiceButton(1)}&nbsp;</td>
+          <td colSpan="3">{this.renderHexeriChoiceButton(6)}&nbsp;</td>
         </tr>
         <tr className="solid-border__cell">
-          <td colSpan="2">&nbsp;</td>
-          <td colSpan="3">&nbsp;</td>
+          <td colSpan="2">{this.renderHexeriChoiceButton(2)}&nbsp;</td>
+          <td colSpan="3">{this.renderHexeriChoiceButton(7)}&nbsp;</td>
           <td className="table-wrapping__cell" rowSpan="8">
             <TestDifficultyCheatSheet/>
           </td>
         </tr>
         <tr className="solid-border__cell">
-          <td colSpan="2">&nbsp;</td>
-          <td colSpan="3">&nbsp;</td>
+          <td colSpan="2">{this.renderHexeriChoiceButton(3)}&nbsp;</td>
+          <td colSpan="3">{this.renderHexeriChoiceButton(8)}&nbsp;</td>
         </tr>
         <tr className="solid-border__cell">
-          <td colSpan="2">&nbsp;</td>
-          <td colSpan="3">&nbsp;</td>
+          <td colSpan="2">{this.renderHexeriChoiceButton(4)}&nbsp;</td>
+          <td colSpan="3">{this.renderHexeriChoiceButton(9)}&nbsp;</td>
         </tr>
         <tr className="solid-border__cell black-and-white__cell">
           <td colSpan="5">WYPOSAŻENIE</td>
@@ -717,6 +749,8 @@ const mapStateToProps = (state) => ({
   chosenImplantsIds: chosenImplantsIds(state),
   chosenImplants: chosenImplants(state),
   regionsFamiliarityChoice: regionsFamiliarityChoice(state),
+  chosenHexerisIds: chosenHexerisIds(state),
+  chosenHexeris: chosenHexeris(state),
 });
 
 const mapDispatchToProps = {
@@ -728,6 +762,7 @@ const mapDispatchToProps = {
   secondaryParameterIncremented,
   secondaryParameterDecremented,
   advantageRemoved,
+  hexeriRemoved,
   implantRemoved,
   regionsFamiliarityUpdated,
   virtueSelected
