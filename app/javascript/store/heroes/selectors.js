@@ -207,10 +207,11 @@ export const focus = createSelector(heroSelected, mainParameterSelfControlTotal,
   }
 );
 
-export const neurostability = createSelector(heroSelected, mainParameterInteligenceTotal, neurostabilityFromVirtues, neurostabilityFromAdvantages, neurostabilityPointsSpent,
-  (chosenHero, inteligenceTotal, fromVirtues, fromAdvantages, neurostabilityPointsSpent) => {
+export const neurostability = createSelector(heroSelected, mainParameterInteligenceTotal, neurostabilityFromVirtues, neurostabilityFromAdvantages, neurostabilityPointsSpent, selectedVirtues,
+  (chosenHero, inteligenceTotal, fromVirtues, fromAdvantages, neurostabilityPointsSpent, selectedVirtues) => {
     if (chosenHero) {
-      const baseMultiplier = 5;
+      const cyberneticBody = !isEmpty(compact(selectedVirtues).filter(virtue => virtue.internal_name === "cybernetic_body"));
+      const baseMultiplier = cyberneticBody ? 10 : 5;
       return ((inteligenceTotal * baseMultiplier) + fromVirtues + fromAdvantages - neurostabilityPointsSpent)
     }
   }

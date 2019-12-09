@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {get, isEmpty, map, find, toNumber, uniq} from 'lodash';
+import {get, isEmpty, map, find, toNumber, uniq, sum} from 'lodash';
 import {Input, Button, UncontrolledTooltip} from 'reactstrap';
 import {connect} from "react-redux";
 import classNames from 'classnames'
@@ -7,6 +7,7 @@ import TestDifficultyCheatSheet from "./TestDifficultyCheatSheet";
 import ChooseAdvantageModal from "./ChooseAdvantageModal";
 import ChooseImplantModal from "./ChooseImplantModal";
 import ChooseHexeriModal from "./ChooseHexeriModal";
+
 //actions
 import {
   inputChange,
@@ -100,7 +101,6 @@ class FirstPageBlob extends Component {
   handleRemoveHexeriChoice = (hexeriId, pdCost) => {
     this.props.hexeriRemoved(hexeriId, pdCost);
   };
-
 
   handleRemoveImplantChoice = (implantId, neurostabilityCost, moneyCost, kind) => {
     const { selectedVirtues, regionsFamiliarityChoice, chosenImplants } = this.props;
@@ -765,7 +765,7 @@ const mapDispatchToProps = {
   hexeriRemoved,
   implantRemoved,
   regionsFamiliarityUpdated,
-  virtueSelected
+  virtueSelected,
 };
 
 export default connect(

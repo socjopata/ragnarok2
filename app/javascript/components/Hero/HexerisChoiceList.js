@@ -70,7 +70,7 @@ class HexerisChoiceList extends Component {
           />
           <label href="#" id={"hexeriDescriptionChoice" + props.id} htmlFor={props.id}>{props.name}</label>
           <UncontrolledTooltip placement="right" target={"hexeriDescriptionChoice" + props.id}>
-            {props.description}. Koszt: {props.pd_cost}. Wymagania: #TODO
+            {props.description}. Koszt: {props.pd_cost}.
           </UncontrolledTooltip>
         </li>)}
       </ul>

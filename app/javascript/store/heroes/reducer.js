@@ -1,4 +1,5 @@
-import {keyBy, get} from 'lodash';
+import {keyBy, get, sum} from 'lodash';
+import { DiceRoller, DiceRoll } from 'rpg-dice-roller';
 
 import {
   FETCH_HEROES_STARTED,
@@ -20,6 +21,16 @@ import {
   HEXERI_SELECTED,
   HEXERI_REMOVED,
 } from './actions';
+
+
+// TODO where to put this code?
+const uniqueDiceRollSet = (numberOfDices, numberOfSides, ...compareNumbers) => {
+  let uniqueNumber;
+  do {
+    uniqueNumber = sum(new DiceRoll(`${numberOfDices}d${numberOfSides}`).rolls[0]);
+  } while(compareNumbers.includes(uniqueNumber));
+  return uniqueNumber;
+};
 
 const initialState = {
   byId: {},
@@ -43,6 +54,7 @@ const initialState = {
     chosenImplantsIds: new Array(10).fill(null),
     regionsFamiliarityChoice: [],
     chosenHexerisIds: new Array(10).fill(null),
+    einherRolls: [],
   }
 };
 
@@ -66,6 +78,7 @@ export const reducer = (state = initialState, action) => {
           chosenImplantsIds: new Array(10).fill(null),
           regionsFamiliarityChoice: [],
           chosenHexerisIds: new Array(10).fill(null),
+          einherRolls: [],
         }
       };
     case INPUT_CHANGE:
@@ -142,13 +155,46 @@ export const reducer = (state = initialState, action) => {
     case VIRTUE_SELECTED:
       const clonedSelectedVirtues = [...state.character.selectedVirtues];
       clonedSelectedVirtues[action.virtueIndex] = action.virtue;
-      return {
+
+      const _state = {
         ...state,
         character: {
           ...state.character,
           selectedVirtues: clonedSelectedVirtues
         }
       };
+
+      // randomly roll dices for the Einher
+      // TODO where to put this code?
+      if (action.virtue.internal_name === "cybernetic_body") {
+        const NUMBERS_MAP = {
+          2: [2],
+          3: [3, 4],
+          4: [3, 4],
+          5: [5, 6],
+          6: [5, 6],
+          7: [7, 8, 9],
+          8: [7, 8, 9],
+          9: [7, 8, 9],
+          10: [10, 11, 12],
+          11: [10, 11, 12],
+          12: [10, 11, 12],
+          13: [13, 14, 15],
+          14: [13, 14, 15],
+          15: [13, 14, 15],
+          16: [16, 17],
+          17: [16, 17],
+          18: [18, 19],
+          19: [18, 19],
+          20: [20],
+        };
+        const firstRoll = sum(new DiceRoll('2d10').rolls[0]);
+        const reservedNumbers = NUMBERS_MAP[firstRoll];
+        const secondRoll = uniqueDiceRollSet(2, 10, ...reservedNumbers);
+        _state.character.einherRolls = [firstRoll, secondRoll];
+      }
+
+      return _state;
     case ADVANTAGE_SELECTED:
       let clonedChosenAdvantagesIds = [...state.character.chosenAdvantagesIds];
       clonedChosenAdvantagesIds[state.character.chosenAdvantagesIds.indexOf(null)] = parseInt(action.advantageId);

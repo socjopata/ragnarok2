@@ -61,7 +61,7 @@ class ImplantsChoiceList extends Component {
           />
           <label href="#" id={"implantDescriptionChoice" + props.id} htmlFor={props.id}>{props.name}</label>
           <UncontrolledTooltip placement="right" target={"implantDescriptionChoice" + props.id}>
-            {props.description}. Koszt: {props.pd_cost}. Wymagania: #TODO
+            {props.description}. Koszt: {props.pd_cost}.
           </UncontrolledTooltip>
         </li>)}
       </ul>
