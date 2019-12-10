@@ -6,7 +6,8 @@ import {get, map, filter, forEach} from "lodash";
 
 //actions
 import {
-  implantSelected
+  implantSelected,
+  einherEnhancementsDetermined,
 } from '../../store/heroes';
 
 //selectors
@@ -35,43 +36,43 @@ class ChooseEinherEnhancementsModal extends Component {
 
     const {einherRolls, implantsList} = this.props;
 
-    const einherImplantIds = [];
+    const einherImplantsIds = [];
     forEach(einherRolls, rollValue => {
       if (rollValue === 2) {
         const medicPouch = filter(implantsList, implant => implant.internal_name === 'medic_pouch')[0];
         this.props.implantSelected(medicPouch.id, 0, 0);
-        einherImplantIds.push(medicPouch.id);
+        einherImplantsIds.push(medicPouch.id);
       } else if ([3, 4].includes(rollValue)) {
         const extendedLungs = filter(implantsList, implant => implant.internal_name === 'extended_lungs')[0];
         this.props.implantSelected(extendedLungs.id, 0, 0);
-        einherImplantIds.push(extendedLungs.id);
+        einherImplantsIds.push(extendedLungs.id);
       } else if ([5, 6].includes(rollValue)) {
         const antiToxic = filter(implantsList, implant => implant.internal_name === 'anti_toxic')[0];
         this.props.implantSelected(antiToxic.id, 0, 0);
-        einherImplantIds.push(antiToxic.id);
+        einherImplantsIds.push(antiToxic.id);
       } else if ([7, 8, 9].includes(rollValue)) {
         const cyberEyes = filter(implantsList, implant => implant.internal_name.startsWith('odins_eye'));
         forEach(cyberEyes, cyberEye => {
           this.props.implantSelected(cyberEye.id, 0, 0);
-          einherImplantIds.push(cyberEye.id);
+          einherImplantsIds.push(cyberEye.id);
         });
       } else if ([10, 11, 12].includes(rollValue)) {
         const cyberneticPerfection = filter(implantsList, implant => implant.id === parseInt(get(_values, 'einherChoicePerfection', 'id')))[0];
         this.props.implantSelected(cyberneticPerfection.id, 0, 0);
-        einherImplantIds.push(cyberneticPerfection.id);
+        einherImplantsIds.push(cyberneticPerfection.id);
       } else if ([13, 14, 15].includes(rollValue)) {
         const limbType = get(_values, 'einherChoiceLimbs');
         if (limbType === "Hands") {
           const cyberHands = filter(implantsList, implant => implant.internal_name.startsWith('cyber_hand'));
           forEach(cyberHands, cyberHand => {
             this.props.implantSelected(cyberHand.id, 0, 0);
-            einherImplantIds.push(cyberHand.id);
+            einherImplantsIds.push(cyberHand.id);
           });
         } else if (limbType === "Legs") {
           const cyberLegs = filter(implantsList, implant => implant.internal_name.startsWith('cyber_leg'));
           forEach(cyberLegs, cyberLeg => {
             this.props.implantSelected(cyberLeg.id, 0, 0);
-            einherImplantIds.push(cyberLeg.id);
+            einherImplantsIds.push(cyberLeg.id);
           });
         }
       } else if ([16, 17].includes(rollValue)) {
@@ -79,24 +80,24 @@ class ChooseEinherEnhancementsModal extends Component {
         if (perceptionType === "Gere") {
           const gerePerception = filter(implantsList, implant => implant.internal_name === 'gere_perception')[0];
           this.props.implantSelected(gerePerception.id, 0, 0);
-          einherImplantIds.push(gerePerception.id);
+          einherImplantsIds.push(gerePerception.id);
         } else if (perceptionType === "Freke") {
           const frekePerception = filter(implantsList, implant => implant.internal_name === 'freke_perception')[0];
           this.props.implantSelected(frekePerception.id, 0, 0);
-          einherImplantIds.push(frekePerception.id);
+          einherImplantsIds.push(frekePerception.id);
         }
       } else if ([18, 19].includes(rollValue)) {
         const onlyAScratch = filter(implantsList, implant => implant.internal_name === 'only_a_scratch')[0];
         this.props.implantSelected(onlyAScratch.id, 0, 0);
-        einherImplantIds.push(onlyAScratch.id);
+        einherImplantsIds.push(onlyAScratch.id);
       } else if ([20].includes(rollValue)) {
         const cyberneticImprovement = filter(implantsList, implant => implant.id === parseInt(get(_values, 'einherCyberneticImprovement', 'id')))[0];
         this.props.implantSelected(cyberneticImprovement.id, 0, 0);
-        einherImplantIds.push(cyberneticImprovement.id);
+        einherImplantsIds.push(cyberneticImprovement.id);
       }
     });
 
-    // einherImplantIds fire up the einherEnhancementsDetermined, erase rolls, set up einherImplantIds, write logic for disabling some implants removal depending on that array, amend the logic for displaying einher choices
+    this.props.einherEnhancementsDetermined(einherImplantsIds);
   };
 
   cyberneticPerfectionImplants = () => {
@@ -116,7 +117,7 @@ class ChooseEinherEnhancementsModal extends Component {
   };
 
   renderEinherChoice = (index, handleChange) => {
-    const einherRoll = [10, 15][index];
+    const einherRoll = this.props.einherRolls[index];
 
     if (einherRoll === 2) {
       return (<span>Wylosowano: Kieszeń Medyczna</span>)
@@ -128,7 +129,7 @@ class ChooseEinherEnhancementsModal extends Component {
       return (<span>Wylosowano: Cyber Oczy</span>)
     } else if ([10, 11, 12].includes(einherRoll)) {
       return (
-        <ul><span>Wylosowano: Cyb. Perfekcja. Określ typ:</span>
+        <ul><span className="bold__text">Wylosowano: Cyb. Perfekcja. Określ typ:</span>
           {map(this.cyberneticPerfectionImplants(), (props) => <li key={props.id}>
             <input
               name={`einherChoicePerfection`}
@@ -148,7 +149,7 @@ class ChooseEinherEnhancementsModal extends Component {
       )
     } else if ([13, 14, 15].includes(einherRoll)) {
       return (
-        <ul><span>Wylosowano: Cyb. Kończyny (ręce lub nogi). Określ typ:</span>
+        <ul><span className="bold__text">Wylosowano: Cyb. Kończyny (ręce lub nogi). Określ typ:</span>
           <li key="einherChoiceLimbs1">
             <input
               name={`einherChoiceLimbs`}
@@ -177,7 +178,7 @@ class ChooseEinherEnhancementsModal extends Component {
       )
     } else if ([16, 17].includes(einherRoll)) {
       return (
-        <ul><span>Wylosowano: Percepcja Freke lub Gere. Określ typ:</span>
+        <ul><span className="bold__text">Wylosowano: Percepcja Freke lub Gere. Określ typ:</span>
           <li key="einherChoicePerception1">
             <input
               name={`einherChoicePerception`}
@@ -208,7 +209,7 @@ class ChooseEinherEnhancementsModal extends Component {
       return (<span>To tylko Draśnięcie!</span>)
     } else if ([20].includes(einherRoll)) {
       return (
-        <ul><span>Wylosowano: Cyb. Udoskonalenie. Określ typ:</span>
+        <ul><span className="bold__text">Wylosowano: Cyb. Udoskonalenie. Określ typ:</span>
           {map(this.cyberneticImprovementImplants(), (props) => <li key={props.id}>
             <input
               name={`einherCyberneticImprovement`}
@@ -295,7 +296,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  // einherEnhancementsDetermined,
+  einherEnhancementsDetermined,
   implantSelected
 };
 

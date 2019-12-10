@@ -57,6 +57,12 @@ export const chosenAdvantages = state => {
   }
 };
 
+export const einherImplantsIds = state => {
+  if (state.heroes && state.heroes.byId) {
+    return (state.heroes.character.einherImplantsIds);
+  }
+};
+
 export const chosenHexerisIds = state => {
   if (state.heroes && state.heroes.byId) {
     return (state.heroes.character.chosenHexerisIds);

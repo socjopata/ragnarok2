@@ -58,6 +58,7 @@ import {
   chosenHexerisIds,
   chosenHexeris,
   einherRolls,
+  einherImplantsIds,
 } from '../../store/heroes';
 
 class FirstPageBlob extends Component {
@@ -258,7 +259,7 @@ class FirstPageBlob extends Component {
 
   //TODO consider renaming this method and other methods, as it's not only a button
   renderImplantChoiceButton(implantIndex) {
-    const {heroSelected, allFlexibleParametersAssigned, allVirtuesSelected, chosenImplantsIds, chosenImplants, einherRolls} = this.props;
+    const {heroSelected, allFlexibleParametersAssigned, allVirtuesSelected, chosenImplantsIds, chosenImplants, einherRolls, einherImplantsIds} = this.props;
     if (heroSelected && allVirtuesSelected && allFlexibleParametersAssigned) {
       if (!isEmpty(einherRolls)) {
         return(<ChooseEinherEnhancementsModal/>);
@@ -269,13 +270,12 @@ class FirstPageBlob extends Component {
           <UncontrolledTooltip placement="right" target={"implantDescription" + implant.id}>
             {implant.description}
           </UncontrolledTooltip>
+          {!(einherImplantsIds.includes(implant.id)) && (
           <Button key={"removeImplant" + implant.id} color="danger"
                   className="tiny__button implant"
                   onClick={() => this.handleRemoveImplantChoice(implant.id, implant.neurostability_cost, implant.money_cost, implant.kind)}>-
-          </Button>
+          </Button>)}
         </p>)
-
-        // render skill name <p> with on hover tooltip with desc + cost of use again
       } else if (chosenImplantsIds.indexOf(null) === implantIndex) {
         return(<ChooseImplantModal/>);
       }
@@ -756,6 +756,7 @@ const mapStateToProps = (state) => ({
   chosenHexerisIds: chosenHexerisIds(state),
   chosenHexeris: chosenHexeris(state),
   einherRolls: einherRolls(state),
+  einherImplantsIds: einherImplantsIds(state),
 });
 
 const mapDispatchToProps = {

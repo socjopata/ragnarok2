@@ -17,6 +17,7 @@ import {
   ADVANTAGE_REMOVED,
   IMPLANT_SELECTED,
   IMPLANT_REMOVED,
+  EINHER_ENHANCEMENTS_DETERMINED,
   REGIONS_FAMILIARITY_UPDATED,
   HEXERI_SELECTED,
   HEXERI_REMOVED,
@@ -55,7 +56,7 @@ const initialState = {
     regionsFamiliarityChoice: [],
     chosenHexerisIds: new Array(10).fill(null),
     einherRolls: [],
-    einherImplantsIds: [], // this is to actually capture the choices and disable the possibility to remove
+    einherImplantsIds: [],
   }
 };
 
@@ -197,6 +198,16 @@ export const reducer = (state = initialState, action) => {
       }
 
       return _state;
+    case EINHER_ENHANCEMENTS_DETERMINED:
+      const clonedEinherImplantsIds = action.einherImplantsIds;
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          einherImplantsIds: clonedEinherImplantsIds,
+          einherRolls: [],
+        }
+      };
     case ADVANTAGE_SELECTED:
       let clonedChosenAdvantagesIds = [...state.character.chosenAdvantagesIds];
       clonedChosenAdvantagesIds[state.character.chosenAdvantagesIds.indexOf(null)] = parseInt(action.advantageId);

@@ -15,6 +15,7 @@ export const ADVANTAGE_SELECTED = 'creator/ADVANTAGE_SELECTED';
 export const ADVANTAGE_REMOVED = 'creator/ADVANTAGE_REMOVED';
 export const IMPLANT_SELECTED = 'creator/IMPLANT_SELECTED';
 export const IMPLANT_REMOVED = 'creator/IMPLANT_REMOVED';
+export const EINHER_ENHANCEMENTS_DETERMINED = 'creator/EINHER_ENHANCEMENTS_DETERMINED';
 export const REGIONS_FAMILIARITY_UPDATED = 'creator/REGIONS_FAMILIARITY_UPDATED';
 export const HEXERI_SELECTED = 'creator/HEXERI_SELECTED';
 export const HEXERI_REMOVED = 'creator/HEXERI_REMOVED';
@@ -87,6 +88,11 @@ export const implantSelected = (implantId, neurostabilityCost, moneyCost,) => ({
   implantId,
   neurostabilityCost,
   moneyCost,
+});
+
+export const einherEnhancementsDetermined = (einherImplantsIds) => ({
+  type: EINHER_ENHANCEMENTS_DETERMINED,
+  einherImplantsIds,
 });
 
 export const implantRemoved = (implantId, neurostabilityCost, moneyCost,) => ({
