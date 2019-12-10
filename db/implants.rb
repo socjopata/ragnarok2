@@ -30,6 +30,16 @@ Implant.create(
   construction: "Technika / Hekseri"
 )
 
+Implant.create(
+  kind: "Midgard",
+  internal_name: "odins_eye_2",
+  name: "Oko Odyna (drugie)",
+  description: "Postać zyskuje jedną, cybernetyczną gałkę oczną. Wszczep umożliwia wprowadzenie następujących opcji: Kamera, Noktowizor, H.U.D, Przesłona, Termowizja",
+  neurostability_cost: 1,
+  money_cost: 500,
+  construction: "Technika / Hekseri"
+)
+
 implant = Implant.create(
   kind: "Midgard",
   internal_name: "camera",

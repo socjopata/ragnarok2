@@ -8,6 +8,7 @@ export const chosenFlexibleSecondaryParameters = state => get(state, "heroes.cha
 export const selectedVirtues = state => get(state, "heroes.character.selectedVirtues");
 export const allVirtuesSelected = state => compact(state.heroes.character.selectedVirtues).length === 2;
 export const regionsFamiliarityChoice = state => get(state, "heroes.character.regionsFamiliarityChoice");
+export const einherRolls = state => get(state, "heroes.character.einherRolls");
 
 const experiencePointsSpent = state => get(state, "heroes.character.experiencePointsSpent");
 const neurostabilityPointsSpent = state => get(state, "heroes.character.neurostabilityPointsSpent");

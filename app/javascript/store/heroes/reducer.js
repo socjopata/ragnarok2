@@ -55,6 +55,7 @@ const initialState = {
     regionsFamiliarityChoice: [],
     chosenHexerisIds: new Array(10).fill(null),
     einherRolls: [],
+    einherImplantsIds: [], // this is to actually capture the choices and disable the possibility to remove
   }
 };
 
@@ -79,6 +80,7 @@ export const reducer = (state = initialState, action) => {
           regionsFamiliarityChoice: [],
           chosenHexerisIds: new Array(10).fill(null),
           einherRolls: [],
+          einherImplantsIds: [],
         }
       };
     case INPUT_CHANGE:

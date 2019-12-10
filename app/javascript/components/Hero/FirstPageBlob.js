@@ -7,6 +7,7 @@ import TestDifficultyCheatSheet from "./TestDifficultyCheatSheet";
 import ChooseAdvantageModal from "./ChooseAdvantageModal";
 import ChooseImplantModal from "./ChooseImplantModal";
 import ChooseHexeriModal from "./ChooseHexeriModal";
+import ChooseEinherEnhancementsModal from "./ChooseEinherEnhancementsModal";
 
 //actions
 import {
@@ -56,6 +57,7 @@ import {
   regionsFamiliarityChoice,
   chosenHexerisIds,
   chosenHexeris,
+  einherRolls,
 } from '../../store/heroes';
 
 class FirstPageBlob extends Component {
@@ -256,9 +258,11 @@ class FirstPageBlob extends Component {
 
   //TODO consider renaming this method and other methods, as it's not only a button
   renderImplantChoiceButton(implantIndex) {
-    const {heroSelected, allFlexibleParametersAssigned, allVirtuesSelected, chosenImplantsIds, chosenImplants} = this.props;
+    const {heroSelected, allFlexibleParametersAssigned, allVirtuesSelected, chosenImplantsIds, chosenImplants, einherRolls} = this.props;
     if (heroSelected && allVirtuesSelected && allFlexibleParametersAssigned) {
-      if (!!chosenImplantsIds[implantIndex]) {
+      if (!isEmpty(einherRolls)) {
+        return(<ChooseEinherEnhancementsModal/>);
+      } else if (!!chosenImplantsIds[implantIndex]) {
         const implant = chosenImplants[implantIndex];
         return (<p>
           <span href="#" id={"implantDescription" + implant.id}>{implant.name}</span>
@@ -751,6 +755,7 @@ const mapStateToProps = (state) => ({
   regionsFamiliarityChoice: regionsFamiliarityChoice(state),
   chosenHexerisIds: chosenHexerisIds(state),
   chosenHexeris: chosenHexeris(state),
+  einherRolls: einherRolls(state),
 });
 
 const mapDispatchToProps = {
