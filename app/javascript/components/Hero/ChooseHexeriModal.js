@@ -3,12 +3,17 @@ import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import {Formik, Field, Form} from 'formik';
 import Select from 'react-select';
 import {connect} from "react-redux";
-import {get, map, uniq, startCase} from "lodash";
+import {get, compact, isEmpty} from "lodash";
 import HexerisChoiceList from "./HexerisChoiceList";
+
+//selectors
+import {
+  selectedVirtues,
+} from "../../store/heroes";
 
 //actions
 import {
-  hexeriSelected
+  hexeriSelected,
 } from '../../store/heroes';
 
 class ChooseHexeriModal extends Component {
@@ -27,9 +32,13 @@ class ChooseHexeriModal extends Component {
       setSubmitting(false);
     }, 400);
     const id = values.hexerisChoiceList;
-    const cost = this.props.hexerisList[id].pd_cost;
+    const originalCost = this.props.hexerisList[id].pd_cost;
+    const selectedVirtues = this.props.selectedVirtues;
+    const stager = !isEmpty(compact(selectedVirtues).filter(virtue => virtue.internal_name === "stager"));
+    const _pdCost = stager ? originalCost - 1 : originalCost;
+
     this.toggleOpen();
-    this.props.hexeriSelected(id, cost);
+    this.props.hexeriSelected(id, _pdCost);
   };
 
   render() {
@@ -72,6 +81,7 @@ class ChooseHexeriModal extends Component {
 
 const mapStateToProps = (state) => ({
   hexerisList: get(state, "advantages.byId"),
+  selectedVirtues: selectedVirtues(state)
 });
 
 const mapDispatchToProps = {

@@ -167,6 +167,7 @@ const hitPointsFromVirtues = state => bonusFromVirtues(state, 'hit_points', "Vir
 const powerFromVirtues = state => bonusFromVirtues(state, 'power', "VirtualParameter");
 const apparitionFromVirtues = state => bonusFromVirtues(state, 'apparition', "VirtualParameter");
 const moneyFromVirtues = state => bonusFromVirtues(state, 'money', "VirtualParameter");
+const experiencePointsFromVirtues = state => bonusFromVirtues(state, 'experience_points', "VirtualParameter");
 
 const focusFromAdvantages = state => bonusFromAdvantages(state, 'focus', "VirtualParameter");
 const neurostabilityFromAdvantages = state => bonusFromAdvantages(state, 'neurostability', "VirtualParameter");
@@ -196,12 +197,12 @@ export const allFlexibleParametersAssigned = createSelector(heroSelected, flexib
   }
 );
 
-export const experiencePoints = createSelector(heroSelected, mainParameterInteligenceTotal, experiencePointsSpent,
-  (chosenHero, inteligenceTotal, experiencePointsSpent) => {
+export const experiencePoints = createSelector(heroSelected, mainParameterInteligenceTotal, experiencePointsSpent, experiencePointsFromVirtues,
+  (chosenHero, inteligenceTotal, experiencePointsSpent, experiencePointsFromVirtues) => {
     if (chosenHero) {
       const defaultBase = 10;
       const defaultInteligenceMultiplier = 3;
-      return (defaultBase + inteligenceTotal * defaultInteligenceMultiplier - experiencePointsSpent)
+      return (defaultBase + experiencePointsFromVirtues + inteligenceTotal * defaultInteligenceMultiplier - experiencePointsSpent)
     }
   }
 );

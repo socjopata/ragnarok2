@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {get, isEmpty, map, find, toNumber, uniq, sum} from 'lodash';
+import {get, isEmpty, map, find, toNumber, uniq, sum, compact} from 'lodash';
 import {Input, Button, UncontrolledTooltip} from 'reactstrap';
 import {connect} from "react-redux";
 import classNames from 'classnames'
@@ -102,7 +102,10 @@ class FirstPageBlob extends Component {
   };
 
   handleRemoveHexeriChoice = (hexeriId, pdCost) => {
-    this.props.hexeriRemoved(hexeriId, pdCost);
+    const selectedVirtues = this.props.selectedVirtues;
+    const stager = !isEmpty(compact(selectedVirtues).filter(virtue => virtue.internal_name === "stager"));
+    const _pdCost = stager ? pdCost - 1 : pdCost;
+    this.props.hexeriRemoved(hexeriId, _pdCost);
   };
 
   handleRemoveImplantChoice = (implantId, neurostabilityCost, moneyCost, kind) => {
