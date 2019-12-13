@@ -7,17 +7,15 @@ import {
   chosenHexeris,
   chosenHexerisIds,
   mainParameterTotal,
-  secondaryParameterTotal,
-  bonusFromVirtues,
   experiencePoints,
 } from "../../store/heroes";
 import {UncontrolledTooltip} from "reactstrap";
 
 class HexerisChoiceList extends Component {
   currentHexerisList = () => {
-    const {hexerisList, chosenHexerisIds} = this.props;
+    const {hexerisList, chosenHexerisIds, selectedHexeriType} = this.props;
     if (hexerisList) {
-      const hexerisOfSelectedType = filter(hexerisList, ['kind', "hexeri"]);
+      const hexerisOfSelectedType = filter(hexerisList, ['kind', selectedHexeriType]);
       const currentHexeris = hexerisOfSelectedType.filter(hexeri => !includes(compact(chosenHexerisIds), hexeri.id));
       return (currentHexeris);
     }
@@ -29,27 +27,27 @@ class HexerisChoiceList extends Component {
   };
 
   hexeriChoiceDisabled = (hexeri) => {
-    const {mainParameterTotal, hexerisList, bonusFromVirtues, secondaryParameterTotal, experiencePoints} = this.props;
-    const booleans = map(hexeri.requirements, requirement => {
-      switch (requirement.check_applies_to) {
-        case "MainParameter":
-          return (mainParameterTotal(requirement.name) >= parseInt(requirement.value));
-        case "Advantage":
-          return map(hexerisList, 'internal_name').includes(requirement.name);
-        case "VirtualParameter":
-          return (bonusFromVirtues(requirement.name, "VirtualParameter") >= parseInt(requirement.value));
-        case "EitherMainParameter":
-          const skillRequirements = requirement.name.split('_or_');
-          return(!find(skillRequirements, skillName => (mainParameterTotal(skillName) >= parseInt(requirement.value))));
-        case "SecondaryParameter":
-          return (secondaryParameterTotal(requirement.name) >= parseInt(requirement.value));
-      }
-    });
-
-    booleans.push(experiencePoints < hexeri.pd_cost);
-    if (booleans.includes(true)) {
-      return (true);
-    }
+    // const {mainParameterTotal, hexerisList, bonusFromVirtues, secondaryParameterTotal, experiencePoints} = this.props;
+    // const booleans = map(hexeri.requirements, requirement => {
+    //   switch (requirement.check_applies_to) {
+    //     case "MainParameter":
+    //       return (mainParameterTotal(requirement.name) >= parseInt(requirement.value));
+    //     case "Advantage":
+    //       return map(hexerisList, 'internal_name').includes(requirement.name);
+    //     case "VirtualParameter":
+    //       return (bonusFromVirtues(requirement.name, "VirtualParameter") >= parseInt(requirement.value));
+    //     case "EitherMainParameter":
+    //       const skillRequirements = requirement.name.split('_or_');
+    //       return(!find(skillRequirements, skillName => (mainParameterTotal(skillName) >= parseInt(requirement.value))));
+    //     case "SecondaryParameter":
+    //       return (secondaryParameterTotal(requirement.name) >= parseInt(requirement.value));
+    //   }
+    // });
+    //
+    // booleans.push(experiencePoints < hexeri.pd_cost);
+    // if (booleans.includes(true)) {
+    //   return (true);
+    // }
 
     return (false);
   };
@@ -84,9 +82,7 @@ const mapStateToProps = (state) => ({
   chosenHexeris: chosenHexeris(state),
   chosenHexerisIds: chosenHexerisIds(state),
   mainParameterTotal: name => mainParameterTotal(state, name),
-  secondaryParameterTotal: name => secondaryParameterTotal(state, name),
-  bonusFromVirtues: (name, type) => bonusFromVirtues(state, name, type),
-  hexerisList: get(state, "advantages.byId"),
+  hexerisList: get(state, "hexeris.byId"),
 });
 
 export default connect(

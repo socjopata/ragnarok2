@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :heroes, only: [:index]
       resources :advantages, only: [:index]
       resources :implants, only: [:index]
+      resources :hexeris, only: [:index]
     end
   end
 

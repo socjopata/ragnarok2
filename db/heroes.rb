@@ -93,7 +93,10 @@ Virtue.create(hero_id: hero.id, name: "Chwila Chwały", internal_name: "a_moment
 Virtue.create(hero_id: hero.id, name: "Hekser", internal_name: "hexer", description: "Weteran może rzucać Hekseri w walce nie dając przeciwnikowi darmowego ataku.")
 virtue = Virtue.create(hero_id: hero.id, name: "Wyga", internal_name: "stager", description: "na etapie tworzenia postaci Weteran otrzymuje dodatkową ilość PD równą wartości swojej Entropii, a koszt nauczenia się wszystkich Hekseri na stałe zmniejszony jest o 1pkt.")
 virtue.virtual_parameters.create(name: "experience_points", value: 6)
-
+# TODO make hekseri spells cost 1 PD less
+#     const isStager = !isEmpty(compact(selectedVirtues).filter(virtue => virtue.internal_name === "stager"));
+#     const _pdCost = isStager ? originalCost - 1 : originalCost;
+#
 hero = Hero.find_by(name: 'Jarl')
 { physique: 5, dexterity: 4, perception: 4, inteligence: 5, self_control: 5, entropy: 4 }.each do |param_name, value|
   hero.main_parameters.create(name: param_name, value: value)

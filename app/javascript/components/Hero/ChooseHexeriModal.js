@@ -3,11 +3,12 @@ import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import {Formik, Field, Form} from 'formik';
 import Select from 'react-select';
 import {connect} from "react-redux";
-import {get, compact, isEmpty} from "lodash";
+import {get, compact, isEmpty, uniq, map} from "lodash";
 import HexerisChoiceList from "./HexerisChoiceList";
 
 //selectors
 import {
+  regionsFamiliarityChoice,
   selectedVirtues,
 } from "../../store/heroes";
 
@@ -27,18 +28,23 @@ class ChooseHexeriModal extends Component {
     }));
   };
 
+  hexeriTypes = () => {
+    let kinds = uniq(map(this.props.hexerisList, "kind"));
+    // const regionsFamiliarityChoice = this.props.regionsFamiliarityChoice;
+    // if (regionsFamiliarityChoice.length > 0) {
+    //   kinds = ["Midgard", ...kinds.filter(kind => regionsFamiliarityChoice.includes(kind))];
+    // }
+    return (map(kinds, (kind) => {
+      return ({value: kind, label: kind})
+    }));
+  };
+
   handleHexeriChoice = (values, {setSubmitting}) => {
     setTimeout(() => {
       setSubmitting(false);
     }, 400);
-    const id = values.hexerisChoiceList;
-    const originalCost = this.props.hexerisList[id].pd_cost;
-    const selectedVirtues = this.props.selectedVirtues;
-    const isStager = !isEmpty(compact(selectedVirtues).filter(virtue => virtue.internal_name === "stager"));
-    const _pdCost = isStager ? originalCost - 1 : originalCost;
 
-    this.toggleOpen();
-    this.props.hexeriSelected(id, _pdCost);
+  //TODO here be dragons
   };
 
   render() {
@@ -50,7 +56,7 @@ class ChooseHexeriModal extends Component {
           <ModalHeader toggle={this.toggleOpen}>Wybierz Hexeri</ModalHeader>
           <ModalBody>
             <Formik
-              initialValues={{hexerisChoiceList: []}}
+              initialValues={{hexeriType: '', hexerisChoiceList: []}}
               onSubmit={this.handleHexeriChoice}>
               {({
                   values,
@@ -62,7 +68,13 @@ class ChooseHexeriModal extends Component {
                   /* and other goodies */
                 }) => (
                 <Form onSubmit={handleSubmit}>
-                  <Field component={HexerisChoiceList} name="hexerisChoiceList"/>
+                  <Select
+                    id="color"
+                    options={this.hexeriTypes()}
+                    multi={false}
+                    onChange={selected => setFieldValue("hexeriType", selected.value)}
+                  />
+                  <Field component={HexerisChoiceList} name="hexerisChoiceList" selectedHexeriType={values.hexeriType}/>
                   <Button type="submit" color="primary" disabled={isSubmitting}>
                     Wybierz
                   </Button>
@@ -80,8 +92,9 @@ class ChooseHexeriModal extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  hexerisList: get(state, "advantages.byId"),
-  selectedVirtues: selectedVirtues(state)
+  hexerisList: get(state, "hexeris.byId"),
+  selectedVirtues: selectedVirtues(state),
+//    regionsFamiliarityChoice: regionsFamiliarityChoice(state), TODO ?
 });
 
 const mapDispatchToProps = {

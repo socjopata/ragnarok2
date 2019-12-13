@@ -15,10 +15,11 @@ import "./hero.scss"
 import {fetchHeroes} from "../../store/heroes";
 import {fetchAdvantages} from "../../store/advantages";
 import {fetchImplants} from "../../store/implants";
+import {fetchHexeris} from "../../store/hexeris";
 
 class Creator extends Component {
   componentDidMount() {
-    const {heroesList, fetchHeroes, advantagesList, fetchAdvantages, implantsList, fetchImplants} = this.props;
+    const {heroesList, fetchHeroes, advantagesList, fetchAdvantages, implantsList, fetchImplants, hexerisList, fetchHexeris} = this.props;
     if (isEmpty(heroesList)) {
       fetchHeroes();
     }
@@ -27,6 +28,9 @@ class Creator extends Component {
     }
     if (isEmpty(implantsList)) {
       fetchImplants();
+    }
+    if (isEmpty(hexerisList)) {
+      fetchHexeris();
     }
   }
 
@@ -54,12 +58,14 @@ const mapStateToProps = (state) => ({
   heroesList: get(state, "heroes.byId"),
   advantagesList: get(state, "advantages.byId"),
   implantsList: get(state, "implants.byId"),
+  hexerisList: get(state, "hexeris.byId"),
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchHeroes: () => fetchHeroes(dispatch),
   fetchAdvantages: () => fetchAdvantages(dispatch),
   fetchImplants: () => fetchImplants(dispatch),
+  fetchHexeris: () => fetchHexeris(dispatch),
 });
 
 export default connect(

@@ -102,10 +102,7 @@ class FirstPageBlob extends Component {
   };
 
   handleRemoveHexeriChoice = (hexeriId, pdCost) => {
-    const selectedVirtues = this.props.selectedVirtues;
-    const isStager = !isEmpty(compact(selectedVirtues).filter(virtue => virtue.internal_name === "stager"));
-    const _pdCost = isStager ? pdCost - 1 : pdCost;
-    this.props.hexeriRemoved(hexeriId, _pdCost);
+    this.props.hexeriRemoved(hexeriId, pdCost);
   };
 
   handleRemoveImplantChoice = (implantId, neurostabilityCost, moneyCost, kind) => {

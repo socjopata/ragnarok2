@@ -70,10 +70,9 @@ export const chosenHexerisIds = state => {
 };
 
 export const chosenHexeris = state => {
-  if (state.advantages && state.advantages.byId) {
+  if (state.hexeris && state.hexeris.byId) {
     const hexeriIds = compact(state.heroes.character.chosenHexerisIds);
-    const advantages = get(state, "advantages.byId");
-    //TODO maybe additionally filter out by kind...
+    const advantages = get(state, "hexeris.byId");
     return (values(advantages).filter(advantage => hexeriIds.includes(advantage.id)));
   }
 };

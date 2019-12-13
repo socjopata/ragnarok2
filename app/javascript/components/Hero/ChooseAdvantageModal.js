@@ -14,6 +14,7 @@ import {
 const ADVANTAGES_MAP = {
   ranged: "Strzeleckie",
   melee: "Walka w Zwarciu",
+  hexeri: "Hekseri",
   general: "Ogólne",
   battle_general: "Ogólne Bitewne"
 };
@@ -30,7 +31,7 @@ class ChooseAdvantageModal extends Component {
   };
 
   advantageTypes = () => {
-    const kinds = uniq(map(this.props.advantagesList, "kind")).filter(kind => kind !== "hexeri");
+    const kinds = uniq(map(this.props.advantagesList, "kind"));
     return (map(kinds, (kind) => {
       return ({value: kind, label: ADVANTAGES_MAP[kind]})
     }));
