@@ -199,12 +199,22 @@ export const reducer = (state = initialState, action) => {
       } else if (action.virtue.internal_name === "crazy_genius") {
         const crazyGenius = find(_state.byId, character => character.name === 'Techmistrz');
         crazyGenius.parameters = map(crazyGenius.parameters, parameter => {
-            parameter.value = parameter.value === 0 ? 0 : parameter.value + 1;
-            return (parameter)
+            if (parameter.type === "SecondaryParameter") {
+              parameter.value = parameter.value === 0 ? 0 : parameter.value + 1;
+              return parameter;
+            } else if (parameter.type === "MainParameter") {
+              if (parameter.name === "inteligence") {
+                parameter.value = 8;
+                return parameter;
+              } else if (parameter.name === "self_control") {
+                parameter.value = 3;
+                return parameter;
+              } else {
+                return parameter;
+              }
+            }
           }
         );
-
-        _state.byId[crazyGenius.id] = crazyGenius;
       }
 
       return _state;
