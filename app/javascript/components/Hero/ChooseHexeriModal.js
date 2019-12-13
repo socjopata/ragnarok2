@@ -34,8 +34,8 @@ class ChooseHexeriModal extends Component {
     const id = values.hexerisChoiceList;
     const originalCost = this.props.hexerisList[id].pd_cost;
     const selectedVirtues = this.props.selectedVirtues;
-    const stager = !isEmpty(compact(selectedVirtues).filter(virtue => virtue.internal_name === "stager"));
-    const _pdCost = stager ? originalCost - 1 : originalCost;
+    const isStager = !isEmpty(compact(selectedVirtues).filter(virtue => virtue.internal_name === "stager"));
+    const _pdCost = isStager ? originalCost - 1 : originalCost;
 
     this.toggleOpen();
     this.props.hexeriSelected(id, _pdCost);

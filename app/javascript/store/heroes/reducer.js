@@ -1,4 +1,4 @@
-import {keyBy, get, sum} from 'lodash';
+import {keyBy, get, sum, find, map} from 'lodash';
 import { DiceRoller, DiceRoll } from 'rpg-dice-roller';
 
 import {
@@ -191,10 +191,20 @@ export const reducer = (state = initialState, action) => {
           19: [18, 19],
           20: [20],
         };
+
         const firstRoll = sum(new DiceRoll('2d10').rolls[0]);
         const reservedNumbers = NUMBERS_MAP[firstRoll];
         const secondRoll = uniqueDiceRollSet(2, 10, ...reservedNumbers);
         _state.character.einherRolls = [firstRoll, secondRoll];
+      } else if (action.virtue.internal_name === "crazy_genius") {
+        const crazyGenius = find(_state.byId, character => character.name === 'Techmistrz');
+        crazyGenius.parameters = map(crazyGenius.parameters, parameter => {
+            parameter.value = parameter.value === 0 ? 0 : parameter.value + 1;
+            return (parameter)
+          }
+        );
+
+        _state.byId[crazyGenius.id] = crazyGenius;
       }
 
       return _state;

@@ -269,11 +269,12 @@ export const apparition = createSelector(heroSelected, mainParameterBodyBuilding
   }
 );
 
-export const money = createSelector(heroSelected, moneyFromVirtues, moneyFromAdvantages, moneySpent,
-  (chosenHero, fromVirtues, fromAdvantages, moneySpent) => {
-    if (chosenHero) {
-      const defaultAmount = 1500;
-      // #FIXME edge cases like Techmistrz
+export const money = createSelector(heroSelected, moneyFromVirtues, moneyFromAdvantages, moneySpent, selectedVirtues, allVirtuesSelected,
+  (chosenHero, fromVirtues, fromAdvantages, moneySpent, selectedVirtues, allVirtuesSelected) => {
+    if (chosenHero && allVirtuesSelected) {
+      const isCrazyGenius = !isEmpty(compact(selectedVirtues).filter(virtue => virtue.internal_name === "crazy_genius"));
+      const defaultAmount = isCrazyGenius ? 50 : 1500;
+
       return (defaultAmount + fromVirtues + fromAdvantages - moneySpent);
     }
   }
