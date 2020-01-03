@@ -111,6 +111,16 @@ class FirstPageBlob extends Component {
     const implantFamilies = uniq(map(chosenImplants.filter(implant => implant.id !== implantId), "kind"));
     this.props.implantRemoved(implantId, neurostabilityCost, moneyCost);
 
+    // Remove dependent implants
+    const originalImplant = find(chosenImplants, {id: implantId});
+    each(filter(chosenImplants, implant => implant.id !== originalImplant.id, {}), implant => {
+      const dependency = find(implant.requirements, {check_applies_to: "Implant", name: originalImplant.internal_name}, null);
+      if (dependency) {
+        this.props.implantRemoved(implant.id, implant.neurostability_cost, implant.money_cost);
+      }
+    });
+
+    //handle implants regions scoping
     const twoImplantGroupsAllowed = selectedVirtues && !isEmpty(selectedVirtues.filter(virtue => virtue.internal_name === "fraud"));
     if (twoImplantGroupsAllowed && (regionsFamiliarityChoice.length === 2) && (implantFamilies.length === 1)) {
       this.props.regionsFamiliarityUpdated(implantFamilies)
