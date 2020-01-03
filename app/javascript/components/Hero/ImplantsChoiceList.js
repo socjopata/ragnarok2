@@ -28,11 +28,11 @@ class ImplantsChoiceList extends Component {
   };
 
   implantChoiceDisabled = (implant) => {
-    const {implantsList, neurostability, money} = this.props;
+    const {chosenImplants, neurostability, money} = this.props;
     const booleans = map(implant.requirements, requirement => {
       switch (requirement.check_applies_to) {
         case "Implant":
-          return map(implantsList, 'internal_name').includes(requirement.name);
+          return !map(chosenImplants, 'internal_name').includes(requirement.name);
       }
     });
     booleans.push(neurostability < implant.neurostability_cost);
