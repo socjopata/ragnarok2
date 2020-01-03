@@ -106,7 +106,6 @@ class FirstPageBlob extends Component {
   };
 
   handleRemoveImplantChoice = (implantId, neurostabilityCost, moneyCost, kind) => {
-    //TODO handle removing all dependent implants!
     const { selectedVirtues, regionsFamiliarityChoice, chosenImplants } = this.props;
     const implantFamilies = uniq(map(chosenImplants.filter(implant => implant.id !== implantId), "kind"));
     this.props.implantRemoved(implantId, neurostabilityCost, moneyCost);
