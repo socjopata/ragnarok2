@@ -249,7 +249,7 @@ class FirstPageBlob extends Component {
     const {heroSelected, allFlexibleParametersAssigned, allVirtuesSelected, chosenAdvantagesIds, chosenAdvantages} = this.props;
     if (heroSelected && allVirtuesSelected && allFlexibleParametersAssigned) {
       if (!!chosenAdvantagesIds[advantageIndex]) {
-        const advantage = chosenAdvantages[advantageIndex];
+        const advantage = find(chosenAdvantages, {id: chosenAdvantagesIds[advantageIndex]});
         return (<p>
           <span href="#" id={"advantageDescription" + advantage.id}>{advantage.name}</span>
           <UncontrolledTooltip placement="right" target={"advantageDescription" + advantage.id}>
@@ -297,7 +297,7 @@ class FirstPageBlob extends Component {
     const {heroSelected, allFlexibleParametersAssigned, allVirtuesSelected, chosenHexerisIds, chosenHexeris} = this.props;
     if (heroSelected && allVirtuesSelected && allFlexibleParametersAssigned) {
       if (!!chosenHexerisIds[hexeriIndex]) {
-        const hexeri = chosenHexeris[hexeriIndex];
+        const hexeri = find(chosenHexeris, {id: chosenHexerisIds[hexeriIndex]});
         return (<p>
           <span href="#" id={"hexeriDescription" + hexeri.id}>{hexeri.name}</span>
           <UncontrolledTooltip placement="right" target={"hexeriDescription" + hexeri.id}>
