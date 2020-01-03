@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {get, isEmpty, map, find, toNumber, uniq, sum, compact} from 'lodash';
+import {get, isEmpty, map, find, toNumber, uniq, sum, compact, filter, each} from 'lodash';
 import {Input, Button, UncontrolledTooltip} from 'reactstrap';
 import {connect} from "react-redux";
 import classNames from 'classnames'
@@ -265,7 +265,7 @@ class FirstPageBlob extends Component {
       if (!isEmpty(einherRolls)) {
         return(<ChooseEinherEnhancementsModal/>);
       } else if (!!chosenImplantsIds[implantIndex]) {
-        const implant = chosenImplants[implantIndex];
+        const implant = find(chosenImplants, {id: chosenImplantsIds[implantIndex]});
         return (<p>
           <span href="#" id={"implantDescription" + implant.id}>{implant.name}</span>
           <UncontrolledTooltip placement="right" target={"implantDescription" + implant.id}>
