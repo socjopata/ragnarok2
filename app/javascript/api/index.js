@@ -11,3 +11,4 @@ export const fetchAdvantages = () => api.get('/advantages').then(extractData);
 export const fetchImplants = () => api.get('/implants').then(extractData);
 export const fetchHexeris = () => api.get('/hexeris').then(extractData);
 export const fetchMeleeWeapons = () => api.get('/melee_weapons').then(extractData);
+export const fetchRangedWeapons = () => api.get('/ranged_weapons').then(extractData);

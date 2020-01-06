@@ -157,3 +157,146 @@ MeleeWeapon.create(name: "Ragnarok", internal_name: "ragnarok", kind: "DW", dmg:
 MeleeWeapon.create(name: "Kastety Vidara", internal_name: "vidars_brass_knuckles", kind: "DW", dmg: "+2", balance: 1, defense: 0,
   special_rules: "Dublet +5pkt Obrażeń", money_cost: 300, family: "hand_to_hand", rarity: "common"
 )
+
+RangedWeapon.create(name: "Typowy", internal_name: "regular_revolver", kind: "handgun", dmg: "5+2k10", accuracy: 2, attacks_capability: "1",
+  special_rules: "", money_cost: 60, family: "revolvers", rarity: "common"
+)
+
+RangedWeapon.create(name: "Midgardzki", internal_name: "midgardian_revolver", kind: "handgun", dmg: "9+2k10", accuracy: 2, attacks_capability: "1",
+  special_rules: "", money_cost: 100, family: "revolvers", rarity: "common"
+)
+
+RangedWeapon.create(name: "Pogromca Ymira", internal_name: "ymirs_demise", kind: "handgun", dmg: "7+3k10", accuracy: 2, attacks_capability: "1",
+  special_rules: "+10obrażeń przeciw Trollom, Olbrzymom i Gigantom", money_cost: 300, family: "revolvers", rarity: "military"
+)
+
+RangedWeapon.create(name: "Ciężki", internal_name: "heavy_revolver", kind: "handgun", dmg: "13+k20", accuracy: 3, attacks_capability: "1",
+  special_rules: "Krytyk: Przebicie", money_cost: 400, family: "revolvers", rarity: "military"
+)
+
+RangedWeapon.create(name: "Gniew Ull'a", internal_name: "ulf_anger", kind: "handgun", dmg: "10+3k10", accuracy: 4, attacks_capability: "1",
+  special_rules: "W pierwszej rundzie walki zwiększa ilość Ataków o +1", money_cost: 5000, family: "revolvers", rarity: "legendary"
+)
+
+RangedWeapon.create(name: "Midgardzki", internal_name: "midgardian_pistol", kind: "handgun", dmg: "8+k10", accuracy: 3, attacks_capability: "1-2",
+  special_rules: "", money_cost: 50, family: "pistols", rarity: "common"
+)
+
+RangedWeapon.create(name: "Maszynowy", internal_name: "submachine_gun", kind: "handgun", dmg: "10+k10", accuracy: 3, attacks_capability: "1/seria",
+  special_rules: "", money_cost: 150, family: "pistols", rarity: "common"
+)
+
+RangedWeapon.create(name: "Ciężki", internal_name: "heavy_pistol", kind: "handgun", dmg: "6+2k10", accuracy: 4, attacks_capability: "1-2",
+  special_rules: "Nie ma kary za strzelanie w różne cele", money_cost: 250, family: "pistols", rarity: "military"
+)
+
+RangedWeapon.create(name: "Automatyczny", internal_name: "automatic_pistol", kind: "handgun", dmg: "7+ZR+k10", accuracy: 4, attacks_capability: "1-3",
+  special_rules: "Kara za dodatkowe strzały zmniejszana jest o 2pkt", money_cost: 350, family: "pistols", rarity: "military"
+)
+
+RangedWeapon.create(name: "Popiel", internal_name: "popiel", kind: "handgun", dmg: "12+2k10", accuracy: 6, attacks_capability: "1-2",
+  special_rules: "Ataki Magiczne i Płonące", money_cost: 4000, family: "pistols", rarity: "legendary"
+)
+
+RangedWeapon.create(name: "Popiel", internal_name: "popiel", kind: "handgun", dmg: "12+2k10", accuracy: 6, attacks_capability: "1-2",
+  special_rules: "Ataki Magiczne i Płonące", money_cost: 4000, family: "pistols", rarity: "legendary"
+)
+
+RangedWeapon.create(name: "Typowy", internal_name: "regular_shotgun", kind: "handgun", dmg: "12+k20", accuracy: 3, attacks_capability: "1",
+  special_rules: "", money_cost: 100, family: "shotgun", rarity: "common"
+)
+
+RangedWeapon.create(name: "Obrzyn", internal_name: "sawed_rifle", kind: "handgun", dmg: "15+k20", accuracy: 3, attacks_capability: "1",
+  special_rules: "Krytyk: +5pkt Obrażeń, Zasięg: tylko Bliski", money_cost: 200, family: "shotgun", rarity: "common"
+)
+
+RangedWeapon.create(name: "Automatyczny", internal_name: "automatic_shotgun", kind: "handgun", dmg: "7+3k10", accuracy: 4, attacks_capability: "1-2",
+  special_rules: "Dublet: +10pkt Obrażeń, Zasięg: tylko Bliski", money_cost: 600, family: "shotgun", rarity: "military"
+)
+
+RangedWeapon.create(name: "Oddech Hel", internal_name: "hels_breath", kind: "handgun", dmg: "10+2k20", accuracy: 6, attacks_capability: "1-3",
+  special_rules: "Zasięg: tylko Bliski", money_cost: 10000, family: "shotgun", rarity: "legendary"
+)
+
+weapon = RangedWeapon.create(name: "Gniew Heimdala", internal_name: "heimdals_anger", kind: "long_rifle", dmg: "2+2k20", accuracy: 2, attacks_capability: "1",
+  special_rules: "Minimalne BC 6, Dublet: +10pkt Obrażeń", money_cost: 400, family: "heavy_guns", rarity: "common"
+)
+weapon.requirements.create(check_applies_to: "MainParameter", name: "physique", value: "6")
+
+weapon = RangedWeapon.create(name: "Strzelba Mały Bjorn", internal_name: "little_bjorn", kind: "long_rifle", dmg: "6+3k10", accuracy: 1, attacks_capability: "1-2",
+  special_rules: "Minimalne BC 6, Dublet: +5pkt Obrażeń", money_cost: 600, family: "heavy_guns", rarity: "common"
+)
+weapon.requirements.create(check_applies_to: "MainParameter", name: "physique", value: "6")
+
+weapon = RangedWeapon.create(name: "Ręczne działo VidArms", internal_name: "vid_arms_cannon", kind: "long_rifle", dmg: "5+3k20", accuracy: 3, attacks_capability: "1-2",
+  special_rules: "Minimalne BC 7, Zasięg: do 50metrów", money_cost: 5000, family: "heavy_guns", rarity: "military"
+)
+weapon.requirements.create(check_applies_to: "MainParameter", name: "physique", value: "7")
+
+weapon = RangedWeapon.create(name: "Rail Gun – Gniew Asów", internal_name: "rail_gun", kind: "long_rifle", dmg: "25+4k10", accuracy: 4, attacks_capability: "1",
+  special_rules: "Minimalne BC 10, Dublet Obrażenia x2", money_cost: 10000, family: "heavy_guns", rarity: "legendary"
+)
+weapon.requirements.create(check_applies_to: "MainParameter", name: "physique", value: "10")
+
+RangedWeapon.create(name: "Szturmowy", internal_name: "assault_rifle", kind: "long_rifle", dmg: "5+2k10", accuracy: 3, attacks_capability: "1-3",
+  special_rules: "", money_cost: 200, family: "rifles", rarity: "common"
+)
+
+RangedWeapon.create(name: "Midgardzki", internal_name: "midgardian_rifle", kind: "long_rifle", dmg: "7+k20", accuracy: 2, attacks_capability: "1-2/seria",
+  special_rules: "", money_cost: 150, family: "rifles", rarity: "common"
+)
+
+RangedWeapon.create(name: "Lekki", internal_name: "light_assault_rifle", kind: "long_rifle", dmg: "3+2k10", accuracy: 2, attacks_capability: "1/seria",
+  special_rules: "Kara za strzelanie Serią zmniejszona jest o 2pkt.", money_cost: 200, family: "rifles", rarity: "common"
+)
+
+RangedWeapon.create(name: "Szczekacz", internal_name: "barker", kind: "long_rifle", dmg: "5+k20", accuracy: 5, attacks_capability: "1-3",
+  special_rules: "", money_cost: 700, family: "rifles", rarity: "military"
+)
+
+RangedWeapon.create(name: "Śmiech Lokiego", internal_name: "lokis_laugh", kind: "long_rifle", dmg: "5+3k10", accuracy: 3, attacks_capability: "1-4",
+  special_rules: "Krytyk +10pkt Obrażeń", money_cost: 1200, family: "rifles", rarity: "military"
+)
+
+weapon = RangedWeapon.create(name: "Xargos", internal_name: "lokis_laugh", kind: "long_rifle", dmg: "10+3k10", accuracy: 2, attacks_capability: "1-3 /seria",
+  special_rules: "Krytyk +10pkt Obrażeń", money_cost: 5000, family: "rifles", rarity: "legendary"
+)
+weapon.requirements.create(check_applies_to: "MainParameter", name: "physique", value: "6")
+
+RangedWeapon.create(name: "Typowy", internal_name: "regular_sniper_rifle", kind: "long_rifle", dmg: "5+3k10", accuracy: 5, attacks_capability: "1-2",
+  special_rules: "Ataki muszą być skierowane w jeden cel", money_cost: 700, family: "sniper_rifles", rarity: "common"
+)
+
+RangedWeapon.create(name: "Midgardzki", internal_name: "midgardian_sniper_rifle", kind: "long_rifle", dmg: "15+2k10", accuracy: 7, attacks_capability: "1",
+  special_rules: "", money_cost: 700, family: "sniper_rifles", rarity: "common"
+)
+
+RangedWeapon.create(name: "Prawo Lokiego", internal_name: "lokis_law", kind: "long_rifle", dmg: "2k10x4", accuracy: 8, attacks_capability: "1",
+  special_rules: "Dodatkowe miejsce na Udoskonalenie", money_cost: 4000, family: "sniper_rifles", rarity: "military"
+)
+
+RangedWeapon.create(name: "Sprawiedliwość Odyna", internal_name: "lokis_law", kind: "long_rifle", dmg: "PERx3+3k10", accuracy: 10, attacks_capability: "1",
+  special_rules: "+10pkt Obrażeń przeciw nie Asgardczykom, Ataki Magiczne", money_cost: 12000, family: "sniper_rifles", rarity: "legendary"
+)
+
+weapon = RangedWeapon.create(name: "Granatnik Pogromca v. 300", internal_name: "conqueror_grenade_launcher", kind: "explosive_propelers", dmg: "2+2k20", accuracy: 2, attacks_capability: "1",
+  special_rules: "Minimalne BC 6, obniża pancerz o połowę", money_cost: 800, family: "heavy_guns", rarity: "common"
+)
+weapon.requirements.create(check_applies_to: "MainParameter", name: "physique", value: "6")
+
+weapon = RangedWeapon.create(name: "Granatnik Walhalla", internal_name: "walhalla_grenade_launcher", kind: "explosive_propelers", dmg: "2+2k20", accuracy: 2, attacks_capability: "1",
+  special_rules: "Minimalne BC 6, obniża pancerz o połowę", money_cost: 800, family: "heavy_guns", rarity: "common"
+)
+weapon.requirements.create(check_applies_to: "MainParameter", name: "physique", value: "8")
+
+weapon = RangedWeapon.create(name: "Wyrzutnia Rakiet", internal_name: "rocket_launcher", kind: "explosive_propelers", dmg: "10+5xk10", accuracy: 2, attacks_capability: "1",
+  special_rules: "Minimalne BC  7, Dublet: +10 obrażeń", money_cost: 5000, family: "heavy_guns", rarity: "military"
+)
+weapon.requirements.create(check_applies_to: "MainParameter", name: "physique", value: "7")
+
+weapon = RangedWeapon.create(name: "Wyrzutnia Klątwa Hel", internal_name: "hels_curse", kind: "explosive_propelers", dmg: "20+4k10", accuracy: 4, attacks_capability: "1/2",
+  special_rules: "Minimalne BC 6, Obrażenia w promieniu Wybuchu nie są zmniejszane", money_cost: 20000, family: "heavy_guns", rarity: "legendary"
+)
+weapon.requirements.create(check_applies_to: "MainParameter", name: "physique", value: "6")
+
+puts("...done!")

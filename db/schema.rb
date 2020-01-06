@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_06_115143) do
+ActiveRecord::Schema.define(version: 2020_01_06_140013) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,21 @@ ActiveRecord::Schema.define(version: 2020_01_06_115143) do
     t.bigint "entity_id"
     t.string "entity_type"
     t.index ["entity_id", "entity_type"], name: "index_parameters_on_entity_id_and_entity_type"
+  end
+
+  create_table "ranged_weapons", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "internal_name", null: false
+    t.string "family", null: false
+    t.string "kind", null: false
+    t.string "rarity", null: false
+    t.string "dmg", null: false
+    t.integer "accuracy", default: 0, null: false
+    t.string "attacks_capability", null: false
+    t.integer "money_cost", default: 0
+    t.text "special_rules"
+    t.index ["internal_name"], name: "index_ranged_weapons_on_internal_name"
+    t.index ["name"], name: "index_ranged_weapons_on_name"
   end
 
   create_table "requirements", force: :cascade do |t|

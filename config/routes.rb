@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :implants, only: [:index]
       resources :hexeris, only: [:index]
       resources :melee_weapons, only: [:index]
+      resources :ranged_weapons, only: [:index]
     end
   end
 

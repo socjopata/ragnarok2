@@ -7,11 +7,12 @@ import advantages from './advantages/reducer';
 import implants from './implants/reducer';
 import hexeris from './hexeris/reducer';
 import melee_weapons from './melee_weapons/reducer';
+import ranged_weapons from './ranged_weapons/reducer';
 
 export const history = createBrowserHistory();
 
 export default createStore(
-  combineReducers({ heroes, advantages, implants, hexeris, melee_weapons }),
+  combineReducers({ heroes, advantages, implants, hexeris, melee_weapons, ranged_weapons }),
   compose(
     applyMiddleware(thunk),
     window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
