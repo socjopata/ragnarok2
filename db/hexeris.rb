@@ -993,3 +993,5 @@ hexeri = Hexeri.create(
 Podbicie: jw. a moc Hekseri utrzymuje się do końca rundy, w której była aktywowana.")
 
 hexeri.requirements.create(check_applies_to: "MainParameter", name: "entropy", value: "7")
+
+puts "...done!"

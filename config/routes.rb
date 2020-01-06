@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :advantages, only: [:index]
       resources :implants, only: [:index]
       resources :hexeris, only: [:index]
+      resources :melee_weapons, only: [:index]
     end
   end
 

@@ -9,8 +9,6 @@ class CreateHexeris < ActiveRecord::Migration[6.0]
       t.string :kind, null: false #Seidr, Alfheim...
       t.integer :mana_cost, default: 0, null: false
       t.integer :casting_difficulty, default: 0, null: false
-
-
     end
   end
 end

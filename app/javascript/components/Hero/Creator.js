@@ -16,10 +16,11 @@ import {fetchHeroes} from "../../store/heroes";
 import {fetchAdvantages} from "../../store/advantages";
 import {fetchImplants} from "../../store/implants";
 import {fetchHexeris} from "../../store/hexeris";
+import {fetchMeleeWeapons} from "../../store/melee_weapons";
 
 class Creator extends Component {
   componentDidMount() {
-    const {heroesList, fetchHeroes, advantagesList, fetchAdvantages, implantsList, fetchImplants, hexerisList, fetchHexeris} = this.props;
+    const {heroesList, fetchHeroes, advantagesList, fetchAdvantages, implantsList, fetchImplants, hexerisList, fetchHexeris, meleeWeaponsList, fetchMeleeWeapons} = this.props;
     if (isEmpty(heroesList)) {
       fetchHeroes();
     }
@@ -31,6 +32,10 @@ class Creator extends Component {
     }
     if (isEmpty(hexerisList)) {
       fetchHexeris();
+    }
+
+    if (isEmpty(meleeWeaponsList)) {
+      fetchMeleeWeapons();
     }
   }
 
@@ -59,6 +64,7 @@ const mapStateToProps = (state) => ({
   advantagesList: get(state, "advantages.byId"),
   implantsList: get(state, "implants.byId"),
   hexerisList: get(state, "hexeris.byId"),
+  meleeWeaponsList: get(state, "meleeWeapons.byId"),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -66,6 +72,7 @@ const mapDispatchToProps = dispatch => ({
   fetchAdvantages: () => fetchAdvantages(dispatch),
   fetchImplants: () => fetchImplants(dispatch),
   fetchHexeris: () => fetchHexeris(dispatch),
+  fetchMeleeWeapons: () => fetchMeleeWeapons(dispatch),
 });
 
 export default connect(

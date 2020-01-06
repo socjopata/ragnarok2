@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_13_132020) do
+ActiveRecord::Schema.define(version: 2020_01_06_115143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,21 @@ ActiveRecord::Schema.define(version: 2019_12_13_132020) do
     t.integer "money_cost", default: 0, null: false
     t.index ["internal_name"], name: "index_implants_on_internal_name"
     t.index ["name"], name: "index_implants_on_name"
+  end
+
+  create_table "melee_weapons", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "internal_name", null: false
+    t.string "family", null: false
+    t.string "kind", null: false
+    t.string "rarity", null: false
+    t.string "dmg", null: false
+    t.integer "balance", default: 0, null: false
+    t.integer "defense", default: 0, null: false
+    t.integer "money_cost", default: 0
+    t.text "special_rules"
+    t.index ["internal_name"], name: "index_melee_weapons_on_internal_name"
+    t.index ["name"], name: "index_melee_weapons_on_name"
   end
 
   create_table "parameters", force: :cascade do |t|
